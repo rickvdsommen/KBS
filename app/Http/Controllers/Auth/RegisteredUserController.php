@@ -15,11 +15,18 @@ use Illuminate\View\View;
 class RegisteredUserController extends Controller
 {
     /**
-     * Display the registration view.
+     * Display the registration view and passes data for signed URL.
      */
-    public function create(): View
+    public function create(Request $request): View
     {
-        return view('auth.register');
+        $email = $request->query('email');
+        $expires = $request->query('expires');
+        $signature = $request->query('signature');
+
+        return view('auth.register')
+                    ->with('email', $email)
+                    ->with('expires', $expires)
+                    ->with('signature', $signature);
     }
 
     /**
@@ -29,9 +36,11 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $email = $request->query('email');
+        
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class, 'in:'.$email],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
