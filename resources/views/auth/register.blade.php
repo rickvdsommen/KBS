@@ -16,6 +16,20 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <!-- Birthday -->
+        <div class="mt-4">
+            <x-input-label for="birthday" :value="__('Geboortedatum')" />
+            <x-text-input id="birthday" class="block mt-1 w-full" type="date" name="birthday" value="" required />
+            <x-input-error :messages="$errors->get('birthday')" class="mt-2" />
+        </div>
+
+        <!-- Function -->
+        <div class="mt-4">
+            <x-input-label for="function" :value="__('Functie')" />
+            <x-text-input id="function" class="block mt-1 w-full" type="text" name="function" value="" required />
+            <x-input-error :messages="$errors->get('function')" class="mt-2" />
+        </div>
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
