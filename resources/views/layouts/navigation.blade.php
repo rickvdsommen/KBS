@@ -12,8 +12,14 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('projects')" :active="request()->routeIs('projects')">
+                        {{ __('Projecten') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('team')" :active="request()->routeIs('team')">
+                        {{ __('Het Team') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('agenda')" :active="request()->routeIs('agenda')">
+                        {{ __('Agenda') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -67,8 +73,14 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('projects')" :active="request()->routeIs('projects')">
+                {{ __('Projecten') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('team')" :active="request()->routeIs('team')">
+                {{ __('Het Team') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('agenda')" :active="request()->routeIs('agenda')">
+                {{ __('Agenda') }}
             </x-responsive-nav-link>
         </div>
 
