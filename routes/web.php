@@ -17,4 +17,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::prefix('admin')->group(function () {
+    Route::prefix('user')->group(function () {
+        Route::get('/registration/{email}', [ProfileController::class, 'getSignedUrl'])->name('profile.invite');
+    });
+});
+
+
 require __DIR__.'/auth.php';

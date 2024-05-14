@@ -7,6 +7,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -56,5 +58,17 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    /**
+     * Creates temporary signed route for account registration.
+     */
+    public function getSignedUrl(String $email)
+    {
+        $signedUrl = URL::temporarySignedRoute('register', now()->addDays(7), ['email' => $email]);
+
+        Mail::to($email)->send(new \App\Mail\RegistrationMail($signedUrl));
+
+        return response()->json(['message' => 'Email sent']);
     }
 }
