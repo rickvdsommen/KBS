@@ -82,6 +82,12 @@
             <x-responsive-nav-link :href="route('projects')" :active="request()->routeIs('projects')">
                 {{ __('Projecten') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('team')" :active="request()->routeIs('team')">
+                {{ __('Het Team') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('agenda')" :active="request()->routeIs('agenda')">
+                {{ __('Agenda') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
