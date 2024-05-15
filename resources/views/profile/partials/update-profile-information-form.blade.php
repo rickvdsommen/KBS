@@ -43,7 +43,7 @@
 
         <div>
             <x-input-label for="bio" :value="__('Bio')" />
-            <x-text-input id="bio" name="bio" type="text" class="mt-1 block w-full" :value="old('bio', $user->bio)" required />
+            <textarea id="bio" name="bio" class="mt-3 block w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" rows="3" required>{{ old('bio', $user->bio) }}</textarea>
             <x-input-error class="mt-2" :messages="$errors->get('bio')" />
         </div>
 
