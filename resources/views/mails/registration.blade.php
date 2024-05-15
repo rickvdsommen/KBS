@@ -1,5 +1,5 @@
 <x-mail::message>
-# Hallo,
+# Welkom,
 Via de knop hieronder kun je je registreren met de mail waarop je deze mail hebt ontvangen.
 <x-mail::button :url="$url" color="success">
 Registreren
