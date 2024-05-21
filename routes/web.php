@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategorieController;
+
 
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
     ->name('login');
@@ -34,6 +37,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/registration/{email}', [ProfileController::class, 'getSignedUrl'])->name('profile.invite');
     });
 });
+
+Route::get('/project', [ProjectController::class, 'projects'])->name('projects');
+Route::get('/categories', [ProjectController::class, 'Categories'])->name('Categories');
+
 
 
 require __DIR__.'/auth.php';

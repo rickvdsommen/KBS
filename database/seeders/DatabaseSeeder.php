@@ -8,6 +8,7 @@ use App\Models\Skill;
 use App\Models\Agenda;
 use App\Models\Device;
 use App\Models\Tag;
+use App\Models\ProjectTag;
 use App\Models\Category;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -84,5 +85,12 @@ class DatabaseSeeder extends Seeder
             'status' => 'offline',
             'email' => 'test@example.com',
         ]);
+
+        ProjectTag::factory()->create([
+            'project_id' => 1,
+            'tag_id' => 1,
+        ]);
+
+        
     }
 }
