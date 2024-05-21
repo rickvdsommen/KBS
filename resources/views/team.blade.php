@@ -5,11 +5,9 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="pb-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-4 sm:p-8 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 shadow sm:rounded-lg">
-                Teamlijst <br/>
-                <br/>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, cupiditate officia illo reiciendis harum facilis fugit at veniam nesciunt amet nulla perspiciatis incidunt praesentium repudiandae autem mollitia perferendis architecto eius?</p>
                 <p>Cupiditate voluptatem ratione magnam numquam, ipsum iusto quasi omnis dolores ea, aperiam praesentium doloremque debitis tempore dolore qui corporis aliquid porro assumenda modi maiores! Expedita error voluptate quasi dolorum ducimus!</p>
                 <p>Perspiciatis laboriosam libero recusandae nesciunt, quas vero explicabo non, ipsam modi error est. Aspernatur consequuntur quae nisi. Inventore odio esse quisquam voluptas cupiditate, labore quasi minima doloribus aliquid, quia molestias.</p>
@@ -20,6 +18,7 @@
                 <p>Aliquam sequi iste aut delectus velit voluptatibus error laborum ipsam qui et maxime inventore enim nostrum, ullam cumque ipsa eum iusto minus ex incidunt culpa nihil in provident distinctio. Quod.</p>
                 <p>Accusamus ipsam quam velit rerum perferendis dolore nisi? At porro labore illo, iusto nostrum temporibus dignissimos qui exercitationem sint perspiciatis! Nesciunt a voluptas illo eaque, cupiditate sint dolor doloribus harum.</p>
                 <p>Nihil distinctio, necessitatibus suscipit eius perferendis veritatis expedita error numquam ab magni nobis porro deleniti quisquam corporis debitis accusantium fuga placeat omnis sed deserunt. Veniam et architecto eum maiores facilis.</p>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi minima molestias doloremque molestiae corporis, a, fuga quidem doloribus quae officia et minus sunt ullam magnam obcaecati expedita neque voluptatem atque!</p>
             </div>
         </div>
     </div>

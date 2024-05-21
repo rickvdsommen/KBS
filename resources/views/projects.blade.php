@@ -5,21 +5,20 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="pb-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-4 sm:p-8 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 shadow sm:rounded-lg">
-                Projectenlijst <br/>
-                <br/>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo provident eaque perferendis accusamus, quae ratione, sed sint repellendus consequuntur asperiores ullam ipsum ab laboriosam suscipit repellat odit a, quos excepturi?</p>
-                <p>Dolore tenetur aspernatur esse maiores temporibus officia impedit. Accusantium explicabo eum rerum, nemo quisquam corporis veniam quis nulla, ipsam, perferendis vel pariatur? Minima illo optio, totam molestias veritatis unde nesciunt.</p>
-                <p>Corporis molestias repudiandae suscipit laborum temporibus voluptates itaque sequi accusamus minus nobis fugit architecto obcaecati, consectetur deleniti rem! Cupiditate ea adipisci omnis? Quaerat asperiores similique eius culpa consectetur pariatur nisi?</p>
-                <p>Laborum, veritatis non! Reprehenderit maxime nobis mollitia suscipit atque? Impedit, consequuntur. Quas aliquid, enim qui magnam repellat rem nostrum iure, in explicabo dicta molestias. Aut praesentium deleniti atque deserunt accusantium!</p>
-                <p>Rem qui ducimus soluta rerum officia? Fuga autem blanditiis mollitia atque sequi, nesciunt, minima nemo dolorem magni vitae tenetur quod repellendus. Aliquid quod dolores in id itaque recusandae ratione et?</p>
-                <p>Aut animi, itaque, impedit aliquam explicabo veritatis repellat consectetur eos repudiandae doloremque nam, maxime eum aliquid inventore ut veniam pariatur odit doloribus dolore quidem alias. Aliquid quam necessitatibus rerum eum?</p>
-                <p>Sequi earum qui similique id fugit molestias sed modi, rem animi eum est reiciendis asperiores! Inventore culpa aliquid sed officiis placeat provident minus officia quaerat quibusdam, dolorem rem at. Soluta.</p>
-                <p>Repellendus nulla cum, ullam optio voluptatum iure laborum quaerat vitae rerum porro commodi dolor ducimus minus doloremque consequuntur incidunt! Soluta tempora dolore repellendus sunt cumque inventore similique officia eaque sapiente?</p>
-                <p>Minus excepturi velit vero, saepe laborum, odio labore quae repellat, iusto temporibus quaerat impedit. Ea sequi cumque tempora! Rerum dolorem voluptate nostrum aperiam qui architecto ut nobis consectetur assumenda laudantium.</p>
-                <p>Natus delectus earum perspiciatis? Suscipit ducimus doloremque eveniet, vel doloribus eum quasi enim rem, consequatur hic repudiandae ab voluptatum aut explicabo ipsum similique illum ea consequuntur. Voluptatibus inventore impedit ea.</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi iste illum harum ex consectetur, ipsum perferendis ut commodi rerum error minus maiores, labore impedit modi quia similique cupiditate ducimus! Voluptate.</p>
+                <p>Dolorem dolores dolor accusamus libero voluptate tempora laudantium autem excepturi delectus ratione accusantium ab magni maxime doloribus ipsam explicabo quibusdam ullam voluptates nulla pariatur culpa, unde consequatur. Voluptatibus, nulla explicabo?</p>
+                <p>Fugit ratione culpa neque maiores blanditiis commodi numquam similique aut? Tempore ipsum reiciendis illo a, porro iure nesciunt sit dolore! Accusantium in sapiente quibusdam rerum temporibus minima ducimus amet quasi.</p>
+                <p>Magni itaque nisi voluptatem incidunt, tenetur labore eligendi qui hic a nihil recusandae rerum optio repellat similique ipsum dignissimos explicabo nam ipsam dolor sapiente impedit veniam. Saepe excepturi repellendus rem.</p>
+                <p>Minus fugiat inventore neque voluptatem excepturi perferendis qui! Beatae maiores dolor illum nobis ipsa adipisci dolorum. Incidunt libero aspernatur, iste, quos tenetur, consequatur fuga totam minus dolor quisquam corrupti nisi?</p>
+                <p>Culpa, rem? Ullam officiis perferendis reiciendis amet culpa neque ipsa nobis reprehenderit asperiores, ratione minus nihil commodi doloribus ex soluta. Eum excepturi, ad doloremque consequuntur eveniet ex! At, qui voluptatibus.</p>
+                <p>Reprehenderit nihil inventore cum. Culpa eius nemo, libero tempora dolorem quaerat cumque odit at ducimus voluptatem dolor ea iure? Id voluptatem modi magni inventore illo alias ratione illum, in quod!</p>
+                <p>Ut quibusdam excepturi nemo natus animi minus, architecto recusandae molestias adipisci amet qui, exercitationem eaque accusamus eligendi in! Accusantium distinctio, harum aut magni dolorem doloremque alias rerum minima delectus reprehenderit?</p>
+                <p>Molestias, officia nisi facilis, voluptatibus porro molestiae vitae culpa at nostrum explicabo ipsam consequuntur. Numquam inventore nihil officia, animi porro reiciendis, vitae minima, ratione labore reprehenderit repudiandae iste voluptate vel.</p>
+                <p>Libero ex sit nemo nesciunt est quod esse maiores dolore saepe blanditiis possimus eos deleniti ut laborum aliquid dolor ipsam mollitia repellat cupiditate, qui eum tempora officiis praesentium unde! Sint!</p>
+                <p>Blanditiis officia impedit quo asperiores eveniet maxime neque ullam dolorem sequi dolores, recusandae dicta voluptates soluta cumque provident harum, deleniti sapiente non sed magni iure laudantium rerum. Tempore, repellat odit!</p>
             </div>
         </div>
     </div>
