@@ -14,10 +14,10 @@ class Category extends Model
         'category',
     ];
 
-    public function projects()
+    public function project()
     {
         // return $this->belongsToMany(Project::class);
-        return $this->morphToMany(Project::class, 'project_categories');
+        return $this->belongsToMany(Project::class, 'project_categories');
     }
 
 }

@@ -9,6 +9,10 @@ use App\Models\Category;
 
 class CategorieController extends Controller
 {
-
+    public function categories()
+    {
+        $all = Category::with('project')->get();
+        dd($all);
+    }
     
 }

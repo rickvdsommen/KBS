@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\TagController;
 
 
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
@@ -39,7 +40,8 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('/project', [ProjectController::class, 'projects'])->name('projects');
-Route::get('/categories', [ProjectController::class, 'Categories'])->name('Categories');
+Route::get('/categories', [CategorieController::class, 'Categories'])->name('Categories');
+Route::get('/tag', [TagController::class, 'tags'])->name('tags');
 
 
 
