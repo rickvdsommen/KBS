@@ -54,7 +54,7 @@
                                 <label for="productOwner">Product Owner</label>
                                 <input type="text" name="productOwner" class="form-control" required>
                             </div>
-                            <div class="form-group" style="margin-bottom: 20px;">
+                                                        <div class="form-group" style="margin-bottom: 20px;">
                                 <label for="description">Description</label>
                                 <textarea name="description" class="form-control" required></textarea>
                             </div>

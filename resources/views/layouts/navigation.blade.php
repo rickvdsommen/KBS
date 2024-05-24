@@ -12,7 +12,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('projects')" :active="request()->routeIs('projects')">
+                    <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects')">
                         {{ __('Projecten') }}
                     </x-nav-link>
                     <x-nav-link :href="route('team')" :active="request()->routeIs('team')">

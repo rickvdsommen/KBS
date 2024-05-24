@@ -43,7 +43,7 @@ Route::get('/project', [ProjectController::class, 'projects'])->name('projects')
 Route::get('/categories', [CategorieController::class, 'Categories'])->name('Categories');
 Route::get('/tag', [TagController::class, 'tags'])->name('tags');
 Route::middleware('auth')->group(function () {
-    Route::resource('projects', ProjectController::class);
+    Route::resource('/projects', ProjectController::class);
 });
 
 
