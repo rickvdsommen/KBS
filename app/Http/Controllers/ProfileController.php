@@ -70,7 +70,9 @@ class ProfileController extends Controller
 
         Mail::to($email)->send(new \App\Mail\RegistrationMail($signedUrl));
 
-        return response()->json(['message' => 'Email sent']);
+        $popupScript = "<script>alert('Uitnodiging succesvol verzonden.');</script>";
+        return Redirect::route('users.index')->with($popupScript);
+        // return response($popupScript);
     }
 
 }

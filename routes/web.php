@@ -6,6 +6,7 @@ use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
 
 
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
@@ -15,9 +16,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/projects', function () {
-    return view('projects');
-})->middleware(['auth', 'verified'])->name('projects');
+// Route::get('/projects', function () {
+//     return view('projects');
+// })->middleware(['auth', 'verified'])->name('projects');
 
 Route::get('/team', function () {
     return view('team');
@@ -35,15 +36,20 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('admin')->group(function () {
     Route::prefix('user')->group(function () {
-        Route::get('/registration/{email}', [ProfileController::class, 'getSignedUrl'])->name('profile.invite');
+        Route::post('/registration/{email}', [ProfileController::class, 'getSignedUrl'])->name('profile.invite');
     });
 });
 
+//dd test routes
 Route::get('/project', [ProjectController::class, 'projects'])->name('projects');
+Route::get('/users', [UserController::class, 'users'])->name('users');
 Route::get('/categories', [CategorieController::class, 'Categories'])->name('Categories');
 Route::get('/tag', [TagController::class, 'tags'])->name('tags');
+
+
 Route::middleware('auth')->group(function () {
     Route::resource('/projects', ProjectController::class);
+    Route::resource('/users', UserController::class);
 });
 
 
