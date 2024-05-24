@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\TagController;
+
 
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
     ->name('login');
@@ -34,5 +38,13 @@ Route::prefix('admin')->group(function () {
         Route::get('/registration/{email}', [ProfileController::class, 'getSignedUrl'])->name('profile.invite');
     });
 });
+
+Route::get('/project', [ProjectController::class, 'projects'])->name('projects');
+Route::get('/categories', [CategorieController::class, 'Categories'])->name('Categories');
+Route::get('/tag', [TagController::class, 'tags'])->name('tags');
+Route::middleware('auth')->group(function () {
+    Route::resource('/projects', ProjectController::class);
+});
+
 
 require __DIR__.'/auth.php';

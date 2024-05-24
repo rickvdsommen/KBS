@@ -8,4 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'projectname',
+        'phaseName',
+        'description',
+        'status',
+        'startingDate',
+        'projectLeader',
+        'categorie',
+        'productOwner',
+    ];
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'project_tags');
+    }
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'project_categories');
+    }
 }
