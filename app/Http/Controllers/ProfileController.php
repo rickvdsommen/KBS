@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
+use App\Models\User;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -71,4 +72,5 @@ class ProfileController extends Controller
 
         return response()->json(['message' => 'Email sent']);
     }
+
 }
