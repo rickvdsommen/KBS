@@ -104,7 +104,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('projects')" :active="request()->routeIs('projects')">
+            <x-responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects')">
                 {{ __('Projecten') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('team')" :active="request()->routeIs('team')">
