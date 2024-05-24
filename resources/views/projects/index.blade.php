@@ -5,7 +5,7 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <!-- Add Project Button -->
         <div class="mb-4">
-            <a href="{{ route('projects.create') }}" class="btn btn-primary text-white">Add Project</a>
+            <a href="{{ route('projects.create') }}" class="btn btn-primary ">+ Add Project +</a>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">

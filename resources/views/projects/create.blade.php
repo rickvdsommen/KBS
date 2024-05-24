@@ -35,10 +35,6 @@
                                 <input type="text" name="phaseName" class="form-control" required>
                             </div>
                             <div class="form-group" style="margin-bottom: 20px;">
-                                <label for="description">Description</label>
-                                <textarea name="description" class="form-control" required></textarea>
-                            </div>
-                            <div class="form-group" style="margin-bottom: 20px;">
                                 <label for="status">Status</label>
                                 <input type="text" name="status" class="form-control" required>
                             </div>
@@ -57,6 +53,10 @@
                             <div class="form-group" style="margin-bottom: 20px;">
                                 <label for="productOwner">Product Owner</label>
                                 <input type="text" name="productOwner" class="form-control" required>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label for="description">Description</label>
+                                <textarea name="description" class="form-control" required></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Submit</button>
                         </form>

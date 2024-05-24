@@ -23,10 +23,6 @@
                                 <input type="text" name="phaseName" class="form-control" value="{{ $project->phaseName }}" required>
                             </div>
                             <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea name="description" class="form-control" required>{{ $project->description }}</textarea>
-                            </div>
-                            <div class="form-group">
                                 <label for="status">Status</label>
                                 <input type="text" name="status" class="form-control" value="{{ $project->status }}" required>
                             </div>
@@ -45,6 +41,10 @@
                             <div class="form-group">
                                 <label for="productOwner">Product Owner</label>
                                 <input type="text" name="productOwner" class="form-control" value="{{ $project->productOwner }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea name="description" class="form-control" required>{{ $project->description }}</textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
