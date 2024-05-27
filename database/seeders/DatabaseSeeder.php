@@ -47,7 +47,6 @@ class DatabaseSeeder extends Seeder
             'status' => 'Lopend',
             'startingDate' => '2024-05-13',
             'projectLeader' => 'The Leader',
-            'categorie' => 'Natuur',
             'productOwner' => 'Bertus Rosier',
 
         ]);
