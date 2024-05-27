@@ -60,17 +60,4 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
-
-    /**
-     * Creates temporary signed route for account registration.
-     */
-    public function getSignedUrl(String $email)
-    {
-        $signedUrl = URL::temporarySignedRoute('register', now()->addDays(7), ['email' => $email]);
-
-        Mail::to($email)->send(new \App\Mail\RegistrationMail($signedUrl));
-
-        return response()->json(['message' => 'Email sent']);
-    }
-
 }

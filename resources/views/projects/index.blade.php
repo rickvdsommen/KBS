@@ -1,13 +1,18 @@
 <x-app-layout>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <!-- Add Project Button -->
-            <h1 class="text-lg font-semibold text-gray-900 dark:text-gray-200">Alle projecten</h1>
-            <div class="mb-4">
-                <a href="{{ route('projects.create') }}" class="btn btn-primary">
-                    <x-primary-button>Voeg project toe</x-primary-button>
-                </a>
-            </div>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Projecten') }}
+        </h2>
+    </x-slot>
+<div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <!-- Add Project Button -->
+        <div class="mb-4">
+            <form action="{{ route('projects.create') }}">
+                <x-primary-button>Project toevoegen</x-primary-button>
+            </form>
+        </div>
+        
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <!-- Project cards --> 
@@ -38,12 +43,12 @@
                         </div>
                         <div class="flex justify-end mt-4">
                             <a href="{{ route('projects.edit', $project->id) }}" class="text-indigo-600 hover:text-indigo-900">
-                                <x-primary-button>Edit</x-primary-button>
+                                <x-primary-button>Bewerken</x-primary-button>
                             </a>
                             <form action="{{ route('projects.destroy', $project->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this project?');">
                                 @csrf
                                 @method('DELETE')
-                                <x-primary-button type="submit" class="ml-2 text-red-600 hover:text-red-900">Delete</x-primary-button>
+                                <x-primary-button type="submit" class="ml-2 text-red-600 hover:text-red-900">Verwijderen</x-primary-button>
                             </form>
                         </div>
                     </div>
