@@ -34,17 +34,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix('admin')->group(function () {
-    Route::prefix('user')->group(function () {
-        Route::post('/registration/{email}', [ProfileController::class, 'getSignedUrl'])->name('profile.invite');
-    });
-});
+// Route::prefix('admin')->group(function () {
+//     Route::prefix('user')->group(function () {
+// Route::post('/usersd', [UserController::class, 'getSignedUrl'])->name('users.invite');
+//     });
+// });
 
 //dd test routes
-Route::get('/project', [ProjectController::class, 'projects'])->name('projects');
-Route::get('/users', [UserController::class, 'users'])->name('users');
-Route::get('/categories', [CategorieController::class, 'Categories'])->name('Categories');
-Route::get('/tag', [TagController::class, 'tags'])->name('tags');
+// Route::get('/project', [ProjectController::class, 'projects'])->name('project');
+// Route::get('/users', [UserController::class, 'users'])->name('users');
+// Route::get('/categories', [CategorieController::class, 'Categories'])->name('Categories');
+// Route::get('/tag', [TagController::class, 'tags'])->name('tags');
 
 
 Route::middleware('auth')->group(function () {

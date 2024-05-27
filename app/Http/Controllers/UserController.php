@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -17,31 +20,16 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('users.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Creates temporary signed route for account registration.
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'projectname' => 'required|unique:projects',
-            'phaseName' => 'required',
-            'description' => 'required',
-            'status' => 'required',
-            'startingDate' => 'required|date',
-            'projectLeader' => 'required',
-            'categorie' => 'required',
-            'productOwner' => 'required',
-        ]);
+        $email = $request->email;
+        $signedUrl = URL::temporarySignedRoute('register', now()->addDays(7), ['email' => $email]);
 
-        User::create($request->all());
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
+        Mail::to($email)->send(new \App\Mail\RegistrationMail($signedUrl));
+
+        return Redirect::route('users.index')->with('status', 'invited');
     }
 
     /**
@@ -49,7 +37,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        $users = User::all();
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -66,14 +55,9 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'projectname' => 'required|unique:projects,projectname,' . $project->id,
-            'phaseName' => 'required',
-            'description' => 'required',
-            'status' => 'required',
-            'startingDate' => 'required|date',
-            'projectLeader' => 'required',
-            'categorie' => 'required',
-            'productOwner' => 'required',
+            'name' => 'required',
+            'birthday' => 'required',
+            'function' => 'required',
         ]);
 
         $user->update($request->all());
