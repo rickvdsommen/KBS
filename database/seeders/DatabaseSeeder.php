@@ -22,15 +22,19 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test Gebruiker',
-            'email' => 'test@example.com',
-            'birthday' => '1998-05-13',
-            'function' => 'Medewerker',
-            'phone' => '+31600000000',
-            'bio' => 'Hallo, ik ben een test gebruiker!',
-        ]);
+        $this->call(RolesAndPermissionsSeeder::class);
+        User::factory()
+            ->create([
+                'name' => 'Test Gebruiker',
+                'email' => 'test@example.com',
+                'birthday' => '1998-05-13',
+                'function' => 'Medewerker',
+                'phone' => '+31600000000',
+                'bio' => 'Hallo, ik ben een test gebruiker!',
+            ])
+            ->each(function ($user) {
+                $user->assignRole('user');
+            });;
         Degree::factory()->create([
             'email' => 'test@example.com',
             'school' => 'Avans hogeschool Asociate Degree',
@@ -85,12 +89,10 @@ class DatabaseSeeder extends Seeder
             'status' => 'offline',
             'email' => 'test@example.com',
         ]);
-
         ProjectTag::factory()->create([
             'project_id' => 1,
             'tag_id' => 1,
         ]);
-
         
     }
 }
