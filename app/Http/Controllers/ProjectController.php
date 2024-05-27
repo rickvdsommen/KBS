@@ -7,23 +7,24 @@ use App\Models\Project;
 
 class ProjectController extends Controller
 {
-    //
     public function projects()
     {
         $all = Project::with('tags')->get();
         dd($all);
     }
-    //
+
     public function categories()
     {
         $all = Project::with('categories')->get();
         dd($all);
     }
+
     public function index()
     {
         $projects = Project::with(['tags', 'categories'])->get();
         return view('projects.index', compact('projects'));
-    }  
+    }
+
     public function create()
     {
         return view('projects.create');
@@ -38,7 +39,6 @@ class ProjectController extends Controller
             'status' => 'required',
             'startingDate' => 'required|date',
             'projectLeader' => 'required',
-            'categorie' => 'required',
             'productOwner' => 'required',
         ]);
 
@@ -46,8 +46,12 @@ class ProjectController extends Controller
         return redirect()->route('projects.index')->with('success', 'Project created successfully.');
     }
 
+    /**
+     * Display the specified project.
+     */
     public function show(Project $project)
     {
+        $project->load(['users', 'categories', 'tags']);
         return view('projects.show', compact('project'));
     }
 
@@ -65,7 +69,6 @@ class ProjectController extends Controller
             'status' => 'required',
             'startingDate' => 'required|date',
             'projectLeader' => 'required',
-            'categorie' => 'required',
             'productOwner' => 'required',
         ]);
 
