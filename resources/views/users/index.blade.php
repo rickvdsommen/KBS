@@ -50,7 +50,7 @@
                                 <form action="{{ route('users.destroy', $user->id)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <x-secondary-button class="ml-2" onclick="return confirm('Weet je zeker dat je deze gebruiker wilt verwijderen?')" type="submit">Verwijderen</x-primary-button>
+                                    <x-secondary-button class="ml-2 text-red-600 dark:text-red-600" onclick="return confirm('Weet je zeker dat je deze gebruiker wilt verwijderen?')" type="submit">Verwijderen</x-primary-button>
                                 </form>
                             </td>
                         </tr>

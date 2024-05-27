@@ -20,7 +20,7 @@
             <!-- Project cards -->
             @foreach ($projects as $project)
             <div class="h-full bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="h-full flex flex-col justify-between p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                <div class="h-full flex flex-col justify-between p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-700">
                     <div>
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-200">{{ $project->projectname }}</h3>
                         <p class="text-gray-700 dark:text-gray-300"><strong>Phase:</strong> {{ $project->phaseName }}</p>
