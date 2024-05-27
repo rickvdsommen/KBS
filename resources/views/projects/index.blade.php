@@ -18,7 +18,7 @@
                 <!-- Project cards --> 
                 @foreach ($projects as $project)
                 <div class="h-full bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="h-full flex flex-col justify-between p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                    <div class="h-full flex flex-col justify-between p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-700">
                         <div>
                             <!-- Project each row -->
                             <a href="{{ route('projects.show', $project->id) }}" class="block">
@@ -48,7 +48,7 @@
                             <form action="{{ route('projects.destroy', $project->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je dit project wilt verwijderen?');">
                                 @csrf
                                 @method('DELETE')
-                                <x-secondary-button type="submit" class="ml-2 text-red-600 hover:text-red-900">Verwijderen</x-secondary-button>
+                                <x-secondary-button type="submit" class="ml-2 text-red-600 dark:text-red-600">Verwijderen</x-secondary-button>
                             </form>
                         </div>
                     </div>

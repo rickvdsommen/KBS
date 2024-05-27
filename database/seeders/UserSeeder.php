@@ -25,10 +25,10 @@ class UserSeeder extends Seeder
         User::factory()
             ->admin()
             ->create([
-                'name' => 'Test Gebruiker',
+                'name' => 'Test Admin',
                 'email' => 'admin@example.com',
                 'birthday' => '1998-05-13',
-                'function' => 'Medewerker',
+                'function' => 'Begeleider',
                 'phone' => '+31600000000',
                 'bio' => 'Hallo, ik ben een admin gebruiker!',
             ]);
