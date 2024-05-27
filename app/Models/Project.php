@@ -28,4 +28,8 @@ class Project extends Model
     {
         return $this->belongsToMany(Category::class, 'project_categories');
     }
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_project');
+    }
 }

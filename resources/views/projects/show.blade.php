@@ -1,53 +1,49 @@
-@extends('layouts.app')
-
-@section('content')
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ $project->projectname }}
-        </h2>
-    </x-slot>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-200">{{ $project->projectname }}</h2>
+                    <p class="text-gray-700 dark:text-gray-300"><strong>Fase:</strong> {{ $project->phaseName }}</p>
+                    <p class="text-gray-700 dark:text-gray-300"><strong>Status:</strong> {{ $project->status }}</p>
+                    <p class="text-gray-700 dark:text-gray-300"><strong>Begin datum:</strong> {{ $project->startingDate }}</p>
+                    <p class="text-gray-700 dark:text-gray-300"><strong>Project Leader:</strong> {{ $project->projectLeader }}</p>
+                    <p class="text-gray-700 dark:text-gray-300"><strong>Product Owner:</strong> {{ $project->productOwner }}</p>
+                    <p class="text-gray-700 dark:text-gray-300"><strong>Omschrijving:</strong> {{ $project->description }}</p>
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ $project->projectname }}</div>
+                    <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-200">Categorieën:</h3>
+                    <ul class="list-disc list-inside">
+                        @foreach ($project->categories as $category)
+                            <li class="text-gray-700 dark:text-gray-300">{{ $category->category }}</li>
+                        @endforeach
+                    </ul>
 
-                    <div class="card-body">
-                        <div class="form-group">
-                            <strong>Phase Name:</strong>
-                            {{ $project->phaseName }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Description:</strong>
-                            {{ $project->description }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Status:</strong>
-                            {{ $project->status }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Starting Date:</strong>
-                            {{ $project->startingDate }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Project Leader:</strong>
-                            {{ $project->projectLeader }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Categorie:</strong>
-                            {{ $project->categorie }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Product Owner:</strong>
-                            {{ $project->productOwner }}
-                        </div>
-                        <a class="btn btn-primary" href="{{ route('projects.index') }}"> Back</a>
+                    <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-200">Tags:</h3>
+                    <ul class="list-disc list-inside">
+                        @foreach ($project->tags as $tag)
+                            <li class="text-gray-700 dark:text-gray-300">{{ $tag->tag }}</li>
+                        @endforeach
+                    </ul>
+
+                    <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-200">Gebruikers die werken aan dit project:</h3>
+                    <ul class="list-disc list-inside">
+                        @foreach ($project->users as $user)
+                            <li class="text-gray-700 dark:text-gray-300">{{ $user->name }} ({{ $user->function }})</li>
+                        @endforeach
+                    </ul>
+
+                    <div class="flex justify-end mt-4">
+                        <a href="{{ route('projects.edit', $project->id) }}" class="text-indigo-600 hover:text-indigo-900">
+                            <x-primary-button>Bewerk</x-primary-button>
+                        </a>
+                        <form action="{{ route('projects.destroy', $project->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je dit project wilt verwijderen?');">
+                            @csrf
+                            @method('DELETE')
+                            <x-secondary-button type="submit" class="ml-2 text-red-600 hover:text-red-900">Verwijder</x-secondary-button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </x-app-layout>
-@endsection
