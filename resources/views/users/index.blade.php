@@ -10,8 +10,8 @@
             <div class="flex items-center">
                 <form id="invite-form" action="{{ route('users.store') }}" method="POST">
                     @csrf
-                    <input class="mb-2 w-80" type="email" name="email" id="email" placeholder="Email uit te nodigen gebruiker" required>
-                    <x-primary-button>Nieuwe gebruiker uitnodigen</x-primary-button>
+                    <input class="mb-2 w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" type="email" name="email" id="email" placeholder="Email uit te nodigen gebruiker" required>
+                    <x-primary-button class="ml-2">Nieuwe gebruiker uitnodigen</x-primary-button>
                 </form>
                     @if (session('status') === 'invited')
                     <div
@@ -24,43 +24,44 @@
                 @endif
                 
             </div>
-
-            <table class="border-collapse table-auto w-full text-sm mt-2" >
-                <thead>
-                    <th class="text-left">Nr</th>
-                    <th class="text-left">ID</th>
-                    <th class="text-left">Naam</th>
-                    <th class="text-left">Email</th>
-                    <th class="text-left">Functie</th>
-                    <th class="text-left">Lid sinds</th>
-                </thead>
-                <tbody>
-                    @forelse ($users as $user)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->function }}</td>
-                        <td>{{ $user->created_at }}</td>
-                        <td class="flex">
-                            <form action="{{ route('users.edit', $user->id)}}" method="GET">
-                                <x-primary-button type="submit">Wijzigen</x-primary-button>
-                            </form>
-                            <form action="{{ route('users.destroy', $user->id)}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <x-secondary-button onclick="return confirm('Weet je zeker dat je deze gebruiker wilt verwijderen?')" type="submit">Verwijderen</x-primary-button>
-                            </form>
-                        </td>
-                    </tr>
-                    @empty
+            <div class=" text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6">
+                <table class="border-collapse table-auto w-full text-sm mt-2" >
+                    <thead>
+                        <th class="text-left">Nr</th>
+                        <th class="text-left">ID</th>
+                        <th class="text-left">Naam</th>
+                        <th class="text-left">Email</th>
+                        <th class="text-left">Functie</th>
+                        <th class="text-left">Lid sinds</th>
+                    </thead>
+                    <tbody>
+                        @forelse ($users as $user)
                         <tr>
-                            Geen gebruikers
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->function }}</td>
+                            <td>{{ $user->created_at }}</td>
+                            <td class="flex">
+                                <form action="{{ route('users.edit', $user->id)}}" method="GET">
+                                    <x-primary-button type="submit">Wijzigen</x-primary-button>
+                                </form>
+                                <form action="{{ route('users.destroy', $user->id)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <x-secondary-button class="ml-2" onclick="return confirm('Weet je zeker dat je deze gebruiker wilt verwijderen?')" type="submit">Verwijderen</x-primary-button>
+                                </form>
+                            </td>
                         </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                        @empty
+                            <tr>
+                                Geen gebruikers
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </x-app-layout>
