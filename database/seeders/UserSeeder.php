@@ -9,6 +9,7 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
+        // Factory for seeding a User with the role 'user'
         User::factory()
             ->user()
             ->create([
@@ -19,7 +20,8 @@ class UserSeeder extends Seeder
                 'phone' => '+31600000000',
                 'bio' => 'Hallo, ik ben een test gebruiker!',
             ]);
-
+        
+        // Factory for seeding a User with the role 'admin'
         User::factory()
             ->admin()
             ->create([

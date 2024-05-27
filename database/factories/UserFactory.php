@@ -46,7 +46,7 @@ class UserFactory extends Factory
     }
 
     /**
-     * Indicate that the model's role should be admin.
+     * Indicate that the model's role should be 'user'.
      */
     public function user(): static
     {
@@ -66,7 +66,7 @@ class UserFactory extends Factory
 
 
     /**
-     * Indicate that the model's role should be admin.
+     * Indicate that the model's role should be 'admin'.
      */
     public function admin(): static
     {
