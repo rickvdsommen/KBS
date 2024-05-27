@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
                 'bio' => 'Hallo, ik ben een test gebruiker!',
             ])
             ->each(function ($user) {
-                $user->assignRole('writer');
+                $user->assignRole('user');
             });;
         Degree::factory()->create([
             'email' => 'test@example.com',
