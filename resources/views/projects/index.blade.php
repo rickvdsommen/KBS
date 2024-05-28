@@ -7,10 +7,18 @@
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <!-- Add Project Button -->
-        <div class="mb-4">
+        <div class="mb-4 flex justify-between items-center">
             <form action="{{ route('projects.create') }}">
                 <x-primary-button>Project toevoegen</x-primary-button>
             </form>
+            <div class="flex space-x-4">
+                <form action="{{ route('tags.index') }}">
+                <x-secondary-button type="submit">tags beheren</x-secondary-button>
+                </form>
+                <form action="{{ route('category.index') }}">
+                <x-secondary-button type="submit">Categorie beheren</x-secondary-button>
+                </form>
+            </div>
         </div>
         
 

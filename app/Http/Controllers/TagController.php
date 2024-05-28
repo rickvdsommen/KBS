@@ -8,10 +8,11 @@ use App\Models\Tag;
 
 class TagController extends Controller
 {
-    //
-    public function tags()
+    
+    public function index()
     {
-        $all = Tag::with('projects')->get();
-        dd($all);
+        $tags = Tag::all();
+        return view('tags.index', compact('tags'));
     }
+
 }
