@@ -13,9 +13,28 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $query = User::query();
+
+        // Search functionality
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%$search%")
+                  ->orWhere('email', 'like', "%$search%")
+                  ->orWhere('function', 'like', "%$search%");
+            });
+        }
+
+        // Filtering by role
+        if ($request->filled('role')) {
+            $role = $request->input('role');
+            $query->role($role)->get();
+        }
+
+        // Paginate the results
+        $users = $query->paginate(10);
         return view('users.index', compact('users'));
     }
 
@@ -46,7 +65,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        $admin = $user->hasRole('admin');
+        return view('users.edit', compact('user', 'admin'), );
     }
 
     /**
@@ -59,6 +79,12 @@ class UserController extends Controller
             'birthday' => 'required',
             'function' => 'required',
         ]);
+
+        if($request->admin === "on"){
+            $user->assignRole('admin');
+        } elseif ($request->admin === null) {
+            $user->removeRole('admin');
+        }
 
         $user->update($request->all());
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
