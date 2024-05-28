@@ -65,11 +65,12 @@
                     </div>
                 </div>
                 
-                <!-- List of Users -->
+                <!-- List of Users and searchbar -->
                 <div class="mb-4">
                     <label for="selectedUsers" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Select Users</label>
+                    <input type="text" id="userSearch" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm mb-2" placeholder="Search users...">
                     <div class="overflow-y-auto w-80 max-h-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3">
-                        <ul>
+                        <ul id="userList">
                             @foreach($users as $user)
                             <li>
                                 <input type="checkbox" name="selectedUsers[]" value="{{ $user->id }}" class="form-checkbox h-4 w-4 text-indigo-600 border-gray-300 dark:border-gray-700 focus:ring-indigo-500">
@@ -86,3 +87,20 @@
         </div>
     </div>
 </x-app-layout>
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('userSearch');
+        const userList = document.getElementById('userList');
+        const users = Array.from(userList.getElementsByTagName('li'));
+
+        searchInput.addEventListener('input', function(event) {
+            const searchTerm = event.target.value.toLowerCase();
+            const filteredUsers = users.filter(user => user.textContent.toLowerCase().includes(searchTerm));
+            userList.innerHTML = '';
+            filteredUsers.forEach(user => {
+                userList.appendChild(user);
+            });
+        });
+    });
+</script>

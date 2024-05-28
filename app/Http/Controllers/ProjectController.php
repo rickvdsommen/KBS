@@ -60,12 +60,12 @@ class ProjectController extends Controller
         if ($request->has('categories')) {
             $project->categories()->attach($request->categories);
         }
-    // Attach selected users to the project
-    if ($request->has('selectedUsers')) {
-        $project->users()->attach($request->selectedUsers);
-    }
-        return redirect()->route('projects.index')->with('success', 'Project created successfully.');
-    }
+        // Attach selected users to the project
+        if ($request->has('selectedUsers')) {
+            $project->users()->attach($request->selectedUsers);
+        }
+            return redirect()->route('projects.index')->with('success', 'Project created successfully.');
+        }
 
     public function show(Project $project)
     {
@@ -76,8 +76,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $tags = Tag::all();
+        $users = User::all(); // Fetch all users
         $categories = Category::all();
-        return view('projects.edit', compact('project', 'tags', 'categories'));
+        return view('projects.edit', compact('project', 'tags', 'categories','users'));
     }
 
     public function update(Request $request, Project $project)
@@ -103,7 +104,9 @@ class ProjectController extends Controller
         if ($request->has('categories')) {
             $project->categories()->sync($request->categories);
         }
-
+        if ($request->has('selectedUsers')) {
+            $project->users()->attach($request->selectedUsers);
+        }
         return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
     }
 
