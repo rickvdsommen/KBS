@@ -22,12 +22,14 @@ $dutchMonths = [
         <input type="text" name="search" id="search" value="{{ request('search') }}"
             placeholder="Zoek op naam, email of functie"
             class="mb-2 w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+
         <select name="role" id="role"
             class="mb-2 ml-2 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
             <option value="">Alle Rollen</option>
             <option value="admin" {{ request('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-            <option value="user" {{ request('role') == 'user' ? 'selected' : '' }}>User</option>
+            <option value="user" {{ request('role') == 'user' ? 'selected' : '' }}>Gebruiker</option>
         </select>
+
         <x-primary-button class="ml-2">Zoeken</x-primary-button>
     </form>
     <table class="border-collapse table-auto w-full text-sm">
