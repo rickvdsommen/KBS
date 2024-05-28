@@ -9,10 +9,10 @@ use App\Models\Category;
 
 class CategorieController extends Controller
 {
-    public function categories()
+    public function index()
     {
-        $all = Category::with('project')->get();
-        dd($all);
+        $categories = Category::all();
+        return view('category.index', compact('categories'));
     }
     
 }
