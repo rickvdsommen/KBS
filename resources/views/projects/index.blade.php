@@ -73,7 +73,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="flex justify-end mt-6">
+                                <div class="flex justify-end">
                                     <a href="{{ route('projects.edit', $project->id) }}"
                                         class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300">
                                         <x-primary-button>Bewerken</x-primary-button>
