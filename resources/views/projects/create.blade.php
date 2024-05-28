@@ -10,15 +10,15 @@
                 @csrf
                 <div class="mb-4">
                     <label for="projectname" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Project Naam</label>
-                    <input type="text" name="projectname" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+                    <input type="text" id="projectname" name="projectname" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
                 </div>
                 <div class="mb-4">
                     <label for="phaseName" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Fase</label>
-                    <input type="text" name="phaseName" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+                    <input type="text" id="phaseName" name="phaseName" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
                 </div>
                 <div class="mb-4">
                     <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Status</label>
-                    <select name="status" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+                    <select id="status" name="status" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
                         <option value="Planning">Planning</option>
                         <option value="In Progress">In Progress</option>
                         <option value="Completed">Completed</option>
@@ -27,22 +27,22 @@
                 </div>
                 <div class="mb-4">
                     <label for="startingDate" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Begindatum</label>
-                    <input type="date" name="startingDate" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+                    <input type="date" id="startingDate" name="startingDate" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
                 </div>
                 <div class="mb-4">
                     <label for="projectLeader" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Project Leider</label>
-                    <input type="text" name="projectLeader" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+                    <input type="text" id="projectLeader" name="projectLeader" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
                 </div>
                 <div class="mb-4">
                     <label for="productOwner" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Product Owner</label>
-                    <input type="text" name="productOwner" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+                    <input type="text" id="productOwner" name="productOwner" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
                 </div>
                 <div class="mb-4">
                     <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Omschrijving</label>
-                    <textarea name="description" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required></textarea>
+                    <textarea id="description" name="description" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required></textarea>
                 </div>
                 <div class="mb-4">
-                    <label for="tags" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Tags</label>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-200">Tags</label>
                     <div class="mt-1 space-x-2 flex flex-wrap">
                         @foreach($tags as $tag)
                         <label class="inline-flex items-center mr-4 mb-2">
@@ -54,7 +54,7 @@
                 </div>
                 
                 <div class="mb-4">
-                    <label for="categories" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Categorieën</label>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-200">Categorieën</label>
                     <div class="mt-1 space-x-2 flex flex-wrap">
                         @foreach($categories as $category)
                         <label class="inline-flex items-center mr-4 mb-2">
@@ -65,9 +65,22 @@
                     </div>
                 </div>
                 
-                <x-primary-button>Opslaan</x-primary-button>
+                <!-- List of Users -->
+        <div class="mb-4">
+            <label for="selectedUsers" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Select Users</label>
+            <div class="overflow-y-auto max-h-40 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                <select id="selectedUsers" name="selectedUsers[]" multiple class="block w-full rounded-md border-gray-300 dark:border-gray-700 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    @foreach($users as $user)
+                        <input type="checkbox" name="selectedUsers[]" value="{{ $user->id }}" class="form-checkbox h-4 w-4 text-indigo-600 border-gray-300 dark:border-gray-700 focus:ring-indigo-500">
+                        {{ $user->name }}
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+
+                <x-primary-button type="submit">Opslaan</x-primary-button>
             </form>
         </div>
-        
     </div>
 </x-app-layout>

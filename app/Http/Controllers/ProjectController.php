@@ -33,7 +33,8 @@ class ProjectController extends Controller
     {
         $tags = Tag::all();
         $categories = Category::all();
-        return view('projects.create', compact('tags', 'categories'));
+        $users = User::all(); // Fetch all users
+        return view('projects.create', compact('tags', 'categories', 'users'));
     }
 
     public function store(Request $request)
@@ -59,7 +60,10 @@ class ProjectController extends Controller
         if ($request->has('categories')) {
             $project->categories()->attach($request->categories);
         }
-
+    // Attach selected users to the project
+    if ($request->has('selectedUsers')) {
+        $project->users()->attach($request->selectedUsers);
+    }
         return redirect()->route('projects.index')->with('success', 'Project created successfully.');
     }
 
