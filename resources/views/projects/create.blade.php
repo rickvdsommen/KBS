@@ -21,10 +21,10 @@
                     <select name="status" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
                         <option value="Planning">Planning</option>
                         <option value="In Progress">In Progress</option>
-                        <option value="Completed" >Completed</option>
-                        <option value="On Hold" >On Hold</option>
+                        <option value="Completed">Completed</option>
+                        <option value="On Hold">On Hold</option>
                     </select>
-    </div>
+                </div>
                 <div class="mb-4">
                     <label for="startingDate" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Begindatum</label>
                     <input type="date" name="startingDate" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
@@ -41,8 +41,33 @@
                     <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Omschrijving</label>
                     <textarea name="description" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required></textarea>
                 </div>
+                <div class="mb-4">
+                    <label for="tags" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Tags</label>
+                    <div class="mt-1 space-x-2 flex flex-wrap">
+                        @foreach($tags as $tag)
+                        <label class="inline-flex items-center mr-4 mb-2">
+                            <input type="checkbox" name="tags[]" value="{{ $tag->id }}" class="form-checkbox h-4 w-4 text-indigo-600 border-gray-300 dark:border-gray-700 focus:ring-indigo-500">
+                            <span class="ml-2">{{ $tag->tag }}</span>
+                        </label>
+                        @endforeach
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="categories" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Categorieën</label>
+                    <div class="mt-1 space-x-2 flex flex-wrap">
+                        @foreach($categories as $category)
+                        <label class="inline-flex items-center mr-4 mb-2">
+                            <input type="checkbox" name="categories[]" value="{{ $category->id }}" class="form-checkbox h-4 w-4 text-indigo-600 border-gray-300 dark:border-gray-700 focus:ring-indigo-500">
+                            <span class="ml-2">{{ $category->category }}</span>
+                        </label>
+                        @endforeach
+                    </div>
+                </div>
+                
                 <x-primary-button>Opslaan</x-primary-button>
             </form>
         </div>
+        
     </div>
 </x-app-layout>

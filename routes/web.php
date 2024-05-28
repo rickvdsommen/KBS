@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::resource('/projects', ProjectController::class);
     Route::resource('/users', UserController::class);
+    
 });
 
 

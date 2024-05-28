@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Tag;
+use App\Models\Category;
+use App\Models\User;
+
 
 class ProjectController extends Controller
 {
@@ -27,7 +31,9 @@ class ProjectController extends Controller
 
     public function create()
     {
-        return view('projects.create');
+        $tags = Tag::all();
+        $categories = Category::all();
+        return view('projects.create', compact('tags', 'categories'));
     }
 
     public function store(Request $request)
@@ -40,24 +46,34 @@ class ProjectController extends Controller
             'startingDate' => 'required|date',
             'projectLeader' => 'required',
             'productOwner' => 'required',
+            'tags' => 'array',
+            'categories' => 'array',
         ]);
 
-        Project::create($request->all());
+        $project = Project::create($request->all());
+
+        // Attach tags and categories
+        if ($request->has('tags')) {
+            $project->tags()->attach($request->tags);
+        }
+        if ($request->has('categories')) {
+            $project->categories()->attach($request->categories);
+        }
+
         return redirect()->route('projects.index')->with('success', 'Project created successfully.');
     }
 
-    /**
-     * Display the specified project.
-     */
     public function show(Project $project)
     {
-        $project->load(['users', 'categories', 'tags']);
+        $project->load(['users','tags', 'categories']);
         return view('projects.show', compact('project'));
     }
 
     public function edit(Project $project)
     {
-        return view('projects.edit', compact('project'));
+        $tags = Tag::all();
+        $categories = Category::all();
+        return view('projects.edit', compact('project', 'tags', 'categories'));
     }
 
     public function update(Request $request, Project $project)
@@ -70,9 +86,20 @@ class ProjectController extends Controller
             'startingDate' => 'required|date',
             'projectLeader' => 'required',
             'productOwner' => 'required',
+            'tags' => 'array',
+            'categories' => 'array',
         ]);
 
         $project->update($request->all());
+
+        // Sync tags and categories
+        if ($request->has('tags')) {
+            $project->tags()->sync($request->tags);
+        }
+        if ($request->has('categories')) {
+            $project->categories()->sync($request->categories);
+        }
+
         return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
     }
 
