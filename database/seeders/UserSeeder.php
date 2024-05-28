@@ -32,6 +32,7 @@ class UserSeeder extends Seeder
                 'phone' => '+31600000000',
                 'bio' => 'Hallo, ik ben een admin gebruiker!',
             ]);
-            User::factory(50)->create();
+
+        User::factory(50)->user()->create();
     }
 }
