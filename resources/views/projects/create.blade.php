@@ -66,17 +66,19 @@
                 </div>
                 
                 <!-- List of Users -->
-        <div class="mb-4">
-            <label for="selectedUsers" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Select Users</label>
-            <div class="overflow-y-auto max-h-40 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                <select id="selectedUsers" name="selectedUsers[]" multiple class="block w-full rounded-md border-gray-300 dark:border-gray-700 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                    @foreach($users as $user)
-                        <input type="checkbox" name="selectedUsers[]" value="{{ $user->id }}" class="form-checkbox h-4 w-4 text-indigo-600 border-gray-300 dark:border-gray-700 focus:ring-indigo-500">
-                        {{ $user->name }}
-                    @endforeach
-                </select>
-            </div>
-        </div>
+                <div class="mb-4">
+                    <label for="selectedUsers" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Select Users</label>
+                    <div class="overflow-y-auto w-80 max-h-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3">
+                        <ul>
+                            @foreach($users as $user)
+                            <li>
+                                <input type="checkbox" name="selectedUsers[]" value="{{ $user->id }}" class="form-checkbox h-4 w-4 text-indigo-600 border-gray-300 dark:border-gray-700 focus:ring-indigo-500">
+                                <span>{{ $user->name }}</span>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
 
 
                 <x-primary-button type="submit">Opslaan</x-primary-button>
