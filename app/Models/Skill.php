@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Skill extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'email',
+        'skillName',
+        'skillExperience',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

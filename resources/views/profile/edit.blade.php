@@ -12,6 +12,31 @@
                     @include('profile.partials.update-profile-information-form')
                 </div>
             </div>
+            
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-700 shadow sm:rounded-lg">
+                <header>
+                    <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                        {{ __('Kennis en Vaardigheden bijwerken') }}
+                    </h2>
+            
+                    <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                        {{ __("Werk je kennis, vaardigheden en opleidingen bij!") }}
+                    </p>
+                </header>
+                <div class="max-w-full flex flex-wrap gap-4">
+                    <div class="flex-1 min-w-[250px]">
+                        @include('profile.partials.update-skills-form')
+                    </div>
+                    <div class="flex-1 min-w-[250px]">
+                        @include('profile.partials.update-courses-form')
+                    </div>
+                    <div class="flex-1 min-w-[250px]">
+                        @include('profile.partials.update-degrees-form')
+                    </div>
+                </div>
+            </div>
+            
+            
 
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-700 shadow sm:rounded-lg">
                 <div class="max-w-xl">

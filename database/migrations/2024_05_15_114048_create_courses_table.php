@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('email');
+            $table->unsignedBigInteger('user_id');
             $table->string('courseName');
             $table->string('description')->nullable();
 
 
             // Define unique key
-            $table->UNIQUE(['email']);
+            $table->UNIQUE(['user_id']);
             
             // Define foreign key
-            $table->foreign('email')->references('email')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
