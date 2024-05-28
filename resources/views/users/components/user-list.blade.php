@@ -1,3 +1,21 @@
+<?php
+// Define an array of Dutch month names
+$dutchMonths = [
+    1 => 'januari',
+    2 => 'februari',
+    3 => 'maart',
+    4 => 'april',
+    5 => 'mei',
+    6 => 'juni',
+    7 => 'juli',
+    8 => 'augustus',
+    9 => 'september',
+    10 => 'oktober',
+    11 => 'november',
+    12 => 'december'
+];
+?>
+
 <div class=" text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6">
     {{-- Search function --}}
     <form method="GET" action="{{ route('users.index') }}" class="flex items-center mb-6">
@@ -33,8 +51,7 @@
                 <td class="px-4 py-2">{{ $user->name }}</td>
                 <td class="px-4 py-2">{{ $user->email }}</td>
                 <td class="px-4 py-2">{{ $user->function }}</td>
-                <td class="px-4 py-2">{{ $user->created_at }}</td>
-                {{-- <td class="px-4 py-2">{{ $user->hadRole }}</td> --}}
+                <td class="px-4 py-2">{{ $user->created_at->format('d') }} {{ $dutchMonths[$user->created_at->format('n')] }} {{ $user->created_at->format('Y') }}</td>
                 <td class="px-4 py-2 flex space-x-2">
                     <form action="{{ route('users.edit', $user->id)}}" method="GET">
                         <x-primary-button type="submit">Wijzigen</x-primary-button>
