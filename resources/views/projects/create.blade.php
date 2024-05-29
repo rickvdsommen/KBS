@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-2xl text-gray-800 dark:text-gray-200 leading-tight">
             Project aanmaken
         </h2>
     </x-slot>
@@ -19,10 +19,11 @@
                 <div class="mb-4">
                     <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Status</label>
                     <select id="status" name="status" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
-                        <option value="Planning">Planning</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Completed">Completed</option>
-                        <option value="On Hold">On Hold</option>
+                        <option value="Ingepland">Ingepland</option>
+                        <option value="Lopend">Lopend</option>
+                        <option value="Afgerond">Afgerond</option>
+                        <option value="Gestopt">Gestopt</option>
+                        <option value="Gepauzeerd">Gepauzeerd</option>
                     </select>
                 </div>
                 <div class="mb-4">
@@ -67,8 +68,8 @@
                 
                 <!-- List of Users and searchbar -->
                 <div class="mb-4">
-                    <label for="selectedUsers" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Select Users</label>
-                    <input type="text" id="userSearch" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm mb-2" placeholder="Search users...">
+                    <label for="selectedUsers" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Wie werkt er mee aan dit project?</label>
+                    <input type="text" id="userSearch" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm mb-2" placeholder="Zoek gebruikers...">
                     <div class="overflow-y-auto w-80 max-h-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3">
                         <ul id="userList">
                             @foreach($users as $user)

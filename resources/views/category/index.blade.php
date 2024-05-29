@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-2xl text-gray-800 dark:text-gray-200 leading-tight">
             Categorieën Beheren
         </h2>
     </x-slot>
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6 my-6 max-w-7xl">
             <div class="mb-2">
-                <h1 class="text-2xl mb-6">Categorie Toevoegen</h1>
+                <h1 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight mb-5">Categorie Toevoegen</h1>
                 <form action="{{ route('categories.store') }}" method="POST" class="flex">
                     @csrf
                     <input id="category" placeholder="Categorie"
