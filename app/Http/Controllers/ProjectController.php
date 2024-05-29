@@ -11,6 +11,7 @@ use App\Models\User;
 
 class ProjectController extends Controller
 {
+    
     public function projects()
     {
         $all = Project::with('tags')->get();
@@ -23,9 +24,41 @@ class ProjectController extends Controller
         dd($all);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::with(['tags', 'categories'])->get();
+        $query = Project::with(['tags', 'categories']);
+        $searchTerm = $request->input('search');
+    
+        // Search functionality for project attributes
+        if ($searchTerm) {
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('projectname', 'like', "%$searchTerm%")
+                    ->orWhere('description', 'like', "%$searchTerm%")
+                    ->orWhere('phaseName', 'like', "%$searchTerm%")
+                    ->orWhere('status', 'like', "%$searchTerm%")
+                    ->orWhere('startingDate', 'like', "%$searchTerm%")
+                    ->orWhere('projectLeader', 'like', "%$searchTerm%")
+                    ->orWhere('productOwner', 'like', "%$searchTerm%");
+            });
+        }
+    
+        // Search functionality for categories
+        if ($searchTerm) {
+            $query->orWhereHas('categories', function ($q) use ($searchTerm) {
+                $q->where('category', 'like', "%$searchTerm%");
+            });
+        }
+    
+        // Search functionality for tags
+        if ($searchTerm) {
+            $query->orWhereHas('tags', function ($q) use ($searchTerm) {
+                $q->where('tag', 'like', "%$searchTerm%");
+            });
+        }
+    
+        // Get all projects if there's no search term
+        $projects = $query->paginate(6);
+    
         return view('projects.index', compact('projects'));
     }
 
