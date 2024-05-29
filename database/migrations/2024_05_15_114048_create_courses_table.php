@@ -17,10 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('courseName');
             $table->string('description')->nullable();
-
-
-            // Define unique key
-            $table->UNIQUE(['user_id']);
             
             // Define foreign key
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
