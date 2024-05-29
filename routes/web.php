@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SkillController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DegreeController;
 
 
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
@@ -15,10 +18,6 @@ Route::get('/', [AuthenticatedSessionController::class, 'create'])
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::get('/projects', function () {
-//     return view('projects');
-// })->middleware(['auth', 'verified'])->name('projects');
 
 Route::get('/team', function () {
     return view('team');
@@ -32,20 +31,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/skills', [SkillController::class, 'store'])->name('skill.store');
+    Route::delete('/skills/{skill}', [SkillController::class, 'destroy'])->name('skill.destroy');
+    Route::post('/courses', [CourseController::class, 'store'])->name('course.store');
+    Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->name('course.destroy');
+    Route::post('/degrees', [DegreeController::class, 'store'])->name('degree.store');
+    Route::delete('/degrees/{degree}', [DegreeController::class, 'destroy'])->name('degree.destroy');
 });
-
-// Route::prefix('admin')->group(function () {
-//     Route::prefix('user')->group(function () {
-// Route::post('/usersd', [UserController::class, 'getSignedUrl'])->name('users.invite');
-//     });
-// });
-
-//dd test routes
-// Route::get('/project', [ProjectController::class, 'projects'])->name('project');
-// Route::get('/users', [UserController::class, 'users'])->name('users');
-// Route::get('/categories', [CategorieController::class, 'Categories'])->name('Categories');
-// Route::get('/tag', [TagController::class, 'tags'])->name('tags');
-
 
 Route::middleware('auth')->group(function () {
     Route::resource('/projects', ProjectController::class);

@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create('skills', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('email');
+            $table->unsignedBigInteger('user_id');
             $table->string('skillName');
             $table->integer('skillExperience');
             $table->string('description')->nullable();
 
             // Define unique key
-            $table->UNIQUE(['email', 'skillName']);
+            $table->UNIQUE(['user_id', 'skillName']);
             
             // Define foreign key
-            $table->foreign('email')->references('email')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
