@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-2xl text-gray-800 dark:text-gray-200 leading-tight">
             Bewerk Project
         </h2>
     </x-slot>
@@ -20,10 +20,11 @@
                 <div class="mb-4">
                     <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Status</label>
                     <select name="status" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
-                        <option value="Planning" {{ $project->status == 'Planning' ? 'selected' : '' }}>Planning</option>
-                        <option value="In Progress" {{ $project->status == 'In Progress' ? 'selected' : '' }}>In Progress</option>
-                        <option value="Completed" {{ $project->status == 'Completed' ? 'selected' : '' }}>Completed</option>
-                        <option value="On Hold" {{ $project->status == 'On Hold' ? 'selected' : '' }}>On Hold</option>
+                        <option value="Ingepland" {{ $project->status == 'Ingepland' ? 'selected' : '' }}>Ingepland</option>
+                        <option value="Lopend" {{ $project->status == 'Lopend' ? 'selected' : '' }}>Lopend</option>
+                        <option value="Afgerond" {{ $project->status == 'Afgerond' ? 'selected' : '' }}>Afgerond</option>
+                        <option value="Gepauzeerd" {{ $project->status == 'Gepauzeerd' ? 'selected' : '' }}>Gepauzeerd</option>
+                        <option value="Gestopt" {{ $project->status == 'Gestopt' ? 'selected' : '' }}>Gestopt</option>
                     </select>
                </div>
                 <div class="mb-4">
@@ -69,8 +70,8 @@
                     </div>
                 <!-- List of Users and searchbar -->
                 <div class="mb-4">
-                    <label for="selectedUsers" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Select Users</label>
-                    <input type="text" id="userSearch" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm mb-2" placeholder="Search users...">
+                    <label for="selectedUsers" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Wie werkt er mee aan dit project?</label>
+                    <input type="text" id="userSearch" class="mt-1 block w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm mb-2" placeholder="Zoek gebruikers...">
                     <div class="overflow-y-auto w-80 max-h-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3">
                         <ul id="userList">
                             @foreach($users as $user)
