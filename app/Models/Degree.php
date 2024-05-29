@@ -16,6 +16,7 @@ class Degree extends Model
         'currentYear',
         'degreeYears',
         'description',
+        'graduated',
     ];
 
     public function user()

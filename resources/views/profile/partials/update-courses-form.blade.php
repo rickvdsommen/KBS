@@ -1,5 +1,5 @@
 <section>
-    <div class="p-6 bg-white shadow-md rounded-lg">
+    <div class="p-6 bg-white dark:bg-gray-700 shadow-md rounded-lg border">
         <div class="mb-4">
             <x-input-label for="course" :value="__('Cursussen')" class="text-lg font-semibold" />
         </div>

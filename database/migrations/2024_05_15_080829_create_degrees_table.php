@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('currentYear')->nullable();
             $table->integer('degreeYears')->nullable();
             $table->string('description')->nullable();
+            $table->boolean('graduated')->default(false);
             $table->timestamps();
 
             // Define unqiue key

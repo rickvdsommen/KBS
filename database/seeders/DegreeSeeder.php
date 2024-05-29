@@ -11,11 +11,22 @@ class DegreeSeeder extends Seeder
     {
         Degree::factory()->create([
             'user_id' => '1',
-            'school' => 'Avans hogeschool Asociate Degree',
+            'school' => 'Avans Academie Associate degrees',
             'degree' => 'Informatica',
             'degreeYears' => '2',
             'currentYear' => '1',
-            'description' => 'Dit is mijn eerste jaar voor informatica'
+            'description' => 'Dit is mijn eerste jaar voor informatica',
+            'graduated' => false,
+        ]);
+
+        Degree::factory()->create([
+            'user_id' => '1',
+            'school' => 'Summa College',
+            'degree' => 'Netwerk Beheer',
+            'degreeYears' => '4',
+            'currentYear' => '',
+            'description' => 'Het beheren van bedrijfsnetwerken',
+            'graduated' => true,
         ]);
     }
 }
