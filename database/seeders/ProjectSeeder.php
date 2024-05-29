@@ -17,7 +17,6 @@ class ProjectSeeder extends Seeder
             'startingDate' => '2024-05-13',
             'projectLeader' => 'The Leader',
             'productOwner' => 'Bertus Rosier',
-
         ]);
     }
 }

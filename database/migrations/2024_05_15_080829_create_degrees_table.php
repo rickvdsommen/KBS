@@ -13,19 +13,20 @@ return new class extends Migration
     {
         Schema::create('degrees', function (Blueprint $table) {
             $table->id();
-            $table->string('email');
+            $table->unsignedBigInteger('user_id');
             $table->string('school');
             $table->string('degree');
-            $table->string('experienceYears')->nullable();
-            $table->integer('year')->nullable();
+            $table->string('currentYear')->nullable();
+            $table->integer('degreeYears')->nullable();
             $table->string('description')->nullable();
+            $table->boolean('graduated')->default(false);
             $table->timestamps();
 
             // Define unqiue key
-            $table->unique(['email', 'school', 'degree']);
+            $table->unique(['user_id', 'school', 'degree']);
             
             // Define foreign key
-            $table->foreign('email')->references('email')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

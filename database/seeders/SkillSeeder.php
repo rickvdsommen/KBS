@@ -10,8 +10,8 @@ class SkillSeeder extends Seeder
     public function run(): void
     {
         Skill::factory()->create([
-            'email' => 'test@example.com',
-            'skillname' => 'solderen',
+            'user_id' => '1',
+            'skillname' => 'Solderen',
             'skillExperience' => '4',
             'description' => 'Machines solderen zoals Arduino en pijpen.',
         ]);
