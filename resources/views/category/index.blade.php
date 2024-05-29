@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Categorieën
+            Categorieën Beheren
         </h2>
     </x-slot>
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6 mb-6 mt-4 max-w-7xl">
+        <div class="text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6 my-6 max-w-7xl">
             <div class="mb-2">
                 <h1 class="text-2xl mb-6">Categorie Toevoegen</h1>
                 <form action="{{ route('categories.store') }}" method="POST" class="flex">
@@ -16,14 +16,13 @@
             </div>
         </div>
     </div>
-    <div class="py-12">
+    <div class="">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <h1 class="text-2xl mb-6">Categorieën</h1>
 
                 <div class="mb-2">
                     <form action="{{ route('categories.index') }}" method="GET" class="flex">
-                        <input id="search" placeholder="zoek categories..." class="mb-2 w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm" type="text" name="search" value="{{ request('search') }}" autofocus />
+                        <input id="search" placeholder="Zoek categories..." class="mb-2 w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm" type="text" name="search" value="{{ request('search') }}" autofocus />
                         <x-primary-button class="w-30 h-8 mt-1 ml-2">Zoeken</x-primary-button>
                     </form>
                 </div>
