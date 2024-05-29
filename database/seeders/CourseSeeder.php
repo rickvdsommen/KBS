@@ -12,6 +12,7 @@ class CourseSeeder extends Seeder
         Course::factory()->create([
             'user_id' => '1',
             'courseName' => 'Lean Orange Belt',
+            'year' => '2023',
             'description' => 'Ik kan bedrijven helpen met hun processen!',
         ]);
     }

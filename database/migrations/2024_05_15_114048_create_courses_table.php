@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
             $table->string('courseName');
+            $table->year('year');
             $table->string('description')->nullable();
             
             // Define foreign key
