@@ -51,9 +51,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('/projects', ProjectController::class);
     Route::resource('/users', UserController::class);
     Route::resource('/tags', TagController::class);
-    Route::resource('/category', CategorieController::class);
+    Route::resource('/categories', CategorieController::class);
 
-
+    //Route::get('/categories', [CategorieController::class, 'index'])->name('categories.index');
+    //Route::get('/categories/{category}/edit', [CategorieController::class, 'edit'])->name('categories.edit');
+    //Route::put('/categories/{category}', [CategorieController::class, 'update'])->name('categories.update');
+   // Route::delete('/categories/{category}', [CategorieController::class, 'destroy'])->name('categories.destroy');
 
 });
 
