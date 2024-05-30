@@ -19,12 +19,11 @@ $dutchMonths = [
 <div class=" text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6">
     {{-- Search function --}}
     <form method="GET" action="{{ route('users.index') }}" class="flex items-center mb-6">
-        <input type="text" name="search" id="search" value="{{ request('search') }}"
-            placeholder="Zoek op naam, email of functie"
-            class="mb-2 w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+        <x-text-input type="text" name="search" id="search" value="{{ request('search') }}"
+            placeholder="Zoek op ID, naam, email of functie..." class="mb-2 w-80"/>
 
         <select name="role" id="role"
-            class="mb-2 ml-2 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+            class="mb-2 ml-2 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
             <option value="">Alle Rollen</option>
             <option value="admin" {{ request('role') == 'admin' ? 'selected' : '' }}>Admin</option>
             <option value="user" {{ request('role') == 'user' ? 'selected' : '' }}>Gebruiker</option>
@@ -43,7 +42,7 @@ $dutchMonths = [
         </thead>
         <tbody>
             @forelse ($users as $user)
-                <tr class="border-t border-gray-200 dark:border-gray-700">
+                <tr class="border-t border-gray-200 dark:border-gray-800">
                     {{-- <td class="px-4 py-2">{{ $loop->iteration + ($users->currentPage() - 1) * $users->perPage() }}</td> --}}
                     <td class="px-4 py-2">{{ $user->id }}</td>
                     <td class="px-4 py-2">{{ $user->name }}</td>
