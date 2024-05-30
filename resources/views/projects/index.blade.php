@@ -4,12 +4,11 @@
             {{ __('Projecten') }}
         </h2>
     </x-slot>
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-4">
         {{-- Search function --}}
-        <form method="GET" action="{{ route('projects.index') }}" class="flex items-center mb-6 mt-4">
-            <input type="text" name="search" id="search" value="{{ request('search') }}"
-                placeholder="Zoek projecten..."
-                class="mb-2 w-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+        <form method="GET" action="{{ route('projects.index') }}" class="flex items-center mb-6">
+            <x-text-input type="text" name="search" id="search" value="{{ request('search') }}"
+                placeholder="Zoek projecten..." class="mb-2 w-80"/>
             <x-primary-button class="ml-2">zoek</x-primary-button>
         </form>
         <!-- Add Project Button -->

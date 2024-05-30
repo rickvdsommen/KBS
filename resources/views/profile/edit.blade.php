@@ -15,7 +15,7 @@
                     </h2>
             
                     <p class="mt-1 mb-4 text-sm text-gray-600 dark:text-gray-400">
-                        {{ __("Werk je kennis, vaardigheden en opleidingen bij!") }}
+                        {{ __("Werk je vaardigheden, cursussen en opleidingen bij!") }}
                     </p>
                 </header>
                 <div class="max-w-full flex flex-wrap gap-4">
