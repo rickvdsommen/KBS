@@ -10,12 +10,13 @@ class AgendaSeeder extends Seeder
     public function run(): void
     {
         Agenda::factory()->create([
-            'email' => 'test@example.com',
-            'datetime' => '2008-11-11',
-            'title' => 'Afspraak bij de kapper',
-            'personalStatus' => 'Bezet',
+            'user_id' => '1',
+            'start_time' => '2024-05-31 12:00:00',
+            'finish_time' => '2024-05-31 13:00:00',
+            'title' => 'Kapper',
+            'personalStatus' => 'Afwezig',
             'description' => 'Kapper voor een uur.',
-            'location' => 'Kapper Rayan',
+            'location' => 'Kapper Den Bosch',
         ]);
     }
 }

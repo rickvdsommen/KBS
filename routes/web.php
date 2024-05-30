@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DegreeController;
+use App\Http\Controllers\AgendaController;
 
 
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
@@ -37,6 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->name('course.destroy');
     Route::post('/degrees', [DegreeController::class, 'store'])->name('degree.store');
     Route::delete('/degrees/{degree}', [DegreeController::class, 'destroy'])->name('degree.destroy');
+
+    Route::post('/agenda', [AgendaController::class, 'store'])->name('agenda.store');
+    Route::get('/agenda', AgendaController::class)->name('agenda');
 });
 
 Route::middleware('auth')->group(function () {

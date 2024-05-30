@@ -70,4 +70,9 @@ class User extends Authenticatable
         return $this->hasMany(Course::class);
     }
 
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
+
 }
