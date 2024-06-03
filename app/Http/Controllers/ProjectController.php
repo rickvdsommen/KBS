@@ -8,10 +8,8 @@ use App\Models\Tag;
 use App\Models\Category;
 use App\Models\User;
 
-
 class ProjectController extends Controller
 {
-    
     public function projects()
     {
         $all = Project::with('tags')->get();
@@ -29,7 +27,6 @@ class ProjectController extends Controller
         $query = Project::with(['tags', 'categories']);
         $searchTerm = $request->input('search');
     
-        // Search functionality for project attributes
         if ($searchTerm) {
             $query->where(function ($q) use ($searchTerm) {
                 $q->where('projectname', 'like', "%$searchTerm%")
@@ -42,21 +39,18 @@ class ProjectController extends Controller
             });
         }
     
-        // Search functionality for categories
         if ($searchTerm) {
             $query->orWhereHas('categories', function ($q) use ($searchTerm) {
                 $q->where('category', 'like', "%$searchTerm%");
             });
         }
     
-        // Search functionality for tags
         if ($searchTerm) {
             $query->orWhereHas('tags', function ($q) use ($searchTerm) {
                 $q->where('tag', 'like', "%$searchTerm%");
             });
         }
     
-        // Get all projects if there's no search term
         $projects = $query->paginate(6);
     
         return view('projects.index', compact('projects'));
@@ -66,7 +60,7 @@ class ProjectController extends Controller
     {
         $tags = Tag::all();
         $categories = Category::all();
-        $users = User::all(); // Fetch all users
+        $users = User::all();
         return view('projects.create', compact('tags', 'categories', 'users'));
     }
 
@@ -86,19 +80,17 @@ class ProjectController extends Controller
 
         $project = Project::create($request->all());
 
-        // Attach tags and categories
         if ($request->has('tags')) {
             $project->tags()->attach($request->tags);
         }
         if ($request->has('categories')) {
             $project->categories()->attach($request->categories);
         }
-        // Attach selected users to the project
         if ($request->has('selectedUsers')) {
             $project->users()->attach($request->selectedUsers);
         }
-            return redirect()->route('projects.index')->with('success', 'Project created successfully.');
-        }
+        return redirect()->route('projects.index')->with('success', 'Project created successfully.');
+    }
 
     public function show(Project $project)
     {
@@ -106,12 +98,20 @@ class ProjectController extends Controller
         return view('projects.show', compact('project'));
     }
 
-    public function edit(Project $project)
+    public function edit(Project $project, Request $request)
     {
         $tags = Tag::all();
-        $users = User::all(); // Fetch all users
         $categories = Category::all();
-        return view('projects.edit', compact('project', 'tags', 'categories','users'));
+        $users = User::all();
+
+        $searchTerm = $request->input('userSearch');
+        if ($searchTerm) {
+            $filteredUsers = User::where('name', 'like', "%$searchTerm%")->get();
+        } else {
+            $filteredUsers = $users;
+        }
+
+        return view('projects.edit', compact('project', 'tags', 'categories', 'filteredUsers'));
     }
 
     public function update(Request $request, Project $project)
@@ -130,7 +130,6 @@ class ProjectController extends Controller
 
         $project->update($request->all());
 
-        // Sync tags and categories
         if ($request->has('tags')) {
             $project->tags()->sync($request->tags);
         }
@@ -138,7 +137,7 @@ class ProjectController extends Controller
             $project->categories()->sync($request->categories);
         }
         if ($request->has('selectedUsers')) {
-            $project->users()->attach($request->selectedUsers);
+            $project->users()->sync($request->selectedUsers);
         }
         return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
     }

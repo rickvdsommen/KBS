@@ -26,7 +26,7 @@
                         <option value="Gepauzeerd" {{ $project->status == 'Gepauzeerd' ? 'selected' : '' }}>Gepauzeerd</option>
                         <option value="Gestopt" {{ $project->status == 'Gestopt' ? 'selected' : '' }}>Gestopt</option>
                     </select>
-               </div>
+                </div>
                 <div class="mb-4">
                     <label for="startingDate" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Begindatum</label>
                     <input type="date" name="startingDate" class="mt-1 block w-80 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm sm:text-sm" value="{{ $project->startingDate }}" required>
@@ -43,38 +43,37 @@
                     <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Omschrijving</label>
                     <textarea name="description" class="mt-1 block w-80 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm sm:text-sm" required>{{ $project->description }}</textarea>
                 </div>
-                    <!-- Categories -->
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-200">Categorieën</label>
-                        <div class="mt-1 space-x-2 flex flex-wrap">
-                            @foreach($categories as $category)
-                            <label class="inline-flex items-center mr-4 mb-2">
-                                <input type="checkbox" name="categories[]" value="{{ $category->id }}" class="rounded-md border-gray-300 dark:border-gray-700 shadow-sm" {{ $project->categories->contains($category->id) ? 'checked' : '' }}>
-                                <span class="ml-2 text-gray-800 dark:text-gray-200 mr-2">{{ $category->category }}</span>
-                            </label>
-                            @endforeach
-                        </div>
+                <!-- Categories -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-200">Categorieën</label>
+                    <div class="mt-1 space-x-2 flex flex-wrap">
+                        @foreach($categories as $category)
+                        <label class="inline-flex items-center mr-4 mb-2">
+                            <input type="checkbox" name="categories[]" value="{{ $category->id }}" class="rounded-md border-gray-300 dark:border-gray-700 shadow-sm" {{ $project->categories->contains($category->id) ? 'checked' : '' }}>
+                            <span class="ml-2 text-gray-800 dark:text-gray-200 mr-2">{{ $category->category }}</span>
+                        </label>
+                        @endforeach
                     </div>
-
-                    <!-- Tags -->
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-200">Tags</label>
-                        <div class="mt-1 space-x-2 flex flex-wrap">
-                            @foreach($tags as $tag)
-                            <label class="inline-flex items-center mr-4 mb-2">
-                                <input type="checkbox" name="tags[]" value="{{ $tag->id }}" class="rounded-md border-gray-300 dark:border-gray-700 shadow-sm" {{ $project->tags->contains($tag->id) ? 'checked' : '' }}>
-                                <span class="ml-2 text-gray-800 dark:text-gray-200">{{ $tag->tag }}</span>
-                            </label>
-                            @endforeach
-                        </div>
+                </div>
+                <!-- Tags -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-200">Tags</label>
+                    <div class="mt-1 space-x-2 flex flex-wrap">
+                        @foreach($tags as $tag)
+                        <label class="inline-flex items-center mr-4 mb-2">
+                            <input type="checkbox" name="tags[]" value="{{ $tag->id }}" class="rounded-md border-gray-300 dark:border-gray-700 shadow-sm" {{ $project->tags->contains($tag->id) ? 'checked' : '' }}>
+                            <span class="ml-2 text-gray-800 dark:text-gray-200">{{ $tag->tag }}</span>
+                        </label>
+                        @endforeach
                     </div>
+                </div>
                 <!-- List of Users and searchbar -->
                 <div class="mb-4">
                     <label for="selectedUsers" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Wie werkt er mee aan dit project?</label>
                     <x-text-input type="text" id="userSearch" class="mt-1 block w-80 sm:text-sm mb-2" placeholder="Zoek gebruikers..."/>
                     <div class="overflow-y-auto w-80 max-h-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3 dark:bg-gray-900">
                         <ul id="userList">
-                            @foreach($users as $user)
+                            @foreach($filteredUsers as $user)
                             <li>
                                 <input type="checkbox" name="selectedUsers[]" value="{{ $user->id }}" class="rounded-md border-gray-300 dark:border-gray-700 shadow-sm" {{ $project->users->contains($user->id) ? 'checked' : '' }}>
                                 <span class="text-gray-800 dark:text-gray-200">{{ $user->name }}</span>
@@ -83,14 +82,11 @@
                         </ul>
                     </div>
                 </div>
-                
-
                 <x-primary-button>Opslaan</x-primary-button>
             </form>
         </div>
     </div>
 </x-app-layout>
-
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -108,4 +104,3 @@
         });
     });
 </script>
-@endpush
