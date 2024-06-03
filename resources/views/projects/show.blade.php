@@ -2,7 +2,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                <div class="p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-700">
                     <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-200">{{ $project->projectname }}</h2>
                     <p class="text-gray-700 dark:text-gray-300"><strong>Fase:</strong> {{ $project->phaseName }}</p>
                     <p class="text-gray-700 dark:text-gray-300"><strong>Status:</strong> {{ $project->status }}</p>
