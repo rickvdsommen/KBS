@@ -31,7 +31,7 @@
 
         <div>
             <x-input-label for="function" :value="__('Functie')" />
-            <x-text-input id="function" name="function" type="text" class="mt-1 block w-full" :value="old('function', $user->function)" required />
+            <x-text-input id="" name="" type="text" class="mt-1 block w-full disabled:bg-gray-200 disabled:text-gray-500 dark:disabled:bg-gray-800 dark:disabled:text-gray-500" :value="old('function', $user->function)" disabled/>
             <x-input-error class="mt-2" :messages="$errors->get('function')" />
         </div>
 

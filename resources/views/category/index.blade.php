@@ -23,7 +23,7 @@
 
             <div class="mb-2">
                 <form action="{{ route('categories.index') }}" method="GET" class="flex">
-                    <x-text-input id="search" placeholder="Zoek categories..."
+                    <x-text-input id="search" placeholder="Zoek categorieën..."
                         class="mb-2 w-80 " type="text"
                         name="search" value="{{ request('search') }}" autofocus />
                     <x-primary-button class="w-30 h-8 mt-1 ml-2">Zoeken</x-primary-button>

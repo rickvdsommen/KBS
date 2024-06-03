@@ -16,7 +16,12 @@ document.addEventListener('DOMContentLoaded', function() {
         editable: true,
         selectable: true,
         select: handleDateSelect,
-        // events: '/events' // Endpoint to fetch existing events
+        events: '/events', // Endpoint to fetch existing events
+        headerToolbar: {
+            left: 'prev,today,next',
+            center: 'title',
+            right: 'timeGridWeek,timeGridDay' // user can switch between the two
+          }
     });
     calendar.render();
 
