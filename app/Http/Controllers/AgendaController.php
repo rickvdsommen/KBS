@@ -16,7 +16,7 @@ class AgendaController extends Controller
         // Eager load the 'user' relationship
         $appointments = Appointment::with(['user'])->get();
 
-        dd($appointments);
+        // dd($appointments);
         foreach ($appointments as $appointment) {
             // Access the associated user using the 'user' relationship
             $userName = $appointment->user->name;
