@@ -8,7 +8,7 @@
             @csrf
             <div class="space-y-4 mb-6">
                 <x-text-input name="name" id="name" type="text" placeholder="Titel cursus" class="w-full" required/>
-                <input name="year" id="year" type="number" placeholder="Jaar behaald" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" min="1900" max="2100" step="1" required>
+                <input name="year" id="year" type="number" placeholder="Jaar behaald" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" min="1901" max="2155" step="1" required>
                 <x-text-input name="description" id="description" type="text" placeholder="Omschrijving" class="w-full" required/>
                 <x-primary-button type="submit">Voeg toe</x-primary-button>
             </div>

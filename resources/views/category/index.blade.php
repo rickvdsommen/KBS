@@ -31,7 +31,7 @@
             </div>
 
             @if ($categories->isEmpty())
-                <p class="text-gray-700 dark:text-gray-300">Kon geen categorieën vinden.</p>
+                <p class="text-gray-700 dark:text-gray-300">Kon geen categorie vinden.</p>
             @else
                 <ul class="space-y-4">
                     @foreach ($categories as $category)
