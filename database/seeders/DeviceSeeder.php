@@ -13,7 +13,7 @@ class DeviceSeeder extends Seeder
             'deviceId' => '1214551',
             'time' => '17:00:00',
             'status' => 'offline',
-            'email' => 'test@example.com',
+            'user_id' => '1',
         ]);
     }
 }

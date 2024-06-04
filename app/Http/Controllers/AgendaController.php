@@ -22,11 +22,12 @@ class AgendaController extends Controller
 
         foreach ($appointments as $appointment) {
             // Access the associated user using the 'user' relationship
-            $userName = "User 1";
+            $userName = $appointment->user ? $appointment->user->name : 'Unknown User';
             
             $obj = [
                 'id' => $appointment->id,
-                'title' => $appointment->title . ' (' . $userName . ')',
+                'title' => $appointment->title,
+                // 'title' => $appointment->title . ' (' . $userName . ')',
                 'start' => $appointment->start,
                 'end' => $appointment->end,
                 'allDay' => (bool) $appointment->all_day,
