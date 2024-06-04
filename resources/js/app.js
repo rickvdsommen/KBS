@@ -34,7 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     type: "POST",
                     success: function (res) {
-                        calendar.addEvent(res);
+                        // calendar.addEvent(res);
+                        calendar.refetchEvents();
                     },
                     error: function (res) {
                         console.log(res);
