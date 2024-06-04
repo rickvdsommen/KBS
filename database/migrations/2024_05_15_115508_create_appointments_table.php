@@ -13,17 +13,14 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->unsignedBigInteger('user_id');
-            $table->datetime('start_time');
-            $table->datetime('finish_time');
             $table->string('title');
-            $table->string('personalStatus');
-            $table->longText('description')->nullable();
-            $table->string('location')->nullable();
+            $table->dateTime('start');
+            $table->dateTime('end');
+            $table->boolean('all_day')->default(false);
+            $table->timestamps();
             
             // Define foreign key
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

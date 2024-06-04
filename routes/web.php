@@ -39,9 +39,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/degrees', [DegreeController::class, 'store'])->name('degree.store');
     Route::delete('/degrees/{degree}', [DegreeController::class, 'destroy'])->name('degree.destroy');
 
-    Route::post('/agenda', [AgendaController::class, 'store'])->name('agenda.store');
     Route::get('/agenda', AgendaController::class)->name('agenda');
+    Route::post('/events', [AgendaController::class, 'store'])->name('event.store');
+    Route::patch('/events', [AgendaController::class, 'patch'])->name('event.patch');
+    Route::get('/events', [AgendaController::class, "getEvents"])->name('events');
 });
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::resource('/projects', ProjectController::class);

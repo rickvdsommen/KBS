@@ -5,43 +5,82 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Appointment;
-
+use Throwable;
 
 class AgendaController extends Controller
 {
     public function __invoke()
     {
-        $events = [];
+        return view('agenda');
+    }
 
+    public function getEvents(Request $request)
+    {
         // Eager load the 'user' relationship
-        $appointments = Appointment::with(['user'])->get();
+        $appointments = Appointment::whereDate('start', '>=', $request->start)->whereDate('end', '<=', $request->end)->get();
+        $events = array();
 
-        // dd($appointments);
         foreach ($appointments as $appointment) {
             // Access the associated user using the 'user' relationship
-            $userName = $appointment->user->name;
+            $userName = "User 1";
             
-            $events[] = [
+            $obj = [
+                'id' => $appointment->id,
                 'title' => $appointment->title . ' (' . $userName . ')',
-                'start' => $appointment->start_time,
-                'end' => $appointment->finish_time,
+                'start' => $appointment->start,
+                'end' => $appointment->end,
+                'allDay' => (bool) $appointment->all_day,
             ];
+
+            array_push($events, $obj);
         }
 
-        return view('/agenda', compact('events'));
+        return response()->json($events);
     }
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|string',
-            'start_time' => 'required|date',
-            'finish_time' => 'required|date',
-            // Add validation rules for other event data fields if needed
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'title' => 'required|string',
+                'start' => 'string',
+                'end' => 'nullable|string',
+                'all_day' => 'required|boolean',
+                // Add validation rules for other event data fields if needed
+            ]);
 
-        $appointment = Appointment::create($validatedData);
+            $appointment = Appointment::create($validatedData);
+                       
+            return response()->json(status: 200, data: $appointment);
 
-        return response()->json($appointment, 201);
+        } catch (Throwable $e) {
+            return response()->json($e);
+        }
+    }
+
+    public function patch(Request $request) {
+        try {
+
+            $validatedData = $request->validate([
+                'id' => 'required',
+                'title' => 'required|string',
+                'start' => 'date',
+                'end' => 'date',
+                'all_day' => 'required|boolean',
+            ]);
+            
+            $appointment = Appointment::find($request->id);
+            
+            // $appointment->title = $validatedData['title'];
+            $appointment->start = $validatedData['start'];
+            $appointment->end =  $validatedData['end'];
+            $appointment->all_day =  $validatedData['all_day'];
+            $appointment->save();
+
+            return response(status: 200);
+
+        } catch (Throwable $e) {
+            return response()->json($e);
+        }
     }
 }
