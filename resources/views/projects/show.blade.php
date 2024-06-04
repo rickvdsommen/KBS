@@ -36,11 +36,13 @@
                         <a href="{{ route('projects.edit', $project->id) }}" class="text-indigo-600 hover:text-indigo-900">
                             <x-primary-button>Wijzigen</x-primary-button>
                         </a>
+                        @role('admin') 
                         <form action="{{ route('projects.destroy', $project->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je dit project wilt verwijderen?');">
                             @csrf
                             @method('DELETE')
                             <x-secondary-button type="submit" class="ml-2 text-red-600 hover:text-red-900">Verwijderen</x-secondary-button>
                         </form>
+                        @endrole
                     </div>
                 </div>
             </div>

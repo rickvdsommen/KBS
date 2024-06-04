@@ -75,4 +75,9 @@ class User extends Authenticatable
         return $this->hasMany(Appointment::class);
     }
 
+    public function device()
+    {
+        return $this->hasOne(Device::class);
+    }
+
 }

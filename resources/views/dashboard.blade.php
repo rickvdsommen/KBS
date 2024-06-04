@@ -12,6 +12,11 @@
 
                     <h1>Welkom bij de K.B.S.</h1>
                     <p>Je kan hier veel bekijken zoals lopende projecten, onze team en je eigen agenda.</p>        
+                    @role('admin')
+                        <br><p>Je bent ingelogd als een ADMIN!</p>
+                    @else
+                        <br><p>Je bent ingelogd als een GEBRUIKER!</p>
+                    @endrole
                 </div>
             </div>
         </div>
