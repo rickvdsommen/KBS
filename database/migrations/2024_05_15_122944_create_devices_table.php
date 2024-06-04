@@ -17,13 +17,13 @@ return new class extends Migration
             $table->string('deviceId');
             $table->time('time');
             $table->string('status')->nullable();
-            $table->string('email');
+            $table->unsignedBigInteger('user_id');
 
             // Define unique key
             $table->UNIQUE(['deviceId']);
             
             // Define foreign key
-            $table->foreign('email')->references('email')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
