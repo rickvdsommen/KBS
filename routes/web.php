@@ -10,7 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DegreeController;
-
+use App\Http\Controllers\TeamController;
 
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
     ->name('login');
@@ -49,6 +49,13 @@ Route::middleware('auth')->group(function () {
     //Route::get('/categories/{category}/edit', [CategorieController::class, 'edit'])->name('categories.edit');
     //Route::put('/categories/{category}', [CategorieController::class, 'update'])->name('categories.update');
    // Route::delete('/categories/{category}', [CategorieController::class, 'destroy'])->name('categories.destroy');
+// routes/web.php
+
+
+Route::get('/team', [TeamController::class, 'index'])->middleware(['auth', 'verified'])->name('team');
+Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
+Route::get('/team/{user}', [TeamController::class, 'show'])->name('team.show');
+Route::get('/teams/{team}', [TeamController::class, 'show'])->name('teams.show');
 
 });
 
