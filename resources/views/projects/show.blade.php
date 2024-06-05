@@ -3,12 +3,12 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-700">
-                    <h2 class="text-3xl mb-2 font-semibold text-gray-900 dark:text-gray-200">{{ $project->projectname }}</h2>
-                    <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Fase:</strong> {{ $project->phaseName }}</p>
-                    <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Status:</strong> {{ $project->status }}</p>
-                    <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Begin datum:</strong> {{ $project->startingDate }}</p>
-                    <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Project Leader:</strong> {{ $project->projectLeader }}</p>
-                    <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Product Owner:</strong> {{ $project->productOwner }}</p>
+                    <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-200">{{ $project->projectname }}</h2>
+                    <p class="text-gray-700 dark:text-gray-300"><strong>Fase:</strong> {{ $project->phaseName }}</p>
+                    <p class="text-gray-700 dark:text-gray-300"><strong>Status:</strong> {{ $project->status }}</p>
+                    <p class="text-gray-700 dark:text-gray-300"><strong>Begin datum:</strong> {{ $project->startingDate }}</p>
+                    <p class="text-gray-700 dark:text-gray-300"><strong>Project Leader:</strong> {{ $project->projectLeader }}</p>
+                    <p class="text-gray-700 dark:text-gray-300"><strong>Product Owner:</strong> {{ $project->productOwner }}</p>
                     <p class="text-gray-700 dark:text-gray-300"><strong>Omschrijving:</strong> {{ $project->description }}</p>
 
                     <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-200">Categorieën:</h3>

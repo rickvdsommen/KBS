@@ -31,13 +31,13 @@ class TeamController extends Controller
             });
         }
         $users = $query->paginate(9); 
-        return view('team.index', compact('users'));
+        return view('teams.index', compact('users'));
     }
 
     public function show(User $user)
     {
         $user->load('courses', 'degrees', 'skills'); // Eager load relationships
-        return view('team.show', compact('user'));
+        return view('teams.show', compact('user'));
     }
 }
 
