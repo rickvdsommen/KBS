@@ -10,7 +10,7 @@ class ProjectSeeder extends Seeder
     public function run(): void
     {
         Project::factory()->create([
-            'projectName' => 'Aquathermie',
+            'projectname' => 'Aquathermie',
             'phaseName' => 'Ontwerp fase',
             'description' => 'In dit project willen we het temperatuur volgen van de water en nog veel meer!',
             'status' => 'Lopend',

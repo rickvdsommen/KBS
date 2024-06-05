@@ -28,7 +28,9 @@
                     <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-200">Gebruikers die werken aan dit project:</h3>
                     <ul class="list-disc list-inside">
                         @foreach ($project->users as $user)
-                            <li class="text-gray-700 dark:text-gray-300">{{ $user->name }} ({{ $user->function }})</li>
+                        <li i class="text-gray-700 dark:text-gray-300">
+                            {{ $user->name }} ({{ $user->function }})
+                        </li>
                         @endforeach
                     </ul>
 

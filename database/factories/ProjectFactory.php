@@ -17,7 +17,13 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'projectname' => $this->faker->unique()->sentence(2),
+            'phaseName' => $this->faker->word,
+            'description' => $this->faker->paragraph,
+            'status' => $this->faker->randomElement(['Planning', 'In Progress', 'Completed']),
+            'startingDate' => $this->faker->date,
+            'projectLeader' => $this->faker->name,
+            'productOwner' => $this->faker->name,
         ];
     }
 }
