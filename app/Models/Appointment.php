@@ -5,15 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Device extends Model
+class Appointment extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'status',
+        'start',
+        'end',
+        'title',
+        'all_day',
+        // 'personalStatus',
+        'description',
+        // 'location',
+        'user',
     ];
-
+ 
     public function user()
     {
         return $this->belongsTo(User::class);

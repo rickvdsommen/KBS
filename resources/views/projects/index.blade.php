@@ -16,6 +16,7 @@
             <form action="{{ route('projects.create') }}">
                 <x-primary-button>Project Toevoegen</x-primary-button>
             </form>
+            @role('admin') 
             <div class="flex space-x-4">
                 <form action="{{ route('tags.index') }}">
                     <x-secondary-button type="submit">Beheer Tags</x-secondary-button>
@@ -24,6 +25,7 @@
                     <x-secondary-button type="submit">Beheer Categorieën</x-secondary-button>
                 </form>
             </div>
+            @endrole
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
@@ -88,6 +90,7 @@
                                     class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300">
                                     <x-primary-button>Wijzigen</x-primary-button>
                                 </a>
+                                @role('admin') 
                                 <form action="{{ route('projects.destroy', $project->id) }}" method="POST"
                                     onsubmit="return confirm('Are you sure you want to delete this project?');"
                                     class="ml-2">
@@ -96,6 +99,7 @@
                                     <x-secondary-button type="submit"
                                         class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300">Verwijderen</x-secondary-button>
                                 </form>
+                                @endrole
                             </div>
                         </div>
                     </a>

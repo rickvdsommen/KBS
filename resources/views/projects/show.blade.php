@@ -2,7 +2,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                <div class="p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-700">
                     <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-200">{{ $project->projectname }}</h2>
                     <p class="text-gray-700 dark:text-gray-300"><strong>Fase:</strong> {{ $project->phaseName }}</p>
                     <p class="text-gray-700 dark:text-gray-300"><strong>Status:</strong> {{ $project->status }}</p>
@@ -38,11 +38,13 @@
                         <a href="{{ route('projects.edit', $project->id) }}" class="text-indigo-600 hover:text-indigo-900">
                             <x-primary-button>Wijzigen</x-primary-button>
                         </a>
+                        @role('admin') 
                         <form action="{{ route('projects.destroy', $project->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je dit project wilt verwijderen?');">
                             @csrf
                             @method('DELETE')
                             <x-secondary-button type="submit" class="ml-2 text-red-600 hover:text-red-900">Verwijderen</x-secondary-button>
                         </form>
+                        @endrole
                     </div>
                 </div>
             </div>

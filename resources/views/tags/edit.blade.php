@@ -15,7 +15,7 @@
     
                     <div class="flex items-center justify-end mt-4">
                         <x-secondary-button type="button" onclick="window.history.back();">
-                            Wijzigen
+                            Annuleren
                         </x-secondary-button>
     
                         <x-primary-button class="ml-3">

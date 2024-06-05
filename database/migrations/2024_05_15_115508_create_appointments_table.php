@@ -11,21 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('agendas', function (Blueprint $table) {
+        Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->string('email');
-            $table->string('dateTime');
             $table->string('title');
-            $table->string('personalStatus');
-            $table->string('description')->nullable();
-            $table->string('location')->nullable();
-
-            // Define unique key
-            $table->UNIQUE(['email', 'dateTime']);
+            $table->dateTime('start');
+            $table->dateTime('end');
+            $table->string('description')->default("");
+            $table->boolean('all_day')->default(false);
+            $table->timestamps();
             
             // Define foreign key
-            $table->foreign('email')->references('email')->on('users');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

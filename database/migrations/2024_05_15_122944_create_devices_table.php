@@ -14,16 +14,11 @@ return new class extends Migration
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('deviceId');
-            $table->time('time');
-            $table->string('status')->nullable();
-            $table->string('email');
-
-            // Define unique key
-            $table->UNIQUE(['deviceId']);
+            $table->string('status')->default('Afwezig');
+            $table->unsignedBigInteger('user_id');
             
             // Define foreign key
-            $table->foreign('email')->references('email')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

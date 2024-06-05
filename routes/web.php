@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DegreeController;
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\TeamController;
 
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
@@ -37,26 +38,27 @@ Route::middleware('auth')->group(function () {
     Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->name('course.destroy');
     Route::post('/degrees', [DegreeController::class, 'store'])->name('degree.store');
     Route::delete('/degrees/{degree}', [DegreeController::class, 'destroy'])->name('degree.destroy');
+
+    Route::get('/agenda', AgendaController::class)->name('agenda');
+    Route::post('/events', [AgendaController::class, 'store'])->name('event.store');
+    Route::patch('/events', [AgendaController::class, 'patch'])->name('event.patch');
+    Route::get('/events', [AgendaController::class, "getEvents"])->name('events');
+
+    Route::get('/team', [TeamController::class, 'index'])->middleware(['auth', 'verified'])->name('team');
+    Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
+    Route::get('/team/{user}', [TeamController::class, 'show'])->name('team.show');
+    Route::get('/teams/{team}', [TeamController::class, 'show'])->name('teams.show');
 });
+
 
 Route::middleware('auth')->group(function () {
     Route::resource('/projects', ProjectController::class);
+});
+
+Route::middleware(['role_or_permission:admin'])->group(function () {
     Route::resource('/users', UserController::class);
     Route::resource('/tags', TagController::class);
     Route::resource('/categories', CategorieController::class);
-
-    //Route::get('/categories', [CategorieController::class, 'index'])->name('categories.index');
-    //Route::get('/categories/{category}/edit', [CategorieController::class, 'edit'])->name('categories.edit');
-    //Route::put('/categories/{category}', [CategorieController::class, 'update'])->name('categories.update');
-   // Route::delete('/categories/{category}', [CategorieController::class, 'destroy'])->name('categories.destroy');
-// routes/web.php
-
-
-Route::get('/team', [TeamController::class, 'index'])->middleware(['auth', 'verified'])->name('team');
-Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
-Route::get('/team/{user}', [TeamController::class, 'show'])->name('team.show');
-Route::get('/teams/{team}', [TeamController::class, 'show'])->name('teams.show');
-
 });
 
 
