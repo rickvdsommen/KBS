@@ -15,10 +15,10 @@
                     <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
                         {{ __('Projecten') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('team')" :active="request()->routeIs('team')">
+                    <x-nav-link :href="route('team.index')" :active="request()->routeIs('team.index')">
                         {{ __('Het Team') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('agenda')" :active="request()->routeIs('agenda')">
+                    <x-nav-link :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">
                         {{ __('Agenda') }}
                     </x-nav-link>
                     @role('admin') 
@@ -84,10 +84,10 @@
             <x-responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
                 {{ __('Projecten') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('team')" :active="request()->routeIs('team')">
+            <x-responsive-nav-link :href="route('team.index')" :active="request()->routeIs('team.index')">
                 {{ __('Het Team') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('agenda')" :active="request()->routeIs('agenda')">
+            <x-responsive-nav-link :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">
                 {{ __('Agenda') }}
             </x-responsive-nav-link>
             @role('admin')  

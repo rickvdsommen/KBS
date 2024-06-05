@@ -9,7 +9,7 @@ use Throwable;
 
 class AgendaController extends Controller
 {
-    public function __invoke()
+    public function index()
     {
         return view('agenda');
     }

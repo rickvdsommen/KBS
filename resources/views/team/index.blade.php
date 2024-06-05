@@ -7,7 +7,7 @@
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-4">
         <!-- Search bar -->
-        <form method="GET" action="{{ route('teams.index') }}">
+        <form method="GET" action="{{ route('team.index') }}">
             <x-text-input class="w-80 mr-2" type="text" name="search" placeholder="Zoek een persoon..."/>
             <x-primary-button type="submit">Zoek</x-primary-button>
         </form>
