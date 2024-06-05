@@ -15,10 +15,10 @@
                     <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
                         {{ __('Projecten') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('team')" :active="request()->routeIs('team')">
+                    <x-nav-link :href="route('team.index')" :active="request()->routeIs('team.index')">
                         {{ __('Het Team') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('agenda')" :active="request()->routeIs('agenda')">
+                    <x-nav-link :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">
                         {{ __('Agenda') }}
                     </x-nav-link>
                     @role('admin') 
@@ -33,7 +33,7 @@
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-base leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">
@@ -80,14 +80,14 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
+        <div class="pt-2 pb-3 space-y-1 text-">
             <x-responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
                 {{ __('Projecten') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('team')" :active="request()->routeIs('team')">
+            <x-responsive-nav-link :href="route('team.index')" :active="request()->routeIs('team.index')">
                 {{ __('Het Team') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('agenda')" :active="request()->routeIs('agenda')">
+            <x-responsive-nav-link :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">
                 {{ __('Agenda') }}
             </x-responsive-nav-link>
             @role('admin')  
