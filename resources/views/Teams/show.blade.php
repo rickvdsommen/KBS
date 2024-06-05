@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-6">
         <div
             class="bg-white dark:bg-gray-700 overflow-hidden shadow-sm sm:rounded-lg hover:shadow-lg transition-shadow duration-300 ease-in-out">
             <div class="p-8">
@@ -20,7 +20,7 @@
                 <p class="text-lg text-gray-700 dark:text-gray-300 mb-6"><strong>Bio:</strong> {{ $user->bio }}</p>
                 @if ($user->degrees->count() > 0)
                     <div class="mb-6">
-                        <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">Opleidingen</h4>
+                        <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-1">Opleidingen</h4>
                         <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 ml-4">
                             @foreach ($user->degrees as $degree)
                                 <li class="mb-2"><span class="font-medium dark:text-white">
@@ -42,7 +42,7 @@
                 @endif
                 @if ($user->skills->count() > 0)
                     <div class="mb-6">
-                        <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">Vaardigheden</h4>
+                        <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-1">Vaardigheden</h4>
                         <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 ml-4">
                             @foreach ($user->skills as $skill)
                                 <li><span class="font-medium dark:text-white">{{ $skill->skillName }}</span>
@@ -58,7 +58,7 @@
                 @endif
                 @if ($user->courses->count() > 0)
                     <div>
-                        <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">Cursussen</h4>
+                        <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-1">Cursussen</h4>
                         <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 ml-4">
                             @foreach ($user->courses as $course)
                                 <li><span class="font-medium dark:text-white">{{ $course->courseName }}</span>
