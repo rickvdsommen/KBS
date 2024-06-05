@@ -31,6 +31,8 @@ class AgendaController extends Controller
                 'start' => $appointment->start,
                 'end' => $appointment->end,
                 'allDay' => (bool) $appointment->all_day,
+                'user' => $appointment->user,
+                'description' => $appointment->description,
             ];
 
             array_push($events, $obj);
@@ -47,6 +49,7 @@ class AgendaController extends Controller
                 'start' => 'string',
                 'end' => 'nullable|string',
                 'all_day' => 'required|boolean',
+                'description' => 'string',
                 // Add validation rules for other event data fields if needed
             ]);
 
@@ -68,6 +71,7 @@ class AgendaController extends Controller
                 'start' => 'date',
                 'end' => 'date',
                 'all_day' => 'required|boolean',
+                'description' => 'string',
             ]);
             
             $appointment = Appointment::find($request->id);

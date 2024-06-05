@@ -15,9 +15,9 @@ class Appointment extends Model
         'title',
         'all_day',
         // 'personalStatus',
-        // 'description',
+        'description',
         // 'location',
-        // 'user_id',
+        'user',
     ];
  
     public function user()
