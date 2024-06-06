@@ -31,13 +31,35 @@
                     <label for="startingDate" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Begindatum</label>
                     <input type="date" name="startingDate" class="mt-1 block w-80 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm sm:text-sm" value="{{ $project->startingDate }}" required>
                 </div>
+                <!-- Project Leader -->
                 <div class="mb-4">
-                    <label for="projectLeader" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Project leider</label>
-                    <x-text-input type="text" name="projectLeader" class="mt-1 block w-80 sm:text-sm" value="{{ $project->projectLeader }}" required/>
+                    <label for="projectLeaderSearch" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Project leider</label>
+                    <x-text-input type="text" id="userSearchPL" class="mt-1 block w-80 sm:text-sm mb-2" placeholder="Zoek projectleiders..."/>
+                    <div class="overflow-y-auto w-80 max-h-60 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3 dark:bg-gray-900">
+                        <ul id="userListPL">
+                            @foreach($filteredUsersPL as $user)
+                            <li>
+                                <input type="radio" name="projectLeader" value="{{ $user->id }}" class="rounded-full border-gray-300 dark:border-gray-700 shadow-sm" {{ $project->projectLeader == $user->id ? 'checked' : '' }}>
+                                <span class="text-gray-800 dark:text-gray-200">{{ $user->name }}</span>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
+                <!-- Product Owner -->
                 <div class="mb-4">
-                    <label for="productOwner" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Product Owner</label>
-                    <x-text-input type="text" name="productOwner" class="mt-1 block w-80 sm:text-sm" value="{{ $project->productOwner }}" required/>
+                    <label for="productOwnerSearch" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Product Owner</label>
+                    <x-text-input type="text" id="userSearchPO" class="mt-1 block w-80 sm:text-sm mb-2" placeholder="Zoek product owners..."/>
+                    <div class="overflow-y-auto w-80 max-h-60 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3 dark:bg-gray-900">
+                        <ul id="userListPO">
+                            @foreach($filteredUsersPO as $user)
+                            <li>
+                                <input type="radio" name="productOwner" value="{{ $user->id }}" class="rounded-full border-gray-300 dark:border-gray-700 shadow-sm" {{ $project->productOwner == $user->id ? 'checked' : '' }}>
+                                <span class="text-gray-800 dark:text-gray-200">{{ $user->name }}</span>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
                 <div class="mb-4">
                     <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Omschrijving</label>
@@ -69,11 +91,11 @@
                 </div>
                 <!-- List of Users and searchbar -->
                 <div class="mb-4">
-                    <label for="selectedUsers" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Wie werkt er mee aan dit project?</label>
+                    <label for="userSearch" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Wie werkt er mee aan dit project?</label>
                     <x-text-input type="text" id="userSearch" class="mt-1 block w-80 sm:text-sm mb-2" placeholder="Zoek gebruikers..."/>
-                    <div class="overflow-y-auto w-80 max-h-80 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3 dark:bg-gray-900">
+                    <div class="overflow-y-auto w-80 max-h-60 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3 dark:bg-gray-900">
                         <ul id="userList">
-                            @foreach($filteredUsers as $user)
+                            @foreach($filteredUsersWorkingWith as $user)
                             <li>
                                 <input type="checkbox" name="selectedUsers[]" value="{{ $user->id }}" class="rounded-md border-gray-300 dark:border-gray-700 shadow-sm" {{ $project->users->contains($user->id) ? 'checked' : '' }}>
                                 <span class="text-gray-800 dark:text-gray-200">{{ $user->name }}</span>
@@ -87,19 +109,44 @@
         </div>
     </div>
 </x-app-layout>
-@push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.getElementById('userSearch');
-        const userList = document.getElementById('userList');
-        const users = Array.from(userList.getElementsByTagName('li'));
+        const searchInputUsers = document.getElementById('userSearch');
+        const searchInputPL = document.getElementById('userSearchPL');
+        const searchInputPO = document.getElementById('userSearchPO');
 
-        searchInput.addEventListener('input', function(event) {
+        const userList = document.getElementById('userList');
+        const userListPL = document.getElementById('userListPL');
+        const userListPO = document.getElementById('userListPO');
+
+        const users = Array.from(userList.getElementsByTagName('li'));
+        const usersPL = Array.from(userListPL.getElementsByTagName('li'));
+        const usersPO = Array.from(userListPO.getElementsByTagName('li'));
+
+        searchInputUsers.addEventListener('input', function(event) {
             const searchTerm = event.target.value.toLowerCase();
-            const filteredUsers = users.filter(user => user.textContent.toLowerCase().includes(searchTerm));
+            const filteredUsersWorkingWithJ = users.filter(user => user.textContent.toLowerCase().includes(searchTerm));
             userList.innerHTML = '';
-            filteredUsers.forEach(user => {
+            filteredUsersWorkingWithJ.forEach(user => {
                 userList.appendChild(user);
+            });
+        });
+
+        searchInputPL.addEventListener('input', function(event) {
+            const searchTerm = event.target.value.toLowerCase();
+            const filteredUsersPL = usersPL.filter(user => user.textContent.toLowerCase().includes(searchTerm));
+            userListPL.innerHTML = '';
+            filteredUsersPL.forEach(user => {
+                userListPL.appendChild(user);
+            });
+        });
+
+        searchInputPO.addEventListener('input', function(event) {
+            const searchTerm = event.target.value.toLowerCase();
+            const filteredUsersPO = usersPO.filter(user => user.textContent.toLowerCase().includes(searchTerm));
+            userListPO.innerHTML = '';
+            filteredUsersPO.forEach(user => {
+                userListPO.appendChild(user);
             });
         });
     });

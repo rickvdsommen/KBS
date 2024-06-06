@@ -24,7 +24,7 @@ class ProjectController extends Controller
 
     public function index(Request $request)
     {
-        $query = Project::with(['tags', 'categories']);
+        $query = Project::with(['tags', 'categories', 'productOwnerRelation', 'projectLeaderRelation']);
         $searchTerm = $request->input('search');
     
         if ($searchTerm) {
@@ -104,14 +104,28 @@ class ProjectController extends Controller
         $categories = Category::all();
         $users = User::all();
 
-        $searchTerm = $request->input('userSearch');
-        if ($searchTerm) {
-            $filteredUsers = User::where('name', 'like', "%$searchTerm%")->get();
+        $searchTermUser = $request->input('userSearch');
+        if ($searchTermUser) {
+            $filteredUsersWorkingWith = User::where('name', 'like', "%$searchTermUser%")->get();
         } else {
-            $filteredUsers = $users;
+            $filteredUsersWorkingWith = $users;
         }
 
-        return view('projects.edit', compact('project', 'tags', 'categories', 'filteredUsers'));
+        $searchTermPO = $request->input('productOwnerSearch');
+        if ($searchTermPO) {
+            $filteredUsersPO = User::where('name', 'like', "%$searchTermPO%")->get();
+        } else {
+            $filteredUsersPO = $users;
+        }
+
+        $searchTermPL = $request->input('projectLeaderSearch');
+        if ($searchTermPL) {
+            $filteredUsersPL = User::where('name', 'like', "%$searchTermPL%")->get();
+        } else {
+            $filteredUsersPL = $users;
+        }
+
+        return view('projects.edit', compact('project', 'tags', 'categories', 'filteredUsersWorkingWith', 'filteredUsersPO', 'filteredUsersPL'));
     }
 
     public function update(Request $request, Project $project)

@@ -6,9 +6,9 @@
                     <h2 class="text-3xl mb-2 font-semibold text-gray-900 dark:text-gray-200">{{ $project->projectname }}</h2>
                     <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Fase:</strong> {{ $project->phaseName }}</p>
                     <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Status:</strong> {{ $project->status }}</p>
-                    <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Begin datum:</strong> {{ $project->startingDate }}</p>
-                    <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Project Leader:</strong> {{ $project->projectLeader }}</p>
-                    <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Product Owner:</strong> {{ $project->productOwner }}</p>
+                    <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Begin datum:</strong> {{ \Carbon\Carbon::parse($project->startingDate)->locale('nl')->translatedFormat('d F Y') }}</p>
+                    <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Project Leader:</strong> {{ $project->projectLeaderRelation->name }}</p>
+                    <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Product Owner:</strong> {{ $project->productOwnerRelation->name }}</p>
                     <p class="text-gray-700 dark:text-gray-300"><strong>Omschrijving:</strong> {{ $project->description }}</p>
 
                     <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-200">Categorieën:</h3>
@@ -29,7 +29,7 @@
                     <ul class="list-disc list-inside">
                         @foreach ($project->users as $user)
                         <li i class="text-gray-700 dark:text-gray-300">
-                            {{ $user->name }} ({{ $user->function }})
+                            <a class="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600" href="{{ route('team.show', $user->id) }}">{{ $user->name }} </a> ({{ $user->function }})
                         </li>
                         @endforeach
                     </ul>
