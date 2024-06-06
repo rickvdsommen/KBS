@@ -22,8 +22,8 @@ class ProjectFactory extends Factory
             'description' => $this->faker->paragraph,
             'status' => $this->faker->randomElement(['Planning', 'In Progress', 'Completed']),
             'startingDate' => $this->faker->date,
-            'projectLeader' => $this->faker->name,
-            'productOwner' => $this->faker->name,
+            'projectLeader' => '1',
+            'productOwner' => '2',
         ];
     }
 }
