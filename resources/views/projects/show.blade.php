@@ -7,8 +7,8 @@
                     <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Fase:</strong> {{ $project->phaseName }}</p>
                     <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Status:</strong> {{ $project->status }}</p>
                     <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Begin datum:</strong> {{ \Carbon\Carbon::parse($project->startingDate)->locale('nl')->translatedFormat('d F Y') }}</p>
-                    <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Project Leader:</strong> {{ $project->projectLeaderRelation->name }}</p>
-                    <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Product Owner:</strong> {{ $project->productOwnerRelation->name }}</p>
+                    <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Project Leader:</strong> <a class="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600" href="{{ route('team.show', $project->projectLeaderRelation->id) }}">{{ $project->projectLeaderRelation->name }}</a></p>
+                    <p class="text-gray-700 dark:text-gray-300 mb-1"><strong>Product Owner:</strong> <a class="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600" href="{{ route('team.show', $project->productOwnerRelation->id) }}">{{ $project->productOwnerRelation->name }}</a></p>
                     <p class="text-gray-700 dark:text-gray-300"><strong>Omschrijving:</strong> {{ $project->description }}</p>
 
                     <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-200">Categorieën:</h3>
