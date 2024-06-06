@@ -12,14 +12,13 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DegreeController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\DashboardController;
+
 
 // Routes for getting a view from a page
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
     ->name('login');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/agenda', function () {
     return view('agenda');
@@ -49,6 +48,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/team/{user}', [TeamController::class, 'show'])->name('team.show');
 
     Route::resource('/projects', ProjectController::class);
+
+    Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
 });
 
 // Only accessible with admin role
