@@ -3,7 +3,7 @@
         <div
             class="bg-white dark:bg-gray-700 overflow-hidden shadow-sm sm:rounded-lg hover:shadow-lg transition-shadow duration-300 ease-in-out">
             <div class="p-8">
-                <h3 class="text-3xl font-semibold text-gray-800 dark:text-gray-200 mb-4">{{ $user->name }}</h3>
+                <h3 class="text-3xl font-semibold text-gray-800 dark:text-gray-200 mb-4">{{ $user->name }} @include('components.status-indicator-extra')</h3>
                 <p class="text-lg text-gray-700 dark:text-gray-300 mb-4"><strong>Email:</strong><a
                         href="mailto:{{ $user->email }}"
                         class="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600">

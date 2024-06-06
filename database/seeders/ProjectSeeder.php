@@ -18,5 +18,7 @@ class ProjectSeeder extends Seeder
             'projectLeader' => '1',
             'productOwner' => '2',
         ]);
+
+        Project::factory(20)->create();
     }
 }

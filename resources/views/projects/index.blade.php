@@ -4,7 +4,7 @@
             {{ __('Projecten') }}
         </h2>
     </x-slot>
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-4">
+    <div class="max-w-7xl mx-auto h-full sm:px-6 lg:px-8 pt-4">
         {{-- Search function --}}
         <form method="GET" action="{{ route('projects.index') }}" class="flex items-center mb-6">
             <x-text-input type="text" name="search" id="search" value="{{ request('search') }}"
@@ -109,7 +109,7 @@
                 @endforelse
             </div>
             <!-- Pagination links -->
-            <div class="mt-4">
+            <div class="pt-6 pb-10">
                 {{ $projects->links() }}
             </div>
         </div>

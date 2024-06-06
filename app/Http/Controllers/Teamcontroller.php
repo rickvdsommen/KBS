@@ -10,7 +10,7 @@ class TeamController extends Controller
 {
     public function index(Request $request)
     {
-        $query = User::query()->with('degrees', 'skills', 'courses');
+        $query = User::query()->with('degrees', 'skills', 'courses', 'device');
         if ($request->has('search')) {
             $search = $request->input('search');
             $query->where(function($q) use ($search) {
@@ -31,6 +31,7 @@ class TeamController extends Controller
             });
         }
         $users = $query->paginate(9); 
+        
         return view('team.index', compact('users'));
     }
 

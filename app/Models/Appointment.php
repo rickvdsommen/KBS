@@ -14,14 +14,6 @@ class Appointment extends Model
         'end',
         'title',
         'all_day',
-        // 'personalStatus',
         'description',
-        // 'location',
-        'user',
     ];
- 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }
