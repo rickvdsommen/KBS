@@ -49,16 +49,16 @@
                                         <span class="font-semibold">Status:</span> {{ $project->status }}
                                     </p>
                                     <p class="text-gray-700 dark:text-gray-300">
-                                        <span class="font-semibold">Begin datum:</span> {{ $project->startingDate }}
+                                        <span class="font-semibold">Begin datum:</span> {{ \Carbon\Carbon::parse($project->startingDate)->locale('nl')->translatedFormat('d F Y') }}
                                     </p>
                                 </div>
                                 <div class="mb-4">
                                     <p class="text-gray-700 dark:text-gray-300">
                                         <span class="font-semibold">Project Leader:</span>
-                                        {{ $project->projectLeader }}
+                                        {{ $project->projectLeaderRelation->name }}
                                     </p>
                                     <p class="text-gray-700 dark:text-gray-300">
-                                        <span class="font-semibold">Product Owner:</span> {{ $project->productOwner }}
+                                        <span class="font-semibold">Product Owner:</span> {{ $project->productOwnerRelation->name }}
                                     </p>
                                 </div>
                                 <div class="mb-4">

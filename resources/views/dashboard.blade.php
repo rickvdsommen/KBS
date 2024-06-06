@@ -17,6 +17,8 @@
                     @else
                         <br><p>Je bent ingelogd als een GEBRUIKER!</p>
                     @endrole
+
+                    <br><div class="min-h-screen w-80" id="calendarDash"></div>
                 </div>
             </div>
         </div>
