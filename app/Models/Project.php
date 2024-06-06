@@ -26,5 +26,13 @@ class Project extends Model
     {
         return $this->belongsToMany(User::class, 'user_project');
     }
+    public function productOwnerRelation()
+    {
+        return $this->belongsTo(User::class, 'productOwner');
+    }
+    public function projectLeaderRelation()
+    {
+        return $this->belongsTo(User::class, 'projectLeader');
+    }
 
 }
