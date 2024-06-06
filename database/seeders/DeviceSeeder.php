@@ -10,7 +10,7 @@ class DeviceSeeder extends Seeder
     public function run(): void
     {
         Device::factory()->create([
-            'status' => 'Aanwezig',
+            'status' => 'aanwezig',
             'user_id' => '1',
         ]);
     }

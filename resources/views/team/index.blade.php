@@ -17,7 +17,7 @@
                 <a href="{{ route('team.show', $user) }}" class="transform transition-transform hover:scale-105 flex">
                     <div class="flex-1 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-lg hover:shadow-xl cursor-pointer flex flex-col">
                         <div class="p-6 flex-1 flex flex-col">
-                            <h3 class="text-2xl font-semibold text-gray-700 dark:text-gray-300">{{ $user->name }} @include('components.status-indicator')</h3>
+                            <h3 class="text-2xl font-semibold text-gray-700 dark:text-gray-300">{{ $user->name }} @include('components.status-indicator-extra')</h3>
                             
                             <p class="text-gray-700 dark:text-gray-300 mt-2"><strong>Functie:</strong> {{ $user->function }}</p>
                             @if ($user->degrees->count() > 0)
