@@ -29,7 +29,7 @@
                     <ul class="list-disc list-inside">
                         @foreach ($project->users as $user)
                         <li i class="text-gray-700 dark:text-gray-300">
-                            {{ $user->name }} ({{ $user->function }})
+                            <a class="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600" href="{{ route('team.show', $user->id) }}">{{ $user->name }} </a> ({{ $user->function }})
                         </li>
                         @endforeach
                     </ul>
