@@ -88,57 +88,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     theme: 'light',
                 });
             },
-            eventClick: function (info) {
-                // Populate the modal with event data
-                $('#eventTitle').val(info.event.title);
-                $('#eventDescription').val(info.event.extendedProps.description);
-                $('#eventUser').val(info.event.extendedProps.user);
-
-                // Show the modal
-                $('#eventModal').modal('show');
-
-                // Save changes
-                $('#saveEventBtn').off('click').on('click', function () {
-                    $.ajax({
-                        url: `http://127.0.0.1:8000/events/${info.event.id}`,
-                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                        data: {
-                            id: info.event.id,
-                            title: $('#eventTitle').val(),
-                            description: $('#eventDescription').val(),
-                            start: moment(info.event.start).format(DATEFORMAT),
-                            end: info.event.end ? moment(info.event.end).format(DATEFORMAT) : moment(info.event.start).format(DATEFORMAT),
-                            all_day: Number(info.event.allDay),
-                        },
-                        type: "PATCH",
-                        success: function (res) {
-                            info.event.setProp('title', $('#eventTitle').val());
-                            info.event.setExtendedProp('description', $('#eventDescription').val());
-                            $('#eventModal').modal('hide');
-                            calendar.refetchEvents();
-                        },
-                        error: function (res) {
-                            console.log(res);
-                        }
-                    });
-                });
-
-                // Delete event
-                $('#deleteEventBtn').off('click').on('click', function () {
-                    $.ajax({
-                        url: `http://127.0.0.1:8000/events/${info.event.id}`,
-                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                        type: "DELETE",
-                        success: function (res) {
-                            info.event.remove();
-                            $('#eventModal').modal('hide');
-                        },
-                        error: function (res) {
-                            console.log(res);
-                        }
-                    });
-                });
-            },
             eventSources: '/events', // Endpoint to fetch existing events
             headerToolbar: {
                 left: 'prev,today,next',
