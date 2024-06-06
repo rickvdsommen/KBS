@@ -20,18 +20,13 @@ class AgendaController extends Controller
         $appointments = Appointment::whereDate('start', '>=', $request->start)->whereDate('end', '<=', $request->end)->get();
         $events = array();
 
-        foreach ($appointments as $appointment) {
-            // Access the associated user using the 'user' relationship
-            $userName = $appointment->user ? $appointment->user->name : 'Unknown User';
-            
+        foreach ($appointments as $appointment) {            
             $obj = [
                 'id' => $appointment->id,
                 'title' => $appointment->title,
-                // 'title' => $appointment->title . ' (' . $userName . ')',
                 'start' => $appointment->start,
                 'end' => $appointment->end,
                 'allDay' => (bool) $appointment->all_day,
-                'user' => $appointment->user,
                 'description' => $appointment->description,
             ];
 
@@ -49,7 +44,7 @@ class AgendaController extends Controller
                 'start' => 'string',
                 'end' => 'nullable|string',
                 'all_day' => 'required|boolean',
-                'description' => 'string',
+                'description' => 'nullable|string',
                 // Add validation rules for other event data fields if needed
             ]);
 
@@ -87,5 +82,13 @@ class AgendaController extends Controller
         } catch (Throwable $e) {
             return response()->json($e);
         }
+    }
+
+    public function destroy(Request $request)
+    {
+        $event = Appointment::findOrFail($request->id);
+        $event->delete();
+        
+        return response()->json(['message' => 'Event deleted successfully']);
     }
 }

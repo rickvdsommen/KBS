@@ -32,6 +32,9 @@ document.addEventListener('DOMContentLoaded', function () {
             select: function (arg) {
                 var title = prompt('Afspraak naam:');
                 var description = prompt('Beschrijving:');
+                if (!description) {
+                    description = "-";
+                }
                 if (title) {
                     $.ajax({
                         url: "http://127.0.0.1:8000/events",
@@ -45,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         },
                         type: "POST",
                         success: function (res) {
-                            // calendar.addEvent(res);
                             calendar.refetchEvents();
                         },
                         error: function (res) {
@@ -87,6 +89,20 @@ document.addEventListener('DOMContentLoaded', function () {
                     placement: 'top',
                     theme: 'light',
                 });
+            },
+            eventClick: function (info) {
+                if (confirm("Are you sure you want to delete this event?")) {
+                $.ajax({
+                    url: `http://127.0.0.1:8000/events/${info.event.id}`,
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    type: "DELETE",
+                    success: function (res) {
+                        calendar.refetchEvents();
+                    },
+                    error: function (res) {
+                        console.log(res);
+                    }
+                });}
             },
             eventSources: '/events', // Endpoint to fetch existing events
             headerToolbar: {
