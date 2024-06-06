@@ -7,6 +7,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
+use App\Models\User;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -16,8 +19,16 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $user = $request->user();
+        $skills = $user->skills;
+        $degrees = $user->degrees;
+        $courses = $user->courses;
+        
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user' => $user,
+            'skills' => $skills,
+            'degrees' => $degrees,
+            'courses' => $courses
         ]);
     }
 
