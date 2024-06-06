@@ -9,6 +9,7 @@ use App\Models\Agenda;
 use App\Models\Device;
 use App\Models\Tag;
 use App\Models\ProjectTag;
+use App\Models\ProjectCategory;
 use App\Models\Category;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -31,5 +32,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
         $this->call(DeviceSeeder::class);
         $this->call(ProjectTagRelationshipsSeeder::class);
+        $this->call(ProjectCategorySeeder::class);
+        $this->call(UserProjectSeeder::class); 
+
     }
 }
