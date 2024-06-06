@@ -15,8 +15,8 @@ class ProjectSeeder extends Seeder
             'description' => 'In dit project willen we het temperatuur volgen van de water en nog veel meer!',
             'status' => 'Lopend',
             'startingDate' => '2024-05-13',
-            'projectLeader' => 'The Leader',
-            'productOwner' => 'Bertus Rosier',
+            'projectLeader' => '1',
+            'productOwner' => '2',
         ]);
     }
 }

@@ -51,7 +51,7 @@ class ProjectController extends Controller
             });
         }
     
-        $projects = $query->paginate(6);
+        $projects = $query->paginate(4);
     
         return view('projects.index', compact('projects'));
     }
