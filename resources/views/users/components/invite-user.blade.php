@@ -1,4 +1,4 @@
-<div class=" text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6 mb-6">
+<div class="text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6 mb-6">
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight mb-5">
         Nieuwe gebruikers uitnodigen
     </h2>
