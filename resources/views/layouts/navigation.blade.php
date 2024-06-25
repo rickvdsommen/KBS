@@ -61,7 +61,7 @@
                         </form>
 
                         <!-- Dark Mode Toggle -->
-                        @include('components.darkmode-toggle')
+                        {{-- @include('components.darkmode-toggle') --}}
                     </x-slot>
                 </x-dropdown>
             </div>
@@ -105,7 +105,7 @@
             </div>
 
             <!-- Dark Mode Toggle -->
-            @include('components.darkmode-toggle')
+            {{-- @include('components.darkmode-toggle') --}}
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
