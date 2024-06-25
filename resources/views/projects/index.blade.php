@@ -6,18 +6,18 @@
     </x-slot>
     <div class="max-w-7xl mx-auto h-full sm:px-6 lg:px-8 pt-4">
         {{-- Search function --}}
-        <form method="GET" action="{{ route('projects.index') }}" class="flex items-center mb-6">
+        <form method="GET" action="{{ route('projects.index') }}" class="flex items-center mb-6 mx-2">
             <x-text-input type="text" name="search" id="search" value="{{ request('search') }}"
                 placeholder="Zoek projecten..." class="mb-2 w-80"/>
             <x-primary-button class="ml-2">zoek</x-primary-button>
         </form>
         <!-- Add Project Button -->
-        <div class="mb-4 flex justify-between items-center">
+        <div class="mb-4 mx-2 flex justify-between items-center">
             <form action="{{ route('projects.create') }}">
                 <x-primary-button>Project Toevoegen</x-primary-button>
             </form>
             @role('admin') 
-            <div class="flex space-x-4">
+            <div class="flex lg:space-x-4">
                 <form action="{{ route('tags.index') }}">
                     <x-secondary-button type="submit">Beheer Tags</x-secondary-button>
                 </form>

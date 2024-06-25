@@ -8,8 +8,8 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-4">
         <!-- Search bar -->
         <form method="GET" action="{{ route('team.index') }}">
-            <x-text-input class="w-80 mr-2" type="text" name="search" placeholder="Zoek een persoon..."/>
-            <x-primary-button type="submit">Zoek</x-primary-button>
+            <x-text-input class="w-80 ml-2" type="text" name="search" placeholder="Zoek een persoon..."/>
+            <x-primary-button class="ml-2 mt-2" type="submit">Zoek</x-primary-button>
         </form>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
