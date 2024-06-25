@@ -7,7 +7,7 @@
         {{-- Invite function --}}
         <form id="invite-form" action="{{ route('users.store') }}" method="POST">
             @csrf
-            <x-text-input class="w-80" type="email" name="email" id="email" placeholder="E-mailadres van uitgenodigde" required/>
+            <x-text-input class="w-80 mb-2" type="email" name="email" id="email" placeholder="E-mailadres van uitgenodigde" required/>
             <x-primary-button class="ml-2">Verstuur uitnodiging</x-primary-button>
         </form>
         @if (session('status') === 'invited')
