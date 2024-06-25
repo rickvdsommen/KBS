@@ -32,7 +32,7 @@ $dutchMonths = [
         <x-primary-button class="ml-2">Zoeken</x-primary-button>
     </form>
     <div class="overflow-x-auto">
-    <table class="border-collapse table-auto w-full text-sm">
+    <table class="border-collapse table-auto w-full">
         <thead>
             {{-- <th class="px-4 py-2 text-left">Nr</th> --}}
             <th class="px-4 py-2 text-left">ID</th>
