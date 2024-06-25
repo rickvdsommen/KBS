@@ -13,26 +13,26 @@ class UserSeeder extends Seeder
         User::factory()
             ->user()
             ->create([
-                'name' => 'Test Gebruiker',
+                'name' => 'Gebruiker',
                 'email' => 'test@example.com',
                 'birthday' => '1998-05-13',
                 'function' => 'Medewerker',
                 'phone' => '+31600000000',
-                'bio' => 'Hallo, ik ben een test gebruiker!',
+                'bio' => 'Ik ben een test gebruiker!',
             ]);
         
         // Factory for seeding a User with the role 'admin'
         User::factory()
             ->admin()
             ->create([
-                'name' => 'Test Admin',
+                'name' => 'Admin',
                 'email' => 'admin@example.com',
                 'birthday' => '1998-05-13',
                 'function' => 'Begeleider',
                 'phone' => '+31600000000',
-                'bio' => 'Hallo, ik ben een admin gebruiker!',
+                'bio' => 'Ik ben een admin gebruiker!',
             ]);
 
-        User::factory(50)->user()->create();
+        User::factory(10)->user()->create();
     }
 }
