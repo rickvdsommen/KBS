@@ -9,14 +9,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-4 sm:p-8 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 shadow sm:rounded-lg">
 
-                <div class="flex space-x-10">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- First column for the calendar -->
-                    <div class="w-1/3 border h-fit border-gray-300 dark:border-gray-600 rounded-lg p-5 shadow-md">
+                    <div class="border h-fit border-gray-300 dark:border-gray-600 rounded-lg p-5 shadow-md">
                         <div class="min-h-screen w-full" id="calendarDash"></div>
                     </div>
 
                     <!-- Second column for "Mijn Projecten" -->
-                    <div class="w-1/3 border h-fit border-gray-300 dark:border-gray-600 rounded-lg p-5 shadow-md">
+                    <div class="border h-fit border-gray-300 dark:border-gray-600 rounded-lg p-5 shadow-md">
                         <h2 class="my-2 text-2xl font-semibold">Mijn Projecten:</h2>
                         <ul class="divide-y divide-gray-200 dark:divide-gray-600 text-lg font-semibold">
                             @forelse ($userProjects as $project)
@@ -32,7 +32,7 @@
                     </div>
 
                     <!-- Third column for "Wie is er vandaag aanwezig?" -->
-                    <div class="w-1/3 border h-fit border-gray-300 dark:border-gray-600 rounded-lg p-5 shadow-md">
+                    <div class="border h-fit border-gray-300 dark:border-gray-600 rounded-lg p-5 shadow-md">
                         <h2 class="my-2 text-2xl font-semibold">Wie is er vandaag aanwezig?</h2>
                         <ul class="divide-y divide-gray-200 dark:divide-gray-600 text-lg font-semibold">
                             @forelse ($users as $user)
