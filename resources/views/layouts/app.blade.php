@@ -13,6 +13,9 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
         <!-- Scripts -->
+        <script>
+            window.APP_URL = "{{ env('APP_URL') }}";
+        </script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased" x-data="{ darkMode: false }" x-init="

@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 if (title) {
                     $.ajax({
-                        url: "http://127.0.0.1:8000/events",
+                        url: window.APP_URL + "/events",
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                         data: {
                             title: title,
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             eventChange: function (arg) {
                 $.ajax({
-                    url: "http://127.0.0.1:8000/events",
+                    url: window.APP_URL + "/events",
                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                     data: {
                         id: arg.event.id,
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
             eventClick: function (info) {
                 if (confirm("Are you sure you want to delete this event?")) {
                 $.ajax({
-                    url: `http://127.0.0.1:8000/events/${info.event.id}`,
+                    url: window.APP_URL + `/events/${info.event.id}`,
                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                     type: "DELETE",
                     success: function (res) {
