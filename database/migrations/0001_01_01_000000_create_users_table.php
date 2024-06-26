@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->date('birthday');
+            $table->date('birthday')->nullable();
             $table->string('function');
             $table->string('phone')->nullable();
             $table->string('bio')->nullable();

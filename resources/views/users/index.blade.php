@@ -7,7 +7,7 @@
 
     <div class="pb-10 pt-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            @include('users.components.invite-user')
+            @include('users.components.add-user')
 
             @include('users.components.user-list')
         </div>

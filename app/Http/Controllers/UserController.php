@@ -42,15 +42,44 @@ class UserController extends Controller
     /**
      * Creates temporary signed route for account registration.
      */
+    // public function store(Request $request)
+    // {
+    //     $email = $request->email;
+    //     $signedUrl = URL::temporarySignedRoute('register', now()->addDays(7), ['email' => $email]);
+
+    //     Mail::to($email)->send(new \App\Mail\RegistrationMail($signedUrl));
+
+    //     return Redirect::route('users.index')->with('status', 'invited');
+    // }
+
     public function store(Request $request)
     {
-        $email = $request->email;
-        $signedUrl = URL::temporarySignedRoute('register', now()->addDays(7), ['email' => $email]);
-
-        Mail::to($email)->send(new \App\Mail\RegistrationMail($signedUrl));
-
-        return Redirect::route('users.index')->with('status', 'invited');
+        // Validate the request data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'function' => 'required|string|max:255',
+            'password' => 'required|string|min:8',
+        ]);
+    
+        try {
+            // Create a new user
+            User::create([
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'function' => $validatedData['function'],
+                'password' => bcrypt($validatedData['password']),
+            ]);
+    
+            // Redirect back with a success message
+            return redirect()->back()->with('status', 'added');
+        } catch (\Exception $e) {
+            // Handle any errors, for example:
+            // Log::error($e->getMessage());
+            return redirect()->back()->with('status', 'error')->withErrors(['error' => 'Er is een fout opgetreden bij het toevoegen van de gebruiker. Probeer het opnieuw.']);
+        }
     }
+    
 
     /**
      * Display the specified resource.
