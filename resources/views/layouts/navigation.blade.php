@@ -55,7 +55,7 @@
 
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                                                this.closest('form').submit();" class="font-semibold text-red-500 hover:text-red-600 hover:bg-red-100 rounded transition duration-150 ease-in-out">
                                 {{ __('Uitloggen') }}
                             </x-dropdown-link>
                         </form>
@@ -81,17 +81,17 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1 text-">
-            <x-responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
+            <x-responsive-nav-link class="text-lg font-medium" :href="route('projects.index')" :active="request()->routeIs('projects.index')">
                 {{ __('Projecten') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('team.index')" :active="request()->routeIs('team.index')">
+            <x-responsive-nav-link class="text-lg font-medium" :href="route('team.index')" :active="request()->routeIs('team.index')">
                 {{ __('Het Team') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">
+            <x-responsive-nav-link class="text-lg font-medium" :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">
                 {{ __('Agenda') }}
             </x-responsive-nav-link>
             @role('admin')  
-                <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                <x-responsive-nav-link class="text-lg font-medium" :href="route('users.index')" :active="request()->routeIs('users.index')">
                     {{ __('Gebruikerbeheer') }}
                 </x-responsive-nav-link>
             @endrole
@@ -118,7 +118,7 @@
 
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
-                                        this.closest('form').submit();">
+                                        this.closest('form').submit();" class="font-semibold text-red-500">
                         {{ __('Uitloggen') }}
                     </x-responsive-nav-link>
                 </form>
