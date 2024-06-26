@@ -28,6 +28,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        // Check if the user is deactivated
+        if (auth()->user()->deactivated) {
+            auth()->logout();
+            return redirect()->route('login')->with('error', 'Dit account is gedeactiveerd.');
+        }
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 

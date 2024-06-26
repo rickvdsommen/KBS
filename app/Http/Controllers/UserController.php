@@ -108,6 +108,7 @@ class UserController extends Controller
             'name' => 'required',
             'birthday' => 'required',
             'function' => 'required',
+            'deactivated' => 'nullable|string|in:on',
         ]);
 
         if($request->admin === "on"){
@@ -116,7 +117,14 @@ class UserController extends Controller
             $user->removeRole('admin');
         }
 
-        $user->update($request->all());
+        if ($request->has('deactivated')) {
+            $user->deactivated = $request->input('deactivated') === 'on';
+        } else {
+            $user->deactivated = false; // or null, depending on your application logic
+        }
+
+        $user->update($request->except('deactivated'));
+        
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 

@@ -13,19 +13,14 @@ use App\Http\Controllers\DegreeController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Middleware\DeactivatedCheck;
 
 // Routes for getting a view from a page
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
     ->name('login');
 
-
-Route::get('/agenda', function () {
-    return view('agenda');
-})->middleware(['auth', 'verified'])->name('agenda');
-
 // Routes for CRUD items
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', DeactivatedCheck::class)->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -54,7 +49,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // Only accessible with admin role
-Route::middleware(['role_or_permission:admin'])->group(function () {
+Route::middleware(['role_or_permission:admin', DeactivatedCheck::class])->group(function () {
     Route::resource('/users', UserController::class);
     Route::resource('/tags', TagController::class);
     Route::resource('/categories', CategorieController::class);
