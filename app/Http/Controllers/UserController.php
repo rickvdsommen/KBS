@@ -119,6 +119,10 @@ class UserController extends Controller
 
         if ($request->has('deactivated')) {
             $user->deactivated = $request->input('deactivated') === 'on';
+            if ($user->device) {
+                $user->device->status = 'deactivated';
+                $user->device->save();
+            }
         } else {
             $user->deactivated = false; // or null, depending on your application logic
         }
