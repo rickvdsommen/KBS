@@ -1,7 +1,9 @@
 <section>
     <div class="p-6 bg-white dark:bg-gray-700 shadow-md rounded-lg border">
         <div class="mb-4">
-            <x-input-label for="course" :value="__('Cursussen')" class="text-lg font-semibold" />
+            <p class="block text-gray-700 dark:text-gray-300 text-base font-semibold">
+                Cursussen
+            </p>
         </div>
 
         <form id="courses-form" action="{{ route('course.store') }}" method="POST">

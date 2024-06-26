@@ -1,7 +1,9 @@
 <section>
         <div class="p-6 bg-white dark:bg-gray-700 shadow-md rounded-lg border">
             <div class="mb-4">
-                <x-input-label for="skills" :value="__('Vaardigheden')" class="text-lg font-semibold" />
+                <p class="block text-gray-700 dark:text-gray-300 text-base font-semibold">
+                    Vaardigheden
+                </p>
             </div>
 
             <form action="{{ route('skill.store')}}" method="post">
