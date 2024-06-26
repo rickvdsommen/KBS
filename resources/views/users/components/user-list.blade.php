@@ -20,22 +20,24 @@ $dutchMonths = [
     {{-- Search function --}}
     <form method="GET" action="{{ route('users.index') }}" class="items-center mb-6">
         <x-text-input type="text" name="search" id="search" value="{{ request('search') }}"
-            placeholder="Zoek op ID, naam, email of functie..." class="mb-2 w-80" />
+            placeholder="Zoek op ID, naam, email of functie..." class="mb-2 w-80 mr-2" />
 
         <select name="role" id="role"
-            class="mb-2 ml-2 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+            class="mb-2 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
             <option value="">Alle Rollen</option>
             <option value="admin" {{ request('role') == 'admin' ? 'selected' : '' }}>Admin</option>
             <option value="user" {{ request('role') == 'user' ? 'selected' : '' }}>Gebruiker</option>
         </select>
 
-        <label class="mx-2">
+        
+
+        <x-primary-button class="ml-2">Zoeken</x-primary-button>
+
+        <label class="ml-2 whitespace-nowrap">
             <input type="checkbox" id="showDeactivated" name="showDeactivated" class="rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 {{ request()->has('showDeactivated') ? 'checked' : '' }}>
             <span class="ml-2">Toon gedeactiveerde gebruikers</span>
         </label>
-
-        <x-primary-button class="ml-2">Zoeken</x-primary-button>
     </form>
 
     <div class="overflow-x-auto">
