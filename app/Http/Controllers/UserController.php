@@ -40,7 +40,7 @@ class UserController extends Controller
     }
 
     /**
-     * Creates temporary signed route for account registration.
+     * Gebruikers uitnodigen via mail.
      */
     // public function store(Request $request)
     // {

@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
                 'birthday' => '1998-05-13',
                 'function' => 'Medewerker',
                 'phone' => '+31600000000',
+                'location' => 'B.107',
                 'bio' => 'Ik ben een test gebruiker!',
             ]);
         
@@ -30,6 +31,7 @@ class UserSeeder extends Seeder
                 'birthday' => '1998-05-13',
                 'function' => 'Begeleider',
                 'phone' => '+31600000000',
+                'location' => 'Server ruimte',
                 'bio' => 'Ik ben een admin gebruiker!',
             ]);
 

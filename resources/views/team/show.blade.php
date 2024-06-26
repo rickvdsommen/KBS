@@ -17,6 +17,8 @@
                 </p>
                 <p class="text-lg text-gray-700 dark:text-gray-300 mb-4"><strong>Functie:</strong> {{ $user->function }}
                 </p>
+                <p class="text-lg text-gray-700 dark:text-gray-300 mb-4"><strong>Waar ben ik te vinden:</strong> {{ $user->location }}
+                </p>
                 <p class="text-lg text-gray-700 dark:text-gray-300 mb-6"><strong>Bio:</strong> {{ $user->bio }}</p>
                 @if ($user->degrees->count() > 0)
                     <div class="mb-6">

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('projectname')->unique();
             $table->string('phaseName');
-            $table->string('description');
+            $table->text('description');
             $table->string('status');
             $table->date('startingDate');
             $table->string('projectLeader');
