@@ -13,7 +13,7 @@ class SkillSeeder extends Seeder
             'user_id' => '1',
             'skillname' => 'Solderen',
             'skillExperience' => '4',
-            'description' => 'Machines solderen zoals Arduino en pijpen.',
+            'description' => 'Dingen solderen zoals Arduino en metalen pijpen.',
         ]);
     }
 }
