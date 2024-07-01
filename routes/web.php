@@ -14,6 +14,7 @@ use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\DeactivatedCheck;
+use App\Http\Controllers\DeviceController;
 
 // Routes for getting a view from a page
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
@@ -54,5 +55,13 @@ Route::middleware(['role_or_permission:admin', DeactivatedCheck::class])->group(
     Route::resource('/tags', TagController::class);
     Route::resource('/categories', CategorieController::class);
 });
+// In routes/web.php
 
+Route::middleware('auth')->group(function () { // Removed 'deactivated'
+    Route::get('/devices', [DeviceController::class, 'index'])->name('devices.index');
+    Route::post('/devices/link', [DeviceController::class, 'link'])->name('devices.link');
+    Route::post('/devices/unlink', [DeviceController::class, 'unlink'])->name('devices.unlink');
+    Route::patch('/devices/{device}', [DeviceController::class, 'update'])->name('devices.update'); // Add this line
+
+});
 require __DIR__.'/auth.php';

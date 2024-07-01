@@ -18,8 +18,9 @@ return new class extends Migration
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->string('status')->default('Afwezig');
-            $table->unsignedBigInteger('user_id');
-            
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('location')->nullable();
+
             // Define foreign key
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
