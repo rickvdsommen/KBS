@@ -11,7 +11,7 @@ class UserSeeder extends Seeder
     {
         // Factory for seeding a User with the role 'user'
         User::factory()
-            ->user()
+            ->admin()
             ->create([
                 'name' => 'Gebruiker',
                 'email' => 'test@example.com',
@@ -34,6 +34,18 @@ class UserSeeder extends Seeder
                 'location' => 'Server ruimte',
                 'bio' => 'Ik ben een admin gebruiker!',
             ]);
+
+        User::factory()
+        ->admin()
+        ->create([
+            'name' => 'Bertus Rosier',
+            'email' => 'b.rosier@avans.nl',
+            'birthday' => null,
+            'function' => 'Baas',
+            'phone' => '',
+            'location' => '',
+            'bio' => '',
+        ]);
 
         User::factory(10)->user()->create();
     }
