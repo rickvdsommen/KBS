@@ -35,7 +35,7 @@
                     <x-slot name="trigger">
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-base leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                            <div class="flex items-center">
+                            <div class="flex items-center text-lg">
                                 {{-- @include('components.status-indicator') --}}
                                 @include('components.profile_picture')
                                 {{ Auth::user()->name }}
@@ -115,7 +115,7 @@
             <div class="px-4 flex items-center">
                 {{-- <div class="font-medium text-base text-gray-800 dark:text-gray-200">@include('components.status-indicator'){{ Auth::user()->name }}</div> --}}
                 @include('components.profile_picture')
-                <div class="font-medium text-base text-gray-500">{{ Auth::user()->name }}</div>
+                <div class="font-medium text-lg text-gray-500">{{ Auth::user()->name }}</div>
             </div>
 
             <!-- Dark Mode Toggle -->

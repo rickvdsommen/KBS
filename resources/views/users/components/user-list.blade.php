@@ -44,7 +44,7 @@ $dutchMonths = [
         <table class="border-collapse table-auto w-full">
             <thead>
                 <th class="px-4 py-2 text-left">ID</th>
-                <th class="px-4 py-2 text-left">Picture</th>
+                <th class="px-4 py-2 text-left">Foto</th>
                 <th class="px-4 py-2 text-left">Naam</th>
                 <th class="px-4 py-2 text-left">Email</th>
                 <th class="px-4 py-2 text-left">Functie</th>

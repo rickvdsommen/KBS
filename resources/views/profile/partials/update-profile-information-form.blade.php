@@ -27,7 +27,7 @@
             @if ($user->profile_picture)
                 <img id="previewImage" src="{{ asset('images/'.$user->profile_picture) }}" alt="Profile Picture" class="w-20 h-20 rounded-full object-cover">
             @else
-                <img id="previewImage" src="#" alt="Preview" class="hidden w-20 h-20 rounded-full object-cover">
+                <img id="previewImage" src="#" alt="Preview" class="w-20 h-20 rounded-full object-cover hidden">
             @endif
         </div>
 
@@ -35,11 +35,6 @@
             document.addEventListener('DOMContentLoaded', function () {
                 const profilePictureInput = document.getElementById('profile_picture');
                 const previewImage = document.getElementById('previewImage');
-                
-                // If there's already an existing profile picture, show it
-                if (previewImage.src !== '#' && previewImage.src !== '') {
-                    previewImage.classList.remove('hidden');
-                }
                 
                 // Event listener for profile picture change
                 profilePictureInput.addEventListener('change', function (event) {
@@ -54,6 +49,10 @@
                     
                     if (file) {
                         reader.readAsDataURL(file);
+                    } else {
+                        // If no file selected, hide the preview
+                        previewImage.src = '#';
+                        previewImage.classList.add('hidden');
                     }
                 });
             });

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use App\Models\User;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -37,22 +38,28 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        // dd($request->file('profile_picture'));
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+        $oldFile = $user->profile_picture;
+
+        $user->fill($request->validated());
 
         // Optionally handle specific attribute modifications here
         // For example, resetting email verification
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
         if ($request->hasFile('profile_picture')) {
+            if ($user->profile_picture) {
+                $image_path = public_path().'/images/'.$oldFile;
+                unlink($image_path);
+            }
             $imageName = time().'.'.$request->profile_picture->extension();
             $request->profile_picture->move(public_path('images'), $imageName);
-            $request->user()->profile_picture = $imageName; // Updated this line
+            $user->profile_picture = $imageName; // Updated this line
         }
 
-        $request->user()->save(); // Removed fill() and save() separation
+        $user->save();
 
         return redirect()->route('profile.edit')->with('status', 'profile-updated');
     }
