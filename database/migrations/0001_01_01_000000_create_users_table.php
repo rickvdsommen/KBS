@@ -22,8 +22,8 @@ return new class extends Migration
             $table->date('birthday')->nullable();
             $table->string('function');
             $table->string('phone')->nullable();
-            $table->string('location')->nullable();
             $table->string('bio')->nullable();
+            $table->string('profile_picture')->nullable();
             $table->boolean('deactivated')->default(false);
         });
 

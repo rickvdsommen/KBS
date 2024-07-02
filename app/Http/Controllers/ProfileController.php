@@ -37,18 +37,26 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        // dd($request->file('profile_picture'));
         $request->user()->fill($request->validated());
-    
+
         // Optionally handle specific attribute modifications here
         // For example, resetting email verification
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
 
-        $request->user()->save();
+        if ($request->hasFile('profile_picture')) {
+            $imageName = time().'.'.$request->profile_picture->extension();
+            $request->profile_picture->move(public_path('images'), $imageName);
+            $request->user()->profile_picture = $imageName; // Updated this line
+        }
+
+        $request->user()->save(); // Removed fill() and save() separation
 
         return redirect()->route('profile.edit')->with('status', 'profile-updated');
     }
+
 
     /**
      * Delete the user's account.

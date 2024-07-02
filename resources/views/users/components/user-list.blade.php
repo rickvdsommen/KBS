@@ -44,6 +44,7 @@ $dutchMonths = [
         <table class="border-collapse table-auto w-full">
             <thead>
                 <th class="px-4 py-2 text-left">ID</th>
+                <th class="px-4 py-2 text-left">Picture</th>
                 <th class="px-4 py-2 text-left">Naam</th>
                 <th class="px-4 py-2 text-left">Email</th>
                 <th class="px-4 py-2 text-left">Functie</th>
@@ -57,6 +58,7 @@ $dutchMonths = [
                     <tr
                         class="border-t border-gray-200 dark:border-gray-800 {{ $user->deactivated ? ' text-gray-300 line-through' : '' }}">
                         <td class="px-4 py-2">{{ $user->id }}</td>
+                        <td class="px-4 py-2">@include('components.profile_picture')</td>
                         <td class="px-4 py-2">{{ $user->name }}</td>
                         <td class="px-4 py-2">{{ $user->email }}</td>
                         <td class="px-4 py-2">{{ $user->function }}</td>

@@ -13,9 +13,51 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
+
+        <div>
+            <x-input-label for="profile_picture" :value="__('Profielfoto')" />
+            <input type="file" name="profile_picture" id="profile_picture" class="mt-1 block w-full" accept="image/*">
+            <x-input-error class="mt-2" :messages="$errors->get('profile_picture')" />
+        </div>
+
+        <div id="profilePicturePreview" class="mt-2">
+            @if ($user->profile_picture)
+                <img id="previewImage" src="{{ asset('images/'.$user->profile_picture) }}" alt="Profile Picture" class="w-20 h-20 rounded-full object-cover">
+            @else
+                <img id="previewImage" src="#" alt="Preview" class="hidden w-20 h-20 rounded-full object-cover">
+            @endif
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const profilePictureInput = document.getElementById('profile_picture');
+                const previewImage = document.getElementById('previewImage');
+                
+                // If there's already an existing profile picture, show it
+                if (previewImage.src !== '#' && previewImage.src !== '') {
+                    previewImage.classList.remove('hidden');
+                }
+                
+                // Event listener for profile picture change
+                profilePictureInput.addEventListener('change', function (event) {
+                    const input = event.target;
+                    const file = input.files[0];
+                    const reader = new FileReader();
+                    
+                    reader.onload = function () {
+                        previewImage.src = reader.result;
+                        previewImage.classList.remove('hidden');
+                    };
+                    
+                    if (file) {
+                        reader.readAsDataURL(file);
+                    }
+                });
+            });
+        </script>
 
         <div>
             <x-input-label for="name" :value="__('Voor- en Achternaam')" />
@@ -43,12 +85,6 @@
             <x-input-label for="phone" :value="__('Telefoonnummer')" />
             <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full" :value="old('phone', $user->phone)" autocomplete="phone" />
             <x-input-error class="mt-2" :messages="$errors->get('phone')" />
-        </div>
-
-        <div>
-            <x-input-label for="location" :value="__('Waar zit je ergens?')" />
-            <x-text-input id="location" name="location" type="text" class="mt-1 block w-full" :value="old('location', $user->location)"/>
-            <x-input-error class="mt-2" :messages="$errors->get('location')" />
         </div>
 
         <div>
