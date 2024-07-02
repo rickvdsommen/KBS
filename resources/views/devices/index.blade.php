@@ -1,3 +1,5 @@
+<!-- devices-management.blade.php -->
+
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
@@ -7,17 +9,22 @@
         </div>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
         {{-- Search function --}}
         <div class="bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6 mb-4">
-            <form method="GET" action="{{ route('devices.index') }}" class="flex space-x-2">
+            <form method="GET" action="{{ route('devices.index') }}" class="flex flex-wrap items-center space-y-2 sm:space-y-0 sm:space-x-2">
                 <x-text-input type="text" name="name" id="name" value="{{ request('name') }}"
-                    placeholder="Search by user name..." class="w-64" />
+                    placeholder="Zoeken op gebruikersnaam..." class="w-full sm:w-64" />
 
                 <x-text-input type="number" name="id" id="id" value="{{ request('id') }}"
-                    placeholder="Search by device ID..." class="w-64" min="1" />
+                    placeholder="Zoeken op apparaat ID..." class="w-full sm:w-64" min="1" />
 
-                <x-primary-button>zoek</x-primary-button>
+                <x-primary-button>Zoek</x-primary-button>
+
+                <a href="{{ route('locations.create') }}" class="transform transition-transform hover:scale-105 flex">
+                    <x-secondary-button>Beheer locaties</x-secondary-button>
+                </a>
             </form>
         </div>
 
@@ -27,7 +34,7 @@
                 <table class="min-w-full bg-white dark:bg-gray-800 shadow-md rounded-lg">
                     <thead>
                         <tr class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
-                            <th class="py-2 px-4 text-left">Device ID</th>
+                            <th class="py-2 px-4 text-left">Apparaat ID</th>
                             <th class="py-2 px-4 text-left">Status</th>
                             <th class="py-2 px-4 text-left">Locatie</th>
                             <th class="py-2 px-4 text-left">Gebruiker</th>
