@@ -12,7 +12,6 @@ class DeviceSeeder extends Seeder
         Device::factory()->create([
             'status' => 'aanwezig',
             'user_id' => '1',
-            'location' => 'B.107'
         ]);
     }
 }

@@ -18,9 +18,6 @@
                     placeholder="Search by device ID..." class="w-64" min="1" />
 
                 <x-primary-button>zoek</x-primary-button>
-                @role('admin')
-                <a href="{{ route('locations.create') }}" ><x-secondary-button  >Voeg locaties toe</x-secondary-button></a>
-                @endrole
             </form>
         </div>
 
@@ -34,9 +31,7 @@
                             <th class="py-2 px-4 text-left">Status</th>
                             <th class="py-2 px-4 text-left">Locatie</th>
                             <th class="py-2 px-4 text-left">Gebruiker</th>
-                            @role('admin')
-                                <th class="py-2 px-4 text-left">Acties</th>
-                            @endrole
+                            <th class="py-2 px-4 text-left">Acties</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,39 +43,37 @@
                                     <form action="{{ route('devices.update', $device->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('PATCH')
-                                        <select name="location_id" class="form-select bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                                            <option value="klik op"></option>
+                                        <select name="location_id" class="form-select bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 w-6/12" >
+                                            <option value="">geen verbindingen</option>
                                             @foreach($locations as $location)
                                                 <option value="{{ $location->id }}" @if($device->location_id == $location->id) selected @endif>{{ $location->name }}</option>
                                             @endforeach
                                         </select>
-                                        <button type="submit" class="btn btn-primary">wijzigen</button>
+                                        <button type="submit" class="btn btn-primary">Wijzigen</button>
                                     </form>
                                 </td>
                                 <td class="py-2 px-4">{{ $device->user ? $device->user->name : 'Unassigned' }}</td>
-                                @role('admin')
-                                    <td class="py-2 px-4">
-                                        @if($device->user)
-                                            <form action="{{ route('devices.unlink') }}" method="POST" style="display:inline;">
-                                                @csrf
-                                                <input type="hidden" name="device_id" value="{{ $device->id }}">
-                                                <button type="submit" class="btn btn-danger">ontkoppelen</button>
-                                            </form>
-                                        @else
-                                            <form action="{{ route('devices.link') }}" method="POST" style="display:inline;">
-                                                @csrf
-                                                <input type="hidden" name="device_id" value="{{ $device->id }}">
-                                                <select name="user_id" class="form-select" required>
-                                                    <option value="">Select User</option>
-                                                    @foreach($users as $user)
-                                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <button type="submit" class="btn btn-primary">Link</button>
-                                            </form>
-                                        @endif
-                                    </td>
-                                @endrole
+                                <td class="py-2 px-4">
+                                    @if($device->user)
+                                        <form action="{{ route('devices.unlink') }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            <input type="hidden" name="device_id" value="{{ $device->id }}">
+                                            <button type="submit" class="btn btn-danger">Ontkoppelen</button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('devices.link') }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            <input type="hidden" name="device_id" value="{{ $device->id }}">
+                                            <select name="user_id" class="form-select" required>
+                                                <option value="">Selecteer gebruiker</option>
+                                                @foreach($users as $user)
+                                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            <button type="submit" class="btn btn-primary">Link</button>
+                                        </form>
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -91,11 +84,6 @@
     </div>
 
     <style>
-        .form-input {
-            padding: 0.5rem;
-            border-radius: 0.375rem;
-            border: 1px solid #d1d5db;
-        }
         .form-select {
             padding: 0.5rem;
             border-radius: 0.375rem;
@@ -106,10 +94,6 @@
             border-radius: 0.375rem;
             border: none;
             cursor: pointer;
-        }
-        .btn-secondary {
-            background-color: #4b5563;
-            color: white;
         }
         .btn-primary {
             background-color: #2563eb;

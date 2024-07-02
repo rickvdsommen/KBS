@@ -87,7 +87,8 @@ class UserController extends Controller
     public function show(User $user)
     {
         $users = User::all();
-        return view('users.index', compact('users'));
+        $user->load('device.location');
+        return view('users.show', compact('users'));
     }
 
     /**

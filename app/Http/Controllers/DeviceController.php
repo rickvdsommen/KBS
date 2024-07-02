@@ -74,16 +74,17 @@ class DeviceController extends Controller
 
         return redirect()->route('devices.index')->with('success', 'Device unlinked successfully.');
     }
-    public function update(Request $request, $id)
+    public function update(Request $request, Device $device)
     {
+        // Validate the request
         $request->validate([
             'location_id' => 'nullable|exists:locations,id',
         ]);
 
-        $device = Device::findOrFail($id);
+        // Update device location_id
         $device->location_id = $request->input('location_id');
         $device->save();
 
-        return redirect()->route('devices.index')->with('success', 'Device location updated successfully.');
+        return redirect()->back()->with('success', 'Device location updated successfully.');
     }
 }
