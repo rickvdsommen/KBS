@@ -53,7 +53,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        <x-dropdown-link :href="route('profile.edit')" class="text-lg">
                             {{ __('Profiel') }}
                         </x-dropdown-link>
 
@@ -64,7 +64,7 @@
                             <x-dropdown-link :href="route('logout')"
                                 onclick="event.preventDefault();
                                                 this.closest('form').submit();"
-                                class="font-semibold text-red-500 hover:text-red-600 hover:bg-red-100 rounded transition duration-150 ease-in-out">
+                                class="font-semibold text-red-500 hover:text-red-600 hover:bg-red-100 rounded transition duration-150 ease-in-out text-lg">
                                 {{ __('Uitloggen') }}
                             </x-dropdown-link>
                         </form>
