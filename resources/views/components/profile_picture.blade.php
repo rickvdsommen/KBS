@@ -12,10 +12,10 @@
 
 @if ($user->profile_picture)
     <img src="{{ asset('images/' . $user->profile_picture) }}" alt="Profile Picture"
-        class="w-9 h-9 rounded-full mr-2 ring-2 {{ $ringColor }} object-cover">
+        class="w-9 h-9 p-0.5 rounded-full mr-2 ring-2 {{ $ringColor }} object-cover">
 @else
     <div
-        class="relative inline-flex items-center justify-center w-9 h-9 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 mr-2 ring-2 {{ $ringColor }} ">
+        class="relative p-1 inline-flex items-center justify-center w-9 h-9 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 mr-2 ring-2 {{ $ringColor }} ">
         <span
             class="font-medium text-gray-600 dark:text-gray-300">{{ strtoupper(substr($user->name, 0, 2)) }}</span>
     </div>

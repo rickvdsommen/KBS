@@ -25,7 +25,7 @@
 
         <div id="profilePicturePreview" class="mt-2">
             @if ($user->profile_picture)
-                <img id="previewImage" src="{{ asset('images/'.$user->profile_picture) }}" alt="Profile Picture" class="w-20 h-20 rounded-full object-cover">
+                <img id="previewImage" src="{{ asset('images/'.$user->profile_picture) }}" alt="Profile Picture" class="w-32 h-32 rounded-full object-cover">
             @else
                 <img id="previewImage" src="#" alt="Preview" class="w-20 h-20 rounded-full object-cover hidden">
             @endif
