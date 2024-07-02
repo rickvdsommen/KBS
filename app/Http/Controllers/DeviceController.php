@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Device;
 use App\Models\User;
+use App\Models\Location;
 use Illuminate\Http\Request;
 
 class DeviceController extends Controller
@@ -11,13 +12,36 @@ class DeviceController extends Controller
     /**
      * Display a listing of the devices.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $devices = Device::all();
+        $name = $request->input('name');
+        $id = $request->input('id');
+
+        // Query devices with optional filters
+        $devicesQuery = Device::query();
+
+        // Apply filters based on search parameters
+        if (!empty($name)) {
+            $devicesQuery->whereHas('user', function ($query) use ($name) {
+                $query->where('name', 'like', '%' . $name . '%');
+            });
+        }
+
+        if (!empty($id)) {
+            $devicesQuery->where('id', $id);
+        }
+
+        // Fetch devices with associated user and location
+        $devices = $devicesQuery->with('user', 'location')->paginate(10)();
         $users = User::all();
-        return view('devices.index', compact('devices', 'users'));
+        $locations = Location::all();
+
+
+
+        return view('devices.index', compact('devices', 'users', 'locations'));
     }
 
+    
     /**
      * Link a device to a user.
      */
@@ -53,11 +77,11 @@ class DeviceController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'location' => 'nullable|string|max:255',
+            'location_id' => 'nullable|exists:locations,id',
         ]);
 
         $device = Device::findOrFail($id);
-        $device->location = $request->input('location');
+        $device->location_id = $request->input('location_id');
         $device->save();
 
         return redirect()->route('devices.index')->with('success', 'Device location updated successfully.');

@@ -1,48 +1,70 @@
-<!-- resources/views/devices/index.blade.php -->
-
 <x-app-layout>
-
     <x-slot name="header">
-        <h2 class="font-semibold text-2xl text-gray-800 dark:text-gray-200 leading-tight">
-            Aanwezigheid 
-        </h2>
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-2xl text-gray-800 dark:text-gray-200 leading-tight">
+                Aanwezigheid
+            </h2>
+        </div>
     </x-slot>
 
-    <div class="pb-10 pt-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6">
-                <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white dark:bg-gray-800 shadow-md rounded-lg">
-                        <thead>
-                            <tr class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
-                                <th class="py-2 px-4 text-left">Device ID</th>
-                                <th class="py-2 px-4 text-left">Status</th>
-                                <th class="py-2 px-4 text-left">Locatie</th>
-                                <th class="py-2 px-4 text-left">Gebruiker</th>
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        {{-- Search function --}}
+        <div class="bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6 mb-4">
+            <form method="GET" action="{{ route('devices.index') }}" class="flex space-x-2">
+                <x-text-input type="text" name="name" id="name" value="{{ request('name') }}"
+                    placeholder="Search by user name..." class="w-64" />
+
+                <x-text-input type="number" name="id" id="id" value="{{ request('id') }}"
+                    placeholder="Search by device ID..." class="w-64" min="1" />
+
+                <x-primary-button>zoek</x-primary-button>
+                @role('admin')
+                <a href="{{ route('locations.create') }}" ><x-secondary-button  >Voeg locaties toe</x-secondary-button></a>
+                @endrole
+            </form>
+        </div>
+
+        {{-- Devices table --}}
+        <div class="bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6">
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white dark:bg-gray-800 shadow-md rounded-lg">
+                    <thead>
+                        <tr class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+                            <th class="py-2 px-4 text-left">Device ID</th>
+                            <th class="py-2 px-4 text-left">Status</th>
+                            <th class="py-2 px-4 text-left">Locatie</th>
+                            <th class="py-2 px-4 text-left">Gebruiker</th>
+                            @role('admin')
                                 <th class="py-2 px-4 text-left">Acties</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($devices as $device)
-                                <tr class="border-b dark:border-gray-700">
-                                    <td class="py-2 px-4">{{ $device->id }}</td>
-                                    <td class="py-2 px-4">{{ $device->status }}</td>
-                                    <td class="py-2 px-4">
-                                        <form action="{{ route('devices.update', $device->id) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('PATCH')
-                                            <input type="text" name="location" value="{{ $device->location }}" class="form-input bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200" readonly>
-                                            <button type="button" class="btn btn-secondary edit-btn">Edit</button>
-                                            <button type="submit" class="btn btn-primary save-btn hidden">Save</button>
-                                        </form>
-                                    </td>
-                                    <td class="py-2 px-4">{{ $device->user ? $device->user->name : 'Unassigned' }}</td>
+                            @endrole
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($devices as $device)
+                            <tr class="border-b dark:border-gray-700">
+                                <td class="py-2 px-4">{{ $device->id }}</td>
+                                <td class="py-2 px-4">{{ $device->status }}</td>
+                                <td class="py-2 px-4">
+                                    <form action="{{ route('devices.update', $device->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('PATCH')
+                                        <select name="location_id" class="form-select bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                                            <option value=""></option>
+                                            @foreach($locations as $location)
+                                                <option value="{{ $location->id }}" @if($device->location_id == $location->id) selected @endif>{{ $location->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <button type="submit" class="btn btn-primary">wijzigen</button>
+                                    </form>
+                                </td>
+                                <td class="py-2 px-4">{{ $device->user ? $device->user->name : 'Unassigned' }}</td>
+                                @role('admin')
                                     <td class="py-2 px-4">
                                         @if($device->user)
                                             <form action="{{ route('devices.unlink') }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 <input type="hidden" name="device_id" value="{{ $device->id }}">
-                                                <button type="submit" class="btn btn-danger">Unlink</button>
+                                                <button type="submit" class="btn btn-danger">ontkoppelen</button>
                                             </form>
                                         @else
                                             <form action="{{ route('devices.link') }}" method="POST" style="display:inline;">
@@ -58,32 +80,15 @@
                                             </form>
                                         @endif
                                     </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                                @endrole
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                {{ $devices->links() }} {{-- Display pagination links --}}
             </div>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const editButtons = document.querySelectorAll('.edit-btn');
-            editButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const form = button.closest('form');
-                    const input = form.querySelector('input[name="location"]');
-                    const saveButton = form.querySelector('.save-btn');
-                    input.removeAttribute('readonly');
-                    input.classList.remove('bg-gray-200');
-                    input.classList.add('bg-white');
-                    button.classList.add('hidden');
-                    saveButton.classList.remove('hidden');
-                });
-            });
-        });
-    </script>
 
     <style>
         .form-input {
@@ -119,5 +124,4 @@
             max-width: 100%;
         }
     </style>
-
 </x-app-layout>

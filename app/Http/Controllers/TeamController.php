@@ -37,7 +37,7 @@ class TeamController extends Controller
 
     public function show(User $user)
     {
-        $user->load('courses', 'degrees', 'skills'); // Eager load relationships
+        $user->load('courses', 'degrees', 'skills', 'device.location'); // Eager load relationships
         return view('team.show', compact('user'));
     }
 }

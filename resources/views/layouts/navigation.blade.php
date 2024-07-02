@@ -21,10 +21,14 @@
                     <x-nav-link :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">
                         {{ __('Agenda') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('devices.index')" :active="request()->routeIs('devices.index')">
+                        {{ __('aanwezigheid') }}
+                    </x-nav-link>
                     @role('admin') 
                         <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                             {{ __('Gebruikerbeheer') }}
                         </x-nav-link>
+                        
                     @endrole
                 </div>
             </div>

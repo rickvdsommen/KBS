@@ -15,6 +15,7 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\DeactivatedCheck;
 use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\LocationController;
 
 // Routes for getting a view from a page
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
@@ -64,4 +65,8 @@ Route::middleware('auth')->group(function () { // Removed 'deactivated'
     Route::patch('/devices/{device}', [DeviceController::class, 'update'])->name('devices.update'); // Add this line
 
 });
+Route::get('/locations', [LocationController::class, 'index'])->name('locations.index');
+Route::get('/locations/create', [LocationController::class, 'create'])->name('locations.create');
+Route::post('/locations', [LocationController::class, 'store'])->name('locations.store');
+Route::delete('/locations/{location}', [LocationController::class, 'destroy'])->name('locations.destroy');
 require __DIR__.'/auth.php';
