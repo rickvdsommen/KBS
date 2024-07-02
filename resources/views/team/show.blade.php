@@ -3,11 +3,11 @@
         <div class="bg-white dark:bg-gray-700 overflow-hidden shadow-sm sm:rounded-lg hover:shadow-lg transition-shadow duration-300 ease-in-out">
             <div class="p-8">
                 <div class="md:flex md:flex-row-reverse md:items-start md:justify-between">
-                    <div class="mb-6 md:mb-0 md:ml-6 md:w-1/2 md:items-center">
+                    <div class="mb-6 md:mb-0 md:w-1/2 flex justify-center items-start">
                         @if ($user->profile_picture)
-                            <img src="{{ asset('images/' . $user->profile_picture) }}" alt="{{ $user->name }}" class="rounded-3xl h-auto max-h-96 max-w-full mx-auto md:mx-0">
+                            <img src="{{ asset('images/' . $user->profile_picture) }}" alt="{{ $user->name }}" class="rounded-3xl h-auto max-h-96 max-w-full">
                         @else
-                            <div class="bg-gray-300 rounded-lg h-96 w-96 flex items-center justify-center mx-auto md:mx-0">
+                            <div class="bg-gray-300 rounded-lg h-96 w-96 flex items-center justify-center">
                                 <span class="text-gray-500 text-4xl">Geen foto</span>
                             </div>
                         @endif
