@@ -50,7 +50,7 @@ class ProfileController extends Controller
         }
 
         if ($request->hasFile('profile_picture')) {
-            if ($user->profile_picture) {
+            if ($oldFile) {
                 $image_path = public_path().'/images/'.$oldFile;
                 unlink($image_path);
             }
