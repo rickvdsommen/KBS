@@ -32,7 +32,7 @@ class DeviceController extends Controller
         }
 
         // Fetch devices with associated user and location
-        $devices = $devicesQuery->with('user', 'location')->paginate(10)();
+        $devices = $devicesQuery->with('user', 'location')->paginate(10);
         $users = User::all();
         $locations = Location::all();
 
