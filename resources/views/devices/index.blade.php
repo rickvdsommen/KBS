@@ -49,7 +49,7 @@
                                         @csrf
                                         @method('PATCH')
                                         <select name="location_id" class="form-select bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                                            <option value="klik op iets"></option>
+                                            <option value="klik op"></option>
                                             @foreach($locations as $location)
                                                 <option value="{{ $location->id }}" @if($device->location_id == $location->id) selected @endif>{{ $location->name }}</option>
                                             @endforeach
