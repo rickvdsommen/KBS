@@ -4,6 +4,7 @@
             Tags Beheren
         </h2>
     </x-slot>
+
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-4">
         <div
             class="text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6 mb-6 max-w-7xl">
@@ -44,7 +45,7 @@
                                     <x-primary-button>Wijzigen</x-primary-button>
                                 </a>
                                 <form action="{{ route('tags.destroy', $tag->id) }}" method="POST"
-                                    onsubmit="return confirm('Are you sure you want to delete this tag?');">
+                                    onsubmit="return confirm('Weet je zeker dat je deze tag wilt verwijderen?');">
                                     @csrf
                                     @method('DELETE')
                                     <x-secondary-button type="submit"
