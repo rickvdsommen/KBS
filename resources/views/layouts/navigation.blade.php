@@ -107,6 +107,9 @@
             <x-responsive-nav-link class="text-lg font-medium" :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">
                 {{ __('Agenda') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link class="text-lg font-medium" :href="route('devices.index')" :active="request()->routeIs('devices.index')">
+                {{ __('Aanwezigheid') }}
+            </x-responsive-nav-link>
             @role('admin')
                 <x-responsive-nav-link class="text-lg font-medium" :href="route('users.index')" :active="request()->routeIs('users.index')">
                     {{ __('Gebruikerbeheer') }}
