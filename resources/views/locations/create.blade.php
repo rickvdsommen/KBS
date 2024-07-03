@@ -50,7 +50,7 @@
 
             {{-- Display list of all locations --}}
             <div>
-                <ul class="mt-2 divide-y divide-gray-200 dark:divide-gray-700">
+                <ul class="mt-2 divide-gray-200 dark:divide-gray-700 space-y-4">
                     @forelse($locations as $location)
                         <li
                             class="flex justify-between items-center p-4 bg-gray-100 dark:bg-gray-600 rounded-lg shadow min-w-fit w-1/3">
