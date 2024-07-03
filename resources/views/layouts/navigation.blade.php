@@ -56,7 +56,7 @@
                     </x-slot>
 
                     <x-slot name="content" x-show="open" @click.away="open = false">
-                        <x-dropdown-link :href="route('profile.edit')" class="text-lg mb-1 mx-2 rounded">
+                        <x-dropdown-link :href="route('profile.edit')" class="text-lg mb-1 block rounded">
                             {{ __('Profiel') }}
                         </x-dropdown-link>
 
