@@ -22,7 +22,7 @@
                         @if($user->device && $user->device->location)
                             {{ $user->device->location->name }}
                         @else
-                            N.v.t.
+                            Geen
                         @endif
                         </p>
                         <p class="text-lg text-gray-700 dark:text-gray-300 mb-6"><strong>Bio:</strong> {{ $user->bio }}</p>
