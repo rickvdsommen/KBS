@@ -49,22 +49,26 @@ Route::middleware('auth', DeactivatedCheck::class)->group(function () {
 
     Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/devices', [DeviceController::class, 'index'])->name('devices.index');
-    Route::post('/devices/link', [DeviceController::class, 'link'])->name('devices.link');
-    Route::post('/devices/unlink', [DeviceController::class, 'unlink'])->name('devices.unlink');
-    Route::patch('/devices/{device}', [DeviceController::class, 'update'])->name('devices.update');
+    
+
+    
+});
+
+// Only accessible with admin role
+Route::middleware(['role_or_permission:admin', 'auth', DeactivatedCheck::class])->group(function () {
+    Route::resource('/users', UserController::class);
+    Route::resource('/tags', TagController::class);
+    Route::resource('/categories', CategorieController::class);
 
     Route::get('/locations', [LocationController::class, 'index'])->name('locations.index');
     Route::get('/locations/create', [LocationController::class, 'create'])->name('locations.create');
     Route::post('/locations', [LocationController::class, 'store'])->name('locations.store');
     Route::delete('/locations/{location}', [LocationController::class, 'destroy'])->name('locations.destroy');
-});
 
-// Only accessible with admin role
-Route::middleware(['role_or_permission:admin', DeactivatedCheck::class])->group(function () {
-    Route::resource('/users', UserController::class);
-    Route::resource('/tags', TagController::class);
-    Route::resource('/categories', CategorieController::class);
+    Route::get('/devices', [DeviceController::class, 'index'])->name('devices.index');
+    Route::post('/devices/link', [DeviceController::class, 'link'])->name('devices.link');
+    Route::post('/devices/unlink', [DeviceController::class, 'unlink'])->name('devices.unlink');
+    Route::patch('/devices/{device}', [DeviceController::class, 'update'])->name('devices.update');
 });
 // In routes/web.php
 
