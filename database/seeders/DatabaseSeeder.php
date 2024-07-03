@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SkillSeeder::class);
         $this->call(TagSeeder::class);
         $this->call(CategorySeeder::class);
+        $this->call(LocationSeeder::class);
         $this->call(DeviceSeeder::class);
         $this->call(ProjectTagRelationshipsSeeder::class);
         $this->call(ProjectCategorySeeder::class);
