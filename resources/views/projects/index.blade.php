@@ -90,16 +90,6 @@
                                     class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300">
                                     <x-primary-button>Wijzigen</x-primary-button>
                                 </a>
-                                @role('admin') 
-                                <form action="{{ route('projects.destroy', $project->id) }}" method="POST"
-                                    onsubmit="return confirm('Are you sure you want to delete this project?');"
-                                    class="ml-2">
-                                    @csrf
-                                    @method('DELETE')
-                                    <x-secondary-button type="submit"
-                                        class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300">Verwijderen</x-secondary-button>
-                                </form>
-                                @endrole
                             </div>
                         </div>
                     </a>
