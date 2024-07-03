@@ -22,7 +22,9 @@ class DeviceController extends Controller
             $search = $request->input('search');
             $devicesQuery->whereHas('user', function ($query) use ($search) {
                 $query->where('name', 'like', "%$search%")
-                ->orWhere('id', 'like', "%$search%");
+                      ->orWhere('id', 'like', "%$search%");
+            })->orWhereHas('location', function ($query) use ($search) {
+                $query->where('name', 'like', "%$search%");
             });
         }
 
