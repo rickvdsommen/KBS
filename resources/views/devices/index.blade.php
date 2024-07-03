@@ -14,18 +14,18 @@
         {{-- Search function --}}
         <div class="bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6 mb-4">
             <div class="flex flex-wrap items-center space-y-2 sm:space-y-0 sm:space-x-2 mb-6">
-            <form method="GET" action="{{ route('devices.index') }}" >
-                <x-text-input type="text" name="search" id="search" value="{{ request('search') }}"
-                placeholder="Zoek op Apparaat ID of Gebruiker..." class="w-80 mr-2" />
-
-                <x-primary-button>Zoeken</x-primary-button>
-            </form>
-            @role('admin')
-                <a href="{{ route('locations.create') }}" class="transform transition-transform hover:scale-105 flex">
-                    <x-secondary-button>Beheer locaties</x-secondary-button>
-                </a>
-            @endrole
+                <form method="GET" action="{{ route('devices.index') }}" class="flex items-center space-x-2">
+                    <x-text-input type="text" name="search" id="search" value="{{ request('search') }}"
+                    placeholder="Zoek op Apparaat ID of Gebruiker..." class="w-80" />
+                    <x-primary-button>Zoeken</x-primary-button>
+                </form>
+                @role('admin')
+                    <form action="{{ route('locations.create') }}" class="flex items-center">
+                        <x-secondary-button type="submit">Beheer locaties</x-secondary-button>
+                    </form>
+                @endrole
             </div>
+            
 
             <div class="overflow-x-auto">
                 <table class="border-collapse table-auto w-full">
@@ -40,12 +40,12 @@
                         @foreach($devices as $device)
                             <tr class="border-t border-gray-200 dark:border-gray-800">
                                 <td class="py-2 px-4">{{ $device->id }}</td>
-                                <td class="py-2 px-4">{{ $device->status }}</td>
+                                <td class="py-2 px-4">{{ ucfirst($device->status) }}</td>
                                 <td class="py-2 px-4">
                                     <form action="{{ route('devices.update', $device->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('PATCH')
-                                        <select name="location_id" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm w-6/12" >
+                                        <select name="location_id" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm min-w-fit" >
                                             <option value="">Geen locatie</option>
                                             @foreach($locations as $location)
                                                 <option value="{{ $location->id }}" @if($device->location_id == $location->id) selected @endif>{{ $location->name }}</option>
