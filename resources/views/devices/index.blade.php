@@ -9,8 +9,8 @@
 
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         {{-- Search function --}}
-        <div class="bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6 mb-4">
-            <form method="GET" action="{{ route('devices.index') }}" class="flex space-x-2">
+        <div class="bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6 mb-4 flex space-x-2">
+            <form method="GET" action="{{ route('devices.index') }}">
                 <x-text-input type="text" name="name" id="name" value="{{ request('name') }}"
                     placeholder="Zoek op naam..." class="w-64" />
 
@@ -19,6 +19,9 @@
 
                 <x-primary-button>Zoek</x-primary-button>
             </form>
+            <a href="{{ route('locations.create') }}" class="transform transition-transform hover:scale-105 flex">
+                <x-secondary-button>Beheer locaties</x-secondary-button>
+            </a>
         </div>
 
         {{-- Devices table --}}
