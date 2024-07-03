@@ -16,7 +16,7 @@
             <div class="flex flex-wrap items-center space-y-2 sm:space-y-0 sm:space-x-2 mb-6">
                 <form method="GET" action="{{ route('devices.index') }}" class="flex flex-wrap items-center space-y-2 sm:space-y-0 sm:space-x-2">
                     <x-text-input type="text" name="search" id="search" value="{{ request('search') }}"
-                                  placeholder="Zoek op Apparaat ID, Locatie of Gebruiker..." class="w-full min-w-fit sm:w-80" />
+                                  placeholder="Zoek op ID, Locatie of Gebruiker..." class="w-full min-w-fit sm:w-80" />
                     <x-primary-button class="sm:w-auto">Zoeken</x-primary-button>
                 </form>
                 @role('admin')
