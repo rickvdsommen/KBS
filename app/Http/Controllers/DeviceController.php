@@ -14,21 +14,16 @@ class DeviceController extends Controller
      */
     public function index(Request $request)
     {
-        $name = $request->input('name');
-        $id = $request->input('id');
-
         // Query devices with optional filters
         $devicesQuery = Device::query();
 
         // Apply filters based on search parameters
-        if (!empty($name)) {
-            $devicesQuery->whereHas('user', function ($query) use ($name) {
-                $query->where('name', 'like', '%' . $name . '%');
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $devicesQuery->whereHas('user', function ($query) use ($search) {
+                $query->where('name', 'like', "%$search%")
+                ->orWhere('id', 'like', "%$search%");
             });
-        }
-
-        if (!empty($id)) {
-            $devicesQuery->where('id', $id);
         }
 
         // Fetch devices with associated user and location

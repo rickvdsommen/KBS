@@ -13,68 +13,66 @@
 
         {{-- Search function --}}
         <div class="bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6 mb-4">
-            <form method="GET" action="{{ route('devices.index') }}" class="flex flex-wrap items-center space-y-2 sm:space-y-0 sm:space-x-2">
-                <x-text-input type="text" name="name" id="name" value="{{ request('name') }}"
-                    placeholder="Zoeken op gebruikersnaam..." class="w-full sm:w-64" />
+            <div class="flex flex-wrap items-center space-y-2 sm:space-y-0 sm:space-x-2 mb-6">
+            <form method="GET" action="{{ route('devices.index') }}" >
+                <x-text-input type="text" name="search" id="search" value="{{ request('search') }}"
+                placeholder="Zoek op Apparaat ID of Gebruiker..." class="w-80 mr-2" />
 
-                <x-text-input type="number" name="id" id="id" value="{{ request('id') }}"
-                    placeholder="Zoeken op apparaat ID..." class="w-full sm:w-64" min="1" />
+                <x-primary-button>Zoeken</x-primary-button>
 
-                <x-primary-button>Zoek</x-primary-button>
-
-                <a href="{{ route('locations.create') }}" class="transform transition-transform hover:scale-105 flex">
-                    <x-secondary-button>Beheer locaties</x-secondary-button>
-                </a>
+                
             </form>
-        </div>
+            <a href="{{ route('locations.create') }}" class="ml-2">
+                <x-secondary-button>Beheer locaties</x-secondary-button>
+            </a>
+            </div>
+
             <div class="overflow-x-auto">
-                <table class="min-w-full bg-white dark:bg-gray-800 shadow-md rounded-lg">
+                <table class="border-collapse table-auto w-full">
                     <thead>
-                        <tr class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
                             <th class="py-2 px-4 text-left">Apparaat ID</th>
                             <th class="py-2 px-4 text-left">Status</th>
                             <th class="py-2 px-4 text-left">Locatie</th>
                             <th class="py-2 px-4 text-left">Gebruiker</th>
-                            <th class="py-2 px-4 text-left">Acties</th>
-                        </tr>
+                            <th class="py-2 px-4 text-left"></th>
                     </thead>
                     <tbody>
                         @foreach($devices as $device)
-                            <tr class="border-b dark:border-gray-700">
+                            <tr class="border-t border-gray-200 dark:border-gray-800">
                                 <td class="py-2 px-4">{{ $device->id }}</td>
                                 <td class="py-2 px-4">{{ $device->status }}</td>
                                 <td class="py-2 px-4">
                                     <form action="{{ route('devices.update', $device->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('PATCH')
-                                        <select name="location_id" class="form-select bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 w-6/12" >
+                                        <select name="location_id" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm w-6/12" >
                                             <option value="">Geen locatie</option>
                                             @foreach($locations as $location)
                                                 <option value="{{ $location->id }}" @if($device->location_id == $location->id) selected @endif>{{ $location->name }}</option>
                                             @endforeach
                                         </select>
-                                        <button type="submit" class="btn btn-primary">Wijzigen</button>
+                                        <x-primary-button type="submit">Wijzigen</x-primary-button>
                                     </form>
                                 </td>
-                                <td class="py-2 px-4">{{ $device->user ? $device->user->name : 'Unassigned' }}</td>
+                                <td class="py-2 px-4">{{ $device->user ? $device->user->name : 'Niet gekoppeld' }}</td>
                                 <td class="py-2 px-4">
                                     @if($device->user)
                                         <form action="{{ route('devices.unlink') }}" method="POST" style="display:inline;">
                                             @csrf
                                             <input type="hidden" name="device_id" value="{{ $device->id }}">
-                                            <button type="submit" class="btn btn-danger">Ontkoppelen</button>
+                                            <x-secondary-button class="text-red-600 dark:text-red-600" type="submit"> Ontkoppelen</x-secondary-button>
                                         </form>
                                     @else
                                         <form action="{{ route('devices.link') }}" method="POST" style="display:inline;">
                                             @csrf
                                             <input type="hidden" name="device_id" value="{{ $device->id }}">
-                                            <select name="user_id" class="form-select" required>
+                                            <select name="user_id" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required>
                                                 <option value="">Selecteer gebruiker</option>
                                                 @foreach($users as $user)
                                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                                 @endforeach
                                             </select>
-                                            <button type="submit" class="btn btn-primary">Koppel</button>
+                                            <x-primary-button type="submit">Koppel</x-primary-button>
                                         </form>
                                     @endif
                                 </td>
@@ -86,30 +84,4 @@
             </div>
         </div>
     </div>
-
-    <style>
-        .form-select {
-            padding: 0.5rem;
-            border-radius: 0.375rem;
-            border: 1px solid #d1d5db;
-        }
-        .btn {
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-primary {
-            background-color: #2563eb;
-            color: white;
-        }
-        .btn-danger {
-            background-color: #dc2626;
-            color: white;
-        }
-        .overflow-x-auto {
-            overflow-x: auto;
-            max-width: 100%;
-        }
-    </style>
 </x-app-layout>

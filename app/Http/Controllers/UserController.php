@@ -39,19 +39,6 @@ class UserController extends Controller
         return view('users.index', compact('users'));
     }
 
-    /**
-     * Gebruikers uitnodigen via mail.
-     */
-    // public function store(Request $request)
-    // {
-    //     $email = $request->email;
-    //     $signedUrl = URL::temporarySignedRoute('register', now()->addDays(7), ['email' => $email]);
-
-    //     Mail::to($email)->send(new \App\Mail\RegistrationMail($signedUrl));
-
-    //     return Redirect::route('users.index')->with('status', 'invited');
-    // }
-
     public function store(Request $request)
     {
         // Validate the request data
