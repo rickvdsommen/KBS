@@ -19,12 +19,12 @@
                 placeholder="Zoek op Apparaat ID of Gebruiker..." class="w-80 mr-2" />
 
                 <x-primary-button>Zoeken</x-primary-button>
-
-                
             </form>
-            <a href="{{ route('locations.create') }}" class="ml-2">
-                <x-secondary-button>Beheer locaties</x-secondary-button>
-            </a>
+            @role('admin')
+                <a href="{{ route('locations.create') }}" class="transform transition-transform hover:scale-105 flex">
+                    <x-secondary-button>Beheer locaties</x-secondary-button>
+                </a>
+            @endrole
             </div>
 
             <div class="overflow-x-auto">
