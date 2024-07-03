@@ -66,7 +66,7 @@
 
         <div>
             <x-input-label for="birthday" :value="__('Geboortedatum')" />
-            <x-text-input id="birthday" name="birthday" type="date" class="mt-1 block w-full" :value="old('birthday', $user->birthday)" required autocomplete="birthday" />
+            <x-text-input id="birthday" name="birthday" type="date" class="mt-1 block w-full" :value="old('birthday', $user->birthday)" autocomplete="birthday" />
             <x-input-error class="mt-2" :messages="$errors->get('birthday')" />
         </div>
 
