@@ -21,10 +21,12 @@
                     placeholder="Zoeken op apparaat ID..." class="w-full sm:w-64" min="1" />
 
                 <x-primary-button>Zoek</x-primary-button>
+                @role('admin') 
 
                 <a href="{{ route('locations.create') }}" class="transform transition-transform hover:scale-105 flex">
                     <x-secondary-button>Beheer locaties</x-secondary-button>
                 </a>
+                @endrole
             </form>
         </div>
 
