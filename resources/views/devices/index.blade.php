@@ -39,45 +39,49 @@
                     </thead>
                     <tbody>
                         @foreach($devices as $device)
-                            <tr class="border-t border-gray-200 dark:border-gray-800">
-                                <td class="py-2 px-4">{{ $device->id }}</td>
-                                <td class="py-2 px-4">{{ ucfirst($device->status) }}</td>
-                                <td class="py-2 px-4">
-                                    <form action="{{ route('devices.update', $device->id) }}" method="POST" class="space-y-2 sm: space-0">
-                                        @csrf
-                                        @method('PATCH')
-                                        <select name="location_id" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm min-w-fit" >
-                                            <option value="">Geen locatie</option>
-                                            @foreach($locations as $location)
-                                                <option value="{{ $location->id }}" @if($device->location_id == $location->id) selected @endif>{{ $location->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <x-primary-button type="submit">Wijzigen</x-primary-button>
-                                    </form>
-                                </td>
-                                <td class="py-2 px-4">{{ $device->user ? $device->user->name : 'Niet gekoppeld' }}</td>
-                                <td class="py-2 px-4">
-                                    @if($device->user)
-                                        <form action="{{ route('devices.unlink') }}" method="POST" style="display:inline;">
+                            @if(auth()->user()->hasRole('admin') || $device->user_id == auth()->id())
+                                <tr class="border-t border-gray-200 dark:border-gray-800">
+                                    <td class="py-2 px-4">{{ $device->id }}</td>
+                                    <td class="py-2 px-4">{{ ucfirst($device->status) }}</td>
+                                    <td class="py-2 px-4">
+                                        <form action="{{ route('devices.update', $device->id) }}" method="POST" class="space-y-2 sm: space-0">
                                             @csrf
-                                            <input type="hidden" name="device_id" value="{{ $device->id }}">
-                                            <x-secondary-button class="text-red-600 dark:text-red-600" type="submit"> Ontkoppelen</x-secondary-button>
-                                        </form>
-                                    @else
-                                        <form action="{{ route('devices.link') }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            <input type="hidden" name="device_id" value="{{ $device->id }}">
-                                            <select name="user_id" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required>
-                                                <option value="">Selecteer gebruiker</option>
-                                                @foreach($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            @method('PATCH')
+                                            <select name="location_id" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm min-w-fit" >
+                                                <option value="">Geen locatie</option>
+                                                @foreach($locations as $location)
+                                                    <option value="{{ $location->id }}" @if($device->location_id == $location->id) selected @endif>{{ $location->name }}</option>
                                                 @endforeach
                                             </select>
-                                            <x-primary-button type="submit">Koppel</x-primary-button>
+                                            <x-primary-button type="submit">Wijzigen</x-primary-button>
                                         </form>
-                                    @endif
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td class="py-2 px-4">{{ $device->user ? $device->user->name : 'Niet gekoppeld' }}</td>
+                                    <td class="py-2 px-4">
+                                        @role('admin')
+                                        @if($device->user)
+                                            <form action="{{ route('devices.unlink') }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                <input type="hidden" name="device_id" value="{{ $device->id }}">
+                                                <x-secondary-button class="text-red-600 dark:text-red-600" type="submit"> Ontkoppelen</x-secondary-button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('devices.link') }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                <input type="hidden" name="device_id" value="{{ $device->id }}">
+                                                <select name="user_id" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required>
+                                                    <option value="">Selecteer gebruiker</option>
+                                                    @foreach($users as $user)
+                                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <x-primary-button type="submit">Koppel</x-primary-button>
+                                            </form>
+                                        @endif
+                                        @endrole
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>
