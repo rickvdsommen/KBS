@@ -29,9 +29,6 @@
                 @endrole
             </form>
         </div>
-
-        {{-- Devices table --}}
-        <div class="bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6">
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white dark:bg-gray-800 shadow-md rounded-lg">
                     <thead>
