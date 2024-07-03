@@ -11,7 +11,7 @@ class LocationController extends Controller
     /**
      * Show the form for creating a new location.
      */
-    public function create(Request $request)
+    public function index(Request $request)
     {
         $search = $request->input('search');
         
@@ -24,7 +24,7 @@ class LocationController extends Controller
     
         $locations = $locationsQuery->paginate(10); // Fetch locations with pagination
     
-        return view('locations.create', compact('locations'));
+        return view('locations.index', compact('locations'));
     }
     
 
@@ -43,7 +43,7 @@ class LocationController extends Controller
             // Add other fields as needed
         ]);
 
-        return redirect()->route('locations.create')->with('success', 'Location created successfully.');
+        return redirect()->route('locations.index')->with('success', 'Location created successfully.');
     }
 
     /**
@@ -53,6 +53,6 @@ class LocationController extends Controller
     {
         $location->delete();
 
-        return redirect()->route('locations.create')->with('success', 'Location deleted successfully.');
+        return redirect()->route('locations.index')->with('success', 'Location deleted successfully.');
     }
 }

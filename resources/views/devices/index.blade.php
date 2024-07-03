@@ -20,7 +20,7 @@
                     <x-primary-button class="sm:w-auto">Zoeken</x-primary-button>
                 </form>
                 @role('admin')
-                    <form action="{{ route('locations.create') }}" class="flex items-center w-full sm:w-auto">
+                    <form action="{{ route('locations.index') }}" class="flex items-center w-full sm:w-auto">
                         <x-secondary-button type="submit" class=" sm:w-auto">Beheer locaties</x-secondary-button>
                     </form>
                 @endrole

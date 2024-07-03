@@ -48,6 +48,16 @@ Route::middleware('auth', DeactivatedCheck::class)->group(function () {
     Route::resource('/projects', ProjectController::class);
 
     Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/devices', [DeviceController::class, 'index'])->name('devices.index');
+    Route::post('/devices/link', [DeviceController::class, 'link'])->name('devices.link');
+    Route::post('/devices/unlink', [DeviceController::class, 'unlink'])->name('devices.unlink');
+    Route::patch('/devices/{device}', [DeviceController::class, 'update'])->name('devices.update');
+
+    Route::get('/locations', [LocationController::class, 'index'])->name('locations.index');
+    Route::get('/locations/create', [LocationController::class, 'create'])->name('locations.create');
+    Route::post('/locations', [LocationController::class, 'store'])->name('locations.store');
+    Route::delete('/locations/{location}', [LocationController::class, 'destroy'])->name('locations.destroy');
 });
 
 // Only accessible with admin role
@@ -59,14 +69,8 @@ Route::middleware(['role_or_permission:admin', DeactivatedCheck::class])->group(
 // In routes/web.php
 
 Route::middleware('auth')->group(function () { // Removed 'deactivated'
-    Route::get('/devices', [DeviceController::class, 'index'])->name('devices.index');
-    Route::post('/devices/link', [DeviceController::class, 'link'])->name('devices.link');
-    Route::post('/devices/unlink', [DeviceController::class, 'unlink'])->name('devices.unlink');
-    Route::patch('/devices/{device}', [DeviceController::class, 'update'])->name('devices.update'); // Add this line
+     // Add this line
 
 });
-Route::get('/locations', [LocationController::class, 'index'])->name('locations.index');
-Route::get('/locations/create', [LocationController::class, 'create'])->name('locations.create');
-Route::post('/locations', [LocationController::class, 'store'])->name('locations.store');
-Route::delete('/locations/{location}', [LocationController::class, 'destroy'])->name('locations.destroy');
+
 require __DIR__.'/auth.php';
