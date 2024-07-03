@@ -49,9 +49,7 @@ Route::middleware('auth', DeactivatedCheck::class)->group(function () {
 
     Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
 
-    
-
-    
+    Route::post('/availability/update', [DeviceController::class, 'updateAvailability'])->name('availability.update');
 });
 
 // Only accessible with admin role

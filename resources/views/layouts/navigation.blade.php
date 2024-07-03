@@ -24,18 +24,17 @@
                     <x-nav-link :href="route('devices.index')" :active="request()->routeIs('devices.index')">
                         {{ __('Aanwezigheid') }}
                     </x-nav-link>
-                    @role('admin') 
+                    @role('admin')
                         <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                             {{ __('Gebruikerbeheer') }}
                         </x-nav-link>
-                        
                     @endrole
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-dropdown align="right" width="48">
+                <x-dropdown align="right" width="60">
                     <x-slot name="trigger">
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-base leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
@@ -56,25 +55,23 @@
                         </button>
                     </x-slot>
 
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')" class="text-lg">
+                    <x-slot name="content" x-show="open" @click.away="open = false">
+                        <x-dropdown-link :href="route('profile.edit')" class="text-lg mb-1 mx-2 rounded">
                             {{ __('Profiel') }}
                         </x-dropdown-link>
 
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+                        <!-- Availability Toggles -->
+                        @include('components.availability-toggle')
 
+                        <!-- Logout Form -->
+                        <form method="POST" action="{{ route('logout') }}" class="mt-1 mx-2">
+                            @csrf
                             <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault();
-                                                this.closest('form').submit();"
-                                class="font-semibold text-red-500 hover:text-red-600 hover:bg-red-100 rounded transition duration-150 ease-in-out text-lg">
+                                onclick="event.preventDefault(); this.closest('form').submit();"
+                                class="font-semibold text-red-500 hover:text-red-600 hover:bg-red-100 rounded transition duration-150 ease-in-out text-lg block">
                                 {{ __('Uitloggen') }}
                             </x-dropdown-link>
                         </form>
-
-                        <!-- Dark Mode Toggle -->
-                        {{-- @include('components.darkmode-toggle') --}}
                     </x-slot>
                 </x-dropdown>
             </div>
@@ -133,6 +130,8 @@
                     {{ __('Profiel') }}
                 </x-responsive-nav-link>
 
+                @include('components.availability-toggle')
+
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -147,5 +146,13 @@
             </div>
         </div>
     </div>
-
 </nav>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('input[name="availability"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                document.getElementById('availabilityForm').submit();
+            });
+        });
+    });
+</script>

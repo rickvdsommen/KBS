@@ -21,7 +21,7 @@
                         @else
                             <div class="w-full h-48 bg-gray-300"></div>
                         @endif --}}
-                        <div class="mt-4 ml-4">
+                        <div class="mt-6 ml-4">
                         @include('components.profile_picture_big')
                         </div>
                         <h3 class="text-3xl font-semibold text-gray-700 dark:text-gray-300 mt-2">{{ $user->name }} </h3>

@@ -6,6 +6,7 @@ use App\Models\Device;
 use App\Models\User;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DeviceController extends Controller
 {
@@ -71,6 +72,7 @@ class DeviceController extends Controller
 
         return redirect()->route('devices.index')->with('success', 'Device unlinked successfully.');
     }
+
     public function update(Request $request, Device $device)
     {
         // Validate the request
@@ -83,5 +85,16 @@ class DeviceController extends Controller
         $device->save();
 
         return redirect()->back()->with('success', 'Device location updated successfully.');
+    }
+
+    public function updateAvailability(Request $request)
+    {
+        $user = Auth::user();
+
+        // dd($request->availability);
+
+        $user->device->status = $request->availability;
+        $user->device->save();
+        return redirect()->back()->with('success', 'Availability updated successfully.');
     }
 }
