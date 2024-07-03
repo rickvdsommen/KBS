@@ -8,8 +8,10 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        {{-- Search function --}}
-        <div class="bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6 mb-4 flex space-x-2">
+
+        {{-- Devices table --}}
+        <div class="bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6">
+            <div class="flex mb-4">
             <form method="GET" action="{{ route('devices.index') }}">
                 <x-text-input type="text" name="name" id="name" value="{{ request('name') }}"
                     placeholder="Zoek op naam..." class="w-64" />
@@ -23,9 +25,6 @@
                 <x-secondary-button>Beheer locaties</x-secondary-button>
             </a>
         </div>
-
-        {{-- Devices table --}}
-        <div class="bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6">
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white dark:bg-gray-800 shadow-md rounded-lg">
                     <thead>
