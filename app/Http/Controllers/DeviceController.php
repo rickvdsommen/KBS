@@ -91,9 +91,9 @@ class DeviceController extends Controller
     {
         $user = Auth::user();
 
-        // dd($request->availability);
-
+        $user->device->updated_at = now();
         $user->device->status = $request->availability;
+        
         $user->device->save();
         return redirect()->back()->with('success', 'Availability updated successfully.');
     }
