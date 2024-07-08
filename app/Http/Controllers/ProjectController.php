@@ -74,6 +74,7 @@ class ProjectController extends Controller
             'startingDate' => 'required|date',
             'projectLeader' => 'required',
             'productOwner' => 'required',
+            'progress' => 'required|integer|min:1|max:100',
             'tags' => 'array',
             'categories' => 'array',
         ]);
@@ -138,6 +139,8 @@ class ProjectController extends Controller
             'startingDate' => 'required|date',
             'projectLeader' => 'required',
             'productOwner' => 'required',
+            'progress' => 'required|integer|min:1|max:100',
+
             'tags' => 'array',
             'categories' => 'array',
         ]);

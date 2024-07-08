@@ -28,11 +28,23 @@
                     <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-200">Gebruikers die werken aan dit project:</h3>
                     <ul class="list-disc list-inside">
                         @foreach ($project->users as $user)
-                        <li i class="text-gray-700 dark:text-gray-300">
-                            <a class="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600" href="{{ route('team.show', $user->id) }}">{{ $user->name }} </a> ({{ $user->function }})
-                        </li>
+                            <li class="text-gray-700 dark:text-gray-300">
+                                <a class="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600" href="{{ route('team.show', $user->id) }}">{{ $user->name }} </a> ({{ $user->function }})
+                            </li>
                         @endforeach
                     </ul>
+
+                    <div class="mt-6">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-200">Vooruitgang:</h3>
+                        <div class="flex items-center mt-2">
+                            <div class="w-9/12 bg-gray-200 dark:bg-gray-600 rounded-lg overflow-hidden">
+                                <div class="bg-indigo-500 dark:bg-indigo-600 text-xs leading-none py-1 text-center text-white" style="width: {{ $project->progress }}%;">
+                                    {{ $project->progress }}%
+                                </div>
+                            </div>
+                            <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">{{ $project->progress }}%</span>
+                        </div>
+                    </div>
 
                     <div class="flex justify-end mt-4">
                         <a href="{{ route('projects.edit', $project->id) }}" class="text-indigo-600 hover:text-indigo-900">

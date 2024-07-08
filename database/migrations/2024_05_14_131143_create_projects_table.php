@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('startingDate');
             $table->string('projectLeader');
             $table->string('productOwner');
+            $table->integer('progress')->default(1);
 
 
         });
