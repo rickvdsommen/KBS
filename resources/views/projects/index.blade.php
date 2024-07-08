@@ -33,7 +33,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
             <!-- Project cards -->
             @forelse ($projects as $project)
-            <div class="h-full bg-white dark:bg-gray-800 overflow-hidden shadow-lg rounded-lg transform transition-transform hover:scale-105">
+            <div class="relative h-full bg-white dark:bg-gray-800 overflow-hidden shadow-lg rounded-lg transform transition-transform hover:scale-105">
                 <a href="{{ route('projects.show', $project->id) }}">
                     <div
                         class="h-full flex flex-col justify-between p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-700 hover:shadow-xl cursor-pointer">
@@ -109,6 +109,11 @@
                         </div>
                     </div>
                 </a>
+                @if ($project->picture)
+                <div class="absolute top-4 right-4 h-40 w-auto  overflow-hidden">
+                    <img src="{{ asset('images/' . $project->picture) }}" alt="{{ $project->projectname }}" class="h-full w-full rounded-2xl">
+                </div>
+                @endif
             </div>
             @empty
             <div class="text-gray-700 dark:text-gray-300">Geen projecten gevonden.</div>
