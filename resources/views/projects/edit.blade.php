@@ -6,7 +6,7 @@
     </x-slot>
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div class="bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6">
-            <form method="POST" action="{{ route('projects.update', $project->id) }}">
+            <form method="POST" action="{{ route('projects.update', $project->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-4">
@@ -15,6 +15,21 @@
                     <x-text-input type="text" name="projectname" class="mt-1 block w-80 sm:text-sm"
                         value="{{ $project->projectname }}" required />
                 </div>
+
+                <div>
+                    <x-input-label for="picture" :value="__('Foto')" />
+                    <input type="file" name="picture" id="picture" class="mt-1 block w-full" accept="image/*">
+                    <x-input-error class="mt-2" :messages="$errors->get('picture')" />
+                </div>
+        
+                <div id="picturePreview" class="mt-2">
+                    @if ($project->picture)
+                        <img id="previewImage" src="{{ asset('images/'.$project->picture) }}" alt="Picture" class="w-32 h-32 object-cover">
+                    @else
+                        <img id="previewImage" src="#" alt="Preview" class="w-20 h-20 rounded-full object-cover hidden">
+                    @endif
+                </div>
+
                 <div class="mb-4">
                     <label for="phaseName"
                         class="block text-sm font-medium text-gray-700 dark:text-gray-200">Fase</label>
@@ -197,6 +212,29 @@
             filteredUsersPO.forEach(user => {
                 userListPO.appendChild(user);
             });
+        });
+
+        const pictureInput = document.getElementById('picture');
+        const previewImage = document.getElementById('previewImage');
+        
+        // Event listener for profile picture change
+        pictureInput.addEventListener('change', function (event) {
+            const input = event.target;
+            const file = input.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function () {
+                previewImage.src = reader.result;
+                previewImage.classList.remove('hidden');
+            };
+            
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                // If no file selected, hide the preview
+                previewImage.src = '#';
+                previewImage.classList.add('hidden');
+            }
         });
     });
 </script>
