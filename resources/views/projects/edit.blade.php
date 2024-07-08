@@ -120,21 +120,27 @@
                         </ul>
                     </div>
                 </div>
+                <x-primary-button>Opslaan</x-primary-button>
+            </form>
+
+            @role('admin')
+                <form action="{{ route('projects.destroy', $project->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je dit project wilt verwijderen??');" class="mt-2">
+                    @csrf
+                    @method('DELETE')
+                    <x-secondary-button type="submit" class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300">Verwijderen</x-secondary-button>
+                </form>
+            @endrole
+        </div>
+    </div>
 </x-app-layout>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const searchInputUsers = document.getElementById('userSearch');
-        const searchInputPL = document.getElementById('userSearchPL');
-        const searchInputPO = document.getElementById('userSearchPO');
 
         const userList = document.getElementById('userList');
-        const userListPL = document.getElementById('userListPL');
-        const userListPO = document.getElementById('userListPO');
 
         const users = Array.from(userList.getElementsByTagName('li'));
-        const usersPL = Array.from(userListPL.getElementsByTagName('li'));
-        const usersPO = Array.from(userListPO.getElementsByTagName('li'));
 
         searchInputUsers.addEventListener('input', function(event) {
             const searchTerm = event.target.value.toLowerCase();
@@ -142,24 +148,6 @@
             userList.innerHTML = '';
             filteredUsersWorkingWith.forEach(user => {
                 userList.appendChild(user);
-            });
-        });
-
-        searchInputPL.addEventListener('input', function(event) {
-            const searchTerm = event.target.value.toLowerCase();
-            const filteredUsersPL = usersPL.filter(user => user.textContent.toLowerCase().includes(searchTerm));
-            userListPL.innerHTML = '';
-            filteredUsersPL.forEach(user => {
-                userListPL.appendChild(user);
-            });
-        });
-
-        searchInputPO.addEventListener('input', function(event) {
-            const searchTerm = event.target.value.toLowerCase();
-            const filteredUsersPO = usersPO.filter(user => user.textContent.toLowerCase().includes(searchTerm));
-            userListPO.innerHTML = '';
-            filteredUsersPO.forEach(user => {
-                userListPO.appendChild(user);
             });
         });
 
