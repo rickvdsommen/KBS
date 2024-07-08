@@ -60,8 +60,12 @@ class ProjectController extends Controller
     {
         $tags = Tag::all();
         $categories = Category::all();
-        $users = User::all();
-        return view('projects.create', compact('tags', 'categories', 'users'));
+        $users = User::where('deactivated', false)->get(); // Fetch all active users
+        $filteredUsersPL = $users; // Assuming all active users initially
+        $filteredUsersPO = $users; // Assuming all active users initially
+    
+        return view('projects.create', compact('tags', 'categories', 'users', 'filteredUsersPL', 'filteredUsersPO'));
+    
     }
 
     public function store(Request $request)
@@ -112,18 +116,20 @@ class ProjectController extends Controller
             $filteredUsersWorkingWith = $users;
         }
 
-        $searchTermPO = $request->input('productOwnerSearch');
-        if ($searchTermPO) {
-            $filteredUsersPO = User::where('name', 'like', "%$searchTermPO%")->get();
-        } else {
-            $filteredUsersPO = $users;
-        }
-
+        // Filter and fetch only active users for Project Leader dropdown
         $searchTermPL = $request->input('projectLeaderSearch');
         if ($searchTermPL) {
-            $filteredUsersPL = User::where('name', 'like', "%$searchTermPL%")->get();
+            $filteredUsersPL = User::where('name', 'like', "%$searchTermPL%")->where('deactivated', false)->get();
         } else {
-            $filteredUsersPL = $users;
+            $filteredUsersPL = User::where('deactivated', false)->get();
+        }
+
+        // Filter and fetch only active users for Product Owner dropdown
+        $searchTermPO = $request->input('productOwnerSearch');
+        if ($searchTermPO) {
+            $filteredUsersPO = User::where('name', 'like', "%$searchTermPO%")->where('deactivated', false)->get();
+        } else {
+            $filteredUsersPO = User::where('deactivated', false)->get();
         }
 
         return view('projects.edit', compact('project', 'tags', 'categories', 'filteredUsersWorkingWith', 'filteredUsersPO', 'filteredUsersPL'));
