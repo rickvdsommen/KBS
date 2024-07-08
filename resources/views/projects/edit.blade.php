@@ -54,33 +54,26 @@
                 </div>
                 <!-- Project Leader -->
                 <div class="mb-4">
-                    <label for="projectLeaderSearch" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Project leider</label>
-                    <x-text-input type="text" id="userSearchPL" class="mt-1 block w-80 sm:text-sm mb-2" placeholder="Zoek projectleiders..." />
-                    <div class="overflow-y-auto w-80 max-h-60 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3 dark:bg-gray-900">
-                        <ul id="userListPL">
-                            @foreach ($filteredUsersPL as $user)
-                                <li>
-                                    <input type="radio" name="projectLeader" value="{{ $user->id }}" class="rounded-full border-gray-300 dark:border-gray-700 shadow-sm" {{ $project->projectLeader == $user->id ? 'checked' : '' }}>
-                                    <span class="text-gray-800 dark:text-gray-200">{{ $user->name }}</span>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    <label for="projectLeader" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Project leider</label>
+                    <select name="projectLeader" class="mt-1 block w-80 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm sm:text-sm" required>
+                        @foreach ($filteredUsersPL as $user)
+                            @if (!$user->deactivated)
+                                <option value="{{ $user->id }}" {{ $project->projectLeader == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
+                            @endif
+                        @endforeach
+                    </select>
                 </div>
+
                 <!-- Product Owner -->
                 <div class="mb-4">
-                    <label for="productOwnerSearch" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Product Owner</label>
-                    <x-text-input type="text" id="userSearchPO" class="mt-1 block w-80 sm:text-sm mb-2" placeholder="Zoek product owners..." />
-                    <div class="overflow-y-auto w-80 max-h-60 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3 dark:bg-gray-900">
-                        <ul id="userListPO">
-                            @foreach ($filteredUsersPO as $user)
-                                <li>
-                                    <input type="radio" name="productOwner" value="{{ $user->id }}" class="rounded-full border-gray-300 dark:border-gray-700 shadow-sm" {{ $project->productOwner == $user->id ? 'checked' : '' }}>
-                                    <span class="text-gray-800 dark:text-gray-200">{{ $user->name }}</span>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    <label for="productOwner" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Product Owner</label>
+                    <select name="productOwner" class="mt-1 block w-80 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm sm:text-sm" required>
+                        @foreach ($filteredUsersPO as $user)
+                            @if (!$user->deactivated)
+                                <option value="{{ $user->id }}" {{ $project->productOwner == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
+                            @endif
+                        @endforeach
+                    </select>
                 </div>
                 <div class="mb-4">
                     <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Omschrijving</label>
@@ -117,26 +110,16 @@
                     <div class="overflow-y-auto w-80 max-h-60 rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3 dark:bg-gray-900">
                         <ul id="userList">
                             @foreach ($filteredUsersWorkingWith as $user)
-                                <li>
-                                    <input type="checkbox" name="selectedUsers[]" value="{{ $user->id }}" class="rounded-md border-gray-300 dark:border-gray-700 shadow-sm" {{ $project->users->contains($user->id) ? 'checked' : '' }}>
-                                    <span class="text-gray-800 dark:text-gray-200">{{ $user->name }}</span>
-                                </li>
+                                @if (!$user->deactivated) <!-- Check if user is not deactivated -->
+                                    <li>
+                                        <input type="checkbox" name="selectedUsers[]" value="{{ $user->id }}" class="rounded-md border-gray-300 dark:border-gray-700 shadow-sm" {{ $project->users->contains($user->id) ? 'checked' : '' }}>
+                                        <span class="text-gray-800 dark:text-gray-200">{{ $user->name }}</span>
+                                    </li>
+                                @endif
                             @endforeach
                         </ul>
                     </div>
                 </div>
-                <x-primary-button>Opslaan</x-primary-button>
-            </form>
-
-            @role('admin')
-                <form action="{{ route('projects.destroy', $project->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je dit project wilt verwijderen??');" class="mt-2">
-                    @csrf
-                    @method('DELETE')
-                    <x-secondary-button type="submit" class="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300">Verwijderen</x-secondary-button>
-                </form>
-            @endrole
-        </div>
-    </div>
 </x-app-layout>
 
 <script>
