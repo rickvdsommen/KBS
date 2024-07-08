@@ -110,7 +110,7 @@
                     </div>
                 </a>
                 @if ($project->picture)
-                <div class="absolute top-4 right-4 h-40 w-auto  overflow-hidden">
+                <div class="absolute top-7 right-5 h-44 w-auto  overflow-hidden">
                     <img src="{{ asset('images/' . $project->picture) }}" alt="{{ $project->projectname }}" class="h-full w-full rounded-2xl">
                 </div>
                 @endif

@@ -31,7 +31,7 @@
             <div class="overflow-x-auto">
                 <table class="border-collapse table-auto w-full">
                     <thead>
-                            <th class="py-2 px-4 text-left">Apparaat ID</th>
+                            <th class="py-2 px-4 text-left">ID</th>
                             <th class="py-2 px-4 text-left">Status</th>
                             <th class="py-2 px-4 text-left">Locatie</th>
                             <th class="py-2 px-4 text-left">Gebruiker</th>
