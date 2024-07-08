@@ -6,7 +6,7 @@
                     <div class="md:flex md:flex-row-reverse md:items-start md:justify-between">
                         <div class="mb-6 md:mb-0 md:w-1/2 flex justify-center items-start">
                             @if ($project->picture)
-                                <img src="{{ asset('images/' . $project->picture) }}" alt="{{ $project->projectname }}" class="rounded-3xl h-auto max-h-96 max-w-full">
+                                <img src="{{ asset('images/' . $project->picture) }}" alt="{{ $project->projectname }}" class="rounded-2xl h-auto max-h-96 max-w-full">
                             @else
                                 <div class="bg-gray-300 rounded-lg h-96 w-96 flex items-center justify-center">
                                     <span class="text-gray-500 text-4xl">Geen foto</span>

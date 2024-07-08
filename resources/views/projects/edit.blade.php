@@ -20,11 +20,11 @@
                     <x-input-error class="mt-2" :messages="$errors->get('picture')" />
                 </div>
         
-                <div id="picturePreview" class="mt-2">
+                <div id="picturePreview" class="my-2">
                     @if ($project->picture)
-                        <img id="previewImage" src="{{ asset('images/'.$project->picture) }}" alt="Picture" class="w-32 h-32 object-cover">
+                        <img id="previewImage" src="{{ asset('images/'.$project->picture) }}" alt="Picture" class="w-auto h-60">
                     @else
-                        <img id="previewImage" src="#" alt="Preview" class="w-60 h-60 rounded-full object-cover hidden">
+                        <img id="previewImage" src="#" alt="Preview" class="w-60 h-60 object-cover hidden">
                     @endif
                 </div>
 
