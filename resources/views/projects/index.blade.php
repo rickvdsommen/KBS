@@ -65,7 +65,13 @@
                             </div>
                             <div class="mb-4">
                                 <p class="text-gray-700 dark:text-gray-300">
-                                    <span class="font-semibold">Omschrijving:</span> {{ $project->description }}
+                                    <span class="font-semibold">Omschrijving:</span>
+                                    @php
+                                        // Truncate description to max 200 characters
+                                        $description = $project->description;
+                                        $truncated_description = strlen($description) > 200 ? substr($description, 0, 200) . '...' : $description;
+                                    @endphp
+                                    {{ $truncated_description }}
                                 </p>
                             </div>
                             <div class="mb-4">
@@ -95,22 +101,22 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="flex justify-end">
-                                <a href="{{ route('projects.edit', $project->id) }}"
-                                    class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300">
-                                    <x-primary-button>Wijzigen</x-primary-button>
-                                </a>
-                            </div>
+                        <div class="flex justify-end">
+                            <a href="{{ route('projects.edit', $project->id) }}"
+                                class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300">
+                                <x-primary-button>Wijzigen</x-primary-button>
+                            </a>
                         </div>
-                    </a>
-                </div>
-                @empty
-                    <div class="text-gray-700 dark:text-gray-300">Geen projecten gevonden.</div>
-                @endforelse
+                    </div>
+                </a>
             </div>
-            <!-- Pagination links -->
-            <div class="pt-6 pb-10">
-                {{ $projects->links() }}
-            </div>
+            @empty
+            <div class="text-gray-700 dark:text-gray-300">Geen projecten gevonden.</div>
+            @endforelse
         </div>
-    </x-app-layout>
+        <!-- Pagination links -->
+        <div class="pt-6 pb-10">
+            {{ $projects->links() }}
+        </div>
+    </div>
+</x-app-layout>
