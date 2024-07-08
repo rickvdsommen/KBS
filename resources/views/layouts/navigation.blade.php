@@ -21,7 +21,7 @@
                     <x-nav-link :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">
                         {{ __('Agenda') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('devices.index')" :active="request()->routeIs('devices.index')">
+                    <x-nav-link :href="route('availability.index')" :active="request()->routeIs('availability.index')">
                         {{ __('Aanwezigheid') }}
                     </x-nav-link>
                     @role('admin')
@@ -104,7 +104,7 @@
             <x-responsive-nav-link class="text-lg font-medium" :href="route('agenda.index')" :active="request()->routeIs('agenda.index')">
                 {{ __('Agenda') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link class="text-lg font-medium" :href="route('devices.index')" :active="request()->routeIs('devices.index')">
+            <x-responsive-nav-link class="text-lg font-medium" :href="route('availability.index')" :active="request()->routeIs('availability.index')">
                 {{ __('Aanwezigheid') }}
             </x-responsive-nav-link>
             @role('admin')

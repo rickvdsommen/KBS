@@ -19,8 +19,8 @@
                         <p class="text-lg text-gray-700 dark:text-gray-300 mb-4"><strong>Geboortedatum:</strong> {{ \Carbon\Carbon::parse($user->birthday)->locale('nl')->translatedFormat('d F Y') }}</p>
                         <p class="text-lg text-gray-700 dark:text-gray-300 mb-4"><strong>Functie:</strong> {{ $user->function }}</p>
                         <p class="text-lg text-gray-700 dark:text-gray-300 mb-4"><strong>Mijn werkplek:</strong>
-                        @if($user->device && $user->device->location)
-                            {{ $user->device->location->name }}
+                        @if($user->availability && $user->availability->location)
+                            {{ $user->availability->location->name }}
                         @else
                             Geen
                         @endif

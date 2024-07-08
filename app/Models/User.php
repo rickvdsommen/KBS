@@ -73,9 +73,9 @@ class User extends Authenticatable
         return $this->hasMany(Course::class);
     }
 
-    public function device()
+    public function availability()
     {
-        return $this->hasOne(Device::class);
+        return $this->hasOne(Availability::class);
     }
 
     

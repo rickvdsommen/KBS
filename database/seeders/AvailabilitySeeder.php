@@ -3,13 +3,13 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Device;
+use App\Models\Availability;
 
-class DeviceSeeder extends Seeder
+class AvailabilitySeeder extends Seeder
 {
     public function run(): void
     {
-        Device::factory()->create([
+        Availability::factory()->create([
             'status' => 'aanwezig',
             'user_id' => '1',
         ]);

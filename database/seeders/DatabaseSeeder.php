@@ -6,7 +6,7 @@ use App\Models\Project;
 use App\Models\Course;
 use App\Models\Skill;
 use App\Models\Agenda;
-use App\Models\Device;
+use App\Models\availability;
 use App\Models\Tag;
 use App\Models\ProjectTag;
 use App\Models\ProjectCategory;
@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TagSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(LocationSeeder::class);
-        $this->call(DeviceSeeder::class);
+        $this->call(AvailabilitySeeder::class);
         $this->call(ProjectTagRelationshipsSeeder::class);
         $this->call(ProjectCategorySeeder::class);
         $this->call(UserProjectSeeder::class); 

@@ -10,7 +10,7 @@ class TeamController extends Controller
 {
     public function index(Request $request)
     {
-        $query = User::query()->with('degrees', 'skills', 'courses', 'device');
+        $query = User::query()->with('degrees', 'skills', 'courses', 'availability');
         if ($request->has('search')) {
             $search = $request->input('search');
             $query->where(function($q) use ($search) {
@@ -37,7 +37,7 @@ class TeamController extends Controller
 
     public function show(User $user)
     {
-        $user->load('courses', 'degrees', 'skills', 'device.location'); // Eager load relationships
+        $user->load('courses', 'degrees', 'skills', 'availability.location'); // Eager load relationships
         return view('team.show', compact('user'));
     }
 }

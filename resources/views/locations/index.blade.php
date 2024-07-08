@@ -29,7 +29,7 @@
                     <x-primary-button type="submit" class="w-32 sm:w-auto sm:ml-2 mt-1">
                         Voeg toe
                     </x-primary-button>
-                    <a href="{{ route('devices.index') }}" class="w-full sm:w-auto sm:ml-2 mt-1">
+                    <a href="{{ route('availability.index') }}" class="w-full sm:w-auto sm:ml-2 mt-1">
                         <x-secondary-button class="sm:w-auto">
                             Terug naar overzicht
                         </x-secondary-button>

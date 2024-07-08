@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\Device;
+use App\Models\availability;
 use Illuminate\Support\Carbon;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $users = User::with('device')
-        ->whereHas('device', function($query) {
+        $users = User::with('availability')
+        ->whereHas('availability', function($query) {
             $query->whereDate('updated_at', Carbon::today())
               ->whereIn('status', ['aanwezig', 'bezet']);
         })->get();

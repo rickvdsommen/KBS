@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('devices', function (Blueprint $table) {
+        Schema::create('availabilities', function (Blueprint $table) {
             $table->id();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->string('status')->default('Afwezig');
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('availability_id')->nullable();
 
             // Define foreign key
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('devices');
+        Schema::dropIfExists('availability');
     }
 };

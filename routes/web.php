@@ -14,7 +14,7 @@ use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\DeactivatedCheck;
-use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\LocationController;
 
 // Routes for getting a view from a page
@@ -49,7 +49,7 @@ Route::middleware('auth', DeactivatedCheck::class)->group(function () {
 
     Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
 
-    Route::post('/availability/update', [DeviceController::class, 'updateAvailability'])->name('availability.update');
+    Route::post('/availabilityToggle/update', [AvailabilityController::class, 'updateAvailability'])->name('availabilityToggle.update');
 });
 
 // Only accessible with admin role
@@ -63,10 +63,10 @@ Route::middleware(['role_or_permission:admin', 'auth', DeactivatedCheck::class])
     Route::post('/locations', [LocationController::class, 'store'])->name('locations.store');
     Route::delete('/locations/{location}', [LocationController::class, 'destroy'])->name('locations.destroy');
 
-    Route::get('/devices', [DeviceController::class, 'index'])->name('devices.index');
-    Route::post('/devices/link', [DeviceController::class, 'link'])->name('devices.link');
-    Route::post('/devices/unlink', [DeviceController::class, 'unlink'])->name('devices.unlink');
-    Route::patch('/devices/{device}', [DeviceController::class, 'update'])->name('devices.update');
+    Route::get('/availability', [AvailabilityController::class, 'index'])->name('availability.index');
+    Route::post('/availability/link', [AvailabilityController::class, 'link'])->name('availability.link');
+    Route::post('/availability/unlink', [AvailabilityController::class, 'unlink'])->name('availability.unlink');
+    Route::patch('/availability/{availability}', [AvailabilityController::class, 'update'])->name('availability.update');
 });
 // In routes/web.php
 
