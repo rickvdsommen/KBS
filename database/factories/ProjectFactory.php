@@ -24,6 +24,7 @@ class ProjectFactory extends Factory
             'startingDate' => $this->faker->date,
             'projectLeader' => '1',
             'productOwner' => '2',
+            'progress' => '20',
         ];
     }
 }

@@ -10,7 +10,7 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = [
-        'projectname', 'phaseName', 'description', 'status', 'startingDate', 'projectLeader', 'productOwner'
+        'projectname', 'phaseName', 'description', 'status', 'startingDate', 'projectLeader', 'productOwner','progress'
     ];
 
     public function tags()

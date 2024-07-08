@@ -87,7 +87,10 @@
                         @endforeach
                     </div>
                 </div>
-                
+                <div class="mb-4">
+                    <label for="progress" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Vooruitgang (%)</label>
+                    <input type="number" id="progress" name="progress" class="mt-1 block w-80 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm sm:text-sm" min="0" max="100" value="0" required/>
+                </div>
                 <!-- List of Users and searchbar -->
                 <div class="mb-4">
                     <label for="selectedUsers" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Wie werkt er mee aan dit project?</label>
@@ -104,12 +107,12 @@
                     </div>
                 </div>
 
-
                 <x-primary-button type="submit">Opslaan</x-primary-button>
             </form>
         </div>
     </div>
 </x-app-layout>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const searchInputUsers = document.getElementById('userSearch');
@@ -126,9 +129,9 @@
 
         searchInputUsers.addEventListener('input', function(event) {
             const searchTerm = event.target.value.toLowerCase();
-            const filteredUsersWorkingWithJ = users.filter(user => user.textContent.toLowerCase().includes(searchTerm));
+            const filteredUsers = users.filter(user => user.textContent.toLowerCase().includes(searchTerm));
             userList.innerHTML = '';
-            filteredUsersWorkingWithJ.forEach(user => {
+            filteredUsers.forEach(user => {
                 userList.appendChild(user);
             });
         });
