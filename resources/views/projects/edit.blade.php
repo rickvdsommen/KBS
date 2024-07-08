@@ -24,7 +24,7 @@
                     @if ($project->picture)
                         <img id="previewImage" src="{{ asset('images/'.$project->picture) }}" alt="Picture" class="w-32 h-32 object-cover">
                     @else
-                        <img id="previewImage" src="#" alt="Preview" class="w-20 h-20 rounded-full object-cover hidden">
+                        <img id="previewImage" src="#" alt="Preview" class="w-60 h-60 rounded-full object-cover hidden">
                     @endif
                 </div>
 

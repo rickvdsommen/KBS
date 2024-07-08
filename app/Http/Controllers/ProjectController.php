@@ -74,12 +74,19 @@ class ProjectController extends Controller
             'startingDate' => 'required|date',
             'projectLeader' => 'required',
             'productOwner' => 'required',
-            'progress' => 'required|integer|min:1|max:100',
+            'progress' => 'integer|min:1|max:100',
             'tags' => 'array',
+            'profile_picture' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'categories' => 'array',
         ]);
 
         $project = Project::create($request->all());
+
+        if ($request->hasFile('picture')) {
+            $imageName = time().'.'.$request->picture->extension();
+            $request->picture->move(public_path('images'), $imageName);
+            $project->picture = $imageName; // Updated this line
+        }
 
         if ($request->has('tags')) {
             $project->tags()->attach($request->tags);
@@ -90,6 +97,9 @@ class ProjectController extends Controller
         if ($request->has('selectedUsers')) {
             $project->users()->attach($request->selectedUsers);
         }
+
+        $project->save();
+
         return redirect()->route('projects.index')->with('success', 'Project created successfully.');
     }
 
@@ -130,34 +140,52 @@ class ProjectController extends Controller
     }
 
     public function update(Request $request, Project $project)
-    {
-        $request->validate([
-            'projectname' => 'required|unique:projects,projectname,' . $project->id,
-            'phaseName' => 'required',
-            'description' => 'required',
-            'status' => 'required',
-            'startingDate' => 'required|date',
-            'projectLeader' => 'required',
-            'productOwner' => 'required',
-            'progress' => 'required|integer|min:1|max:100',
+{
+    $request->validate([
+        'projectname' => 'required|unique:projects,projectname,' . $project->id,
+        'phaseName' => 'required',
+        'description' => 'required',
+        'status' => 'required',
+        'startingDate' => 'required|date',
+        'projectLeader' => 'required',
+        'productOwner' => 'required',
+        'progress' => 'required|integer|min:1|max:100',
+        'picture' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+        'tags' => 'array',
+        'categories' => 'array',
+        'selectedUsers' => 'array',
+    ]);
 
-            'tags' => 'array',
-            'categories' => 'array',
-        ]);
+    $data = $request->except('picture');
 
-        $project->update($request->all());
+    if ($request->hasFile('picture')) {
+        // Delete the old image if it exists
+        if ($project->picture && file_exists(public_path('images/' . $project->picture))) {
+            unlink(public_path('images/' . $project->picture));
+        }
 
-        if ($request->has('tags')) {
-            $project->tags()->sync($request->tags);
-        }
-        if ($request->has('categories')) {
-            $project->categories()->sync($request->categories);
-        }
-        if ($request->has('selectedUsers')) {
-            $project->users()->sync($request->selectedUsers);
-        }
-        return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
+        // Store the new image
+        $imageName = time() . '.' . $request->picture->extension();
+        $request->picture->move(public_path('images'), $imageName);
+        $data['picture'] = $imageName;
     }
+
+    $project->update($data);
+
+    // Sync tags, categories, and selectedUsers if they are present in the request
+    if ($request->has('tags')) {
+        $project->tags()->sync($request->tags);
+    }
+    if ($request->has('categories')) {
+        $project->categories()->sync($request->categories);
+    }
+    if ($request->has('selectedUsers')) {
+        $project->users()->sync($request->selectedUsers);
+    }
+
+    return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
+}
+
 
     public function destroy(Project $project)
     {
