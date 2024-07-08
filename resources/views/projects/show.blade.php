@@ -42,7 +42,6 @@
                                     {{ $project->progress }}%
                                 </div>
                             </div>
-                            <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">{{ $project->progress }}%</span>
                         </div>
                     </div>
 
