@@ -50,6 +50,9 @@ Route::middleware('auth', DeactivatedCheck::class)->group(function () {
     Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
 
     Route::post('/availabilityToggle/update', [AvailabilityController::class, 'updateAvailability'])->name('availabilityToggle.update');
+    
+    Route::get('/availability', [AvailabilityController::class, 'index'])->name('availability.index');
+    Route::patch('/availability/{availability}', [AvailabilityController::class, 'update'])->name('availability.update');
 });
 
 // Only accessible with admin role
@@ -63,16 +66,10 @@ Route::middleware(['role_or_permission:admin', 'auth', DeactivatedCheck::class])
     Route::post('/locations', [LocationController::class, 'store'])->name('locations.store');
     Route::delete('/locations/{location}', [LocationController::class, 'destroy'])->name('locations.destroy');
 
-    Route::get('/availability', [AvailabilityController::class, 'index'])->name('availability.index');
+    
     Route::post('/availability/link', [AvailabilityController::class, 'link'])->name('availability.link');
     Route::post('/availability/unlink', [AvailabilityController::class, 'unlink'])->name('availability.unlink');
-    Route::patch('/availability/{availability}', [AvailabilityController::class, 'update'])->name('availability.update');
-});
-// In routes/web.php
-
-Route::middleware('auth')->group(function () { // Removed 'deactivated'
-     // Add this line
-
+    
 });
 
 require __DIR__.'/auth.php';
