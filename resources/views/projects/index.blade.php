@@ -32,74 +32,83 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
             <!-- Project cards -->
-            @forelse ($projects as $project)
-            <div class="relative h-full bg-white dark:bg-gray-800 overflow-hidden shadow-lg rounded-lg transform transition-transform hover:scale-105">
+            @foreach ($projects as $project)
+            <div class="relative bg-white dark:bg-gray-800 overflow-hidden shadow-lg rounded-lg transform transition-transform hover:scale-105">
                 <a href="{{ route('projects.show', $project->id) }}">
                     <div
                         class="h-full flex flex-col justify-between p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-700 hover:shadow-xl cursor-pointer">
-                        <div>
+                        <div class="flex flex-col sm:flex-row items-center sm:items-start mb-4">
+                           
                             <!-- Project each row -->
-                            <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-200 mb-4 max-w-72">
-                                {{ $project->projectname }}
-                            </h3>
+                            <div class="ml-0 sm:ml-4">
+                                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-200 mb-2 sm:mb-4">
+                                    {{ $project->projectname }}
+                                </h3>
 
-                            <div class="mb-4">
-                                <p class="text-gray-700 dark:text-gray-300">
-                                    <span class="font-semibold">Fase:</span> {{ $project->phaseName }}
-                                </p>
-                                <p class="text-gray-700 dark:text-gray-300">
-                                    <span class="font-semibold">Status:</span> {{ $project->status }}
-                                </p>
-                                <p class="text-gray-700 dark:text-gray-300">
-                                    <span class="font-semibold">Begin datum:</span> {{ \Carbon\Carbon::parse($project->startingDate)->locale('nl')->translatedFormat('d F Y') }}
-                                </p>
-                            </div>
-                            <div class="mb-4">
-                                <p class="text-gray-700 dark:text-gray-300">
-                                    <span class="font-semibold">Project Leader:</span>
-                                    {{ $project->projectLeaderRelation->name }}
-                                </p>
-                                <p class="text-gray-700 dark:text-gray-300">
-                                    <span class="font-semibold">Product Owner:</span> {{ $project->productOwnerRelation->name }}
-                                </p>
-                            </div>
-                            <div class="mb-4">
-                                <p class="text-gray-700 dark:text-gray-300">
-                                    <span class="font-semibold">Omschrijving:</span>
-                                    @php
-                                        // Truncate description to max 200 characters
-                                        $description = $project->description;
-                                        $truncated_description = strlen($description) > 200 ? substr($description, 0, 200) . '...' : $description;
-                                    @endphp
-                                    {{ $truncated_description }}
-                                </p>
-                            </div>
-                            <div class="mb-4">
-                                <p class="text-gray-700 dark:text-gray-300">
-                                    <span class="font-semibold">Categorieën:</span>
-                                    @foreach ($project->categories as $category)
-                                    {{ $category->category }}@if (!$loop->last),@endif
-                                    @endforeach
-                                </p>
-                                <p class="text-gray-700 dark:text-gray-300">
-                                    <span class="font-semibold">Tags:</span>
-                                    @foreach ($project->tags as $tag)
-                                    {{ $tag->tag }}@if (!$loop->last),@endif
-                                    @endforeach
-                                </p>
-                            </div>
-                            <!-- Progress Bar -->
-                            <div class="mb-4">
-                                <p class="text-gray-700 dark:text-gray-300">
-                                    <span class="font-semibold">Vooruitgang:</span>
-                                </p>
-                                <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-lg overflow-hidden mt-2">
-                                    <div class="bg-indigo-500 dark:bg-indigo-600 text-xs leading-none py-1 text-center text-white"
-                                        style="width: {{ $project->progress }}%;">
-                                        {{ $project->progress }}%
+                                <div class="">
+                                    <p class="text-gray-700 dark:text-gray-300">
+                                        <span class="font-semibold">Fase:</span> {{ $project->phaseName }}
+                                    </p>
+                                    <p class="text-gray-700 dark:text-gray-300">
+                                        <span class="font-semibold">Status:</span> {{ $project->status }}
+                                    </p>
+                                    <p class="text-gray-700 dark:text-gray-300">
+                                        <span class="font-semibold">Begin datum:</span>
+                                        {{ \Carbon\Carbon::parse($project->startingDate)->locale('nl')->translatedFormat('d F Y') }}
+                                    </p>
+                                </div>
+                                <div class="mb-2 sm:mb-4">
+                                    <p class="text-gray-700 dark:text-gray-300">
+                                        <span class="font-semibold">Project Leader:</span>
+                                        {{ $project->projectLeaderRelation->name }}
+                                    </p>
+                                    <p class="text-gray-700 dark:text-gray-300">
+                                        <span class="font-semibold">Product Owner:</span>
+                                        {{ $project->productOwnerRelation->name }}
+                                    </p>
+                                </div>
+                                <div class="mb-2 sm:mb-4">
+                                    <p class="text-gray-700 dark:text-gray-300">
+                                        <span class="font-semibold">Omschrijving:</span>
+                                        @php
+                                            // Truncate description to max 200 characters
+                                            $description = $project->description;
+                                            $truncated_description = strlen($description) > 200 ? substr($description, 0, 200) . '...' : $description;
+                                        @endphp
+                                        {{ $truncated_description }}
+                                    </p>
+                                </div>
+                                <div class="mb-2 sm:mb-4">
+                                    <p class="text-gray-700 dark:text-gray-300">
+                                        <span class="font-semibold">Categorieën:</span>
+                                        @foreach ($project->categories as $category)
+                                        {{ $category->category }}@if (!$loop->last),@endif
+                                        @endforeach
+                                    </p>
+                                    <p class="text-gray-700 dark:text-gray-300">
+                                        <span class="font-semibold">Tags:</span>
+                                        @foreach ($project->tags as $tag)
+                                        {{ $tag->tag }}@if (!$loop->last),@endif
+                                        @endforeach
+                                    </p>
+                                </div>
+                                <!-- Progress Bar -->
+                                <div class="mb-2 sm:mb-4">
+                                    <p class="text-gray-700 dark:text-gray-300">
+                                        <span class="font-semibold">Vooruitgang:</span>
+                                    </p>
+                                    <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-lg overflow-hidden mt-2">
+                                        <div class="bg-indigo-500 dark:bg-indigo-600 text-xs leading-none py-1 text-center text-white"
+                                            style="width: {{ $project->progress }}%;">
+                                            {{ $project->progress }}%
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            @if ($project->picture)
+                            <img src="{{ asset('images/' . $project->picture) }}" alt="{{ $project->projectname }}"
+                                class="h-auto w-full object-cover rounded-lg mb-4 sm:mb-0 sm:h-auto sm:w-2/5 ">
+                            @endif
                         </div>
                         <div class="flex justify-end">
                             <a href="{{ route('projects.edit', $project->id) }}"
@@ -109,15 +118,8 @@
                         </div>
                     </div>
                 </a>
-                @if ($project->picture)
-                <div class="absolute top-7 right-5 h-44 w-auto overflow-hidden">
-                    <img src="{{ asset('images/' . $project->picture) }}" alt="{{ $project->projectname }}" class="h-full max-w-72 rounded-2xl">
-                </div>
-                @endif
             </div>
-            @empty
-            <div class="text-gray-700 dark:text-gray-300">Geen projecten gevonden.</div>
-            @endforelse
+            @endforeach
         </div>
         <!-- Pagination links -->
         <div class="pt-6 pb-10">
