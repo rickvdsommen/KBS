@@ -33,7 +33,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
             <!-- Project cards -->
             @foreach ($projects as $project)
-            <div class="relative bg-white dark:bg-gray-800 overflow-hidden shadow-lg rounded-lg transform transition-transform hover:scale-105">
+            <div class="relative bg-white dark:bg-gray-800 overflow-hidden shadow-lg rounded-lg transform transition-transform @lg:hover:scale-105">
                 <a href="{{ route('projects.show', $project->id) }}">
                     <div
                         class="h-full flex flex-col justify-between p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-700 hover:shadow-xl cursor-pointer">
