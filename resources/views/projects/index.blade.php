@@ -39,7 +39,7 @@
                         class="h-full flex flex-col justify-between p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-700 hover:shadow-xl cursor-pointer">
                         <div>
                             <!-- Project each row -->
-                            <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-200 mb-4">
+                            <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-200 mb-4 max-w-72">
                                 {{ $project->projectname }}
                             </h3>
 
@@ -110,8 +110,8 @@
                     </div>
                 </a>
                 @if ($project->picture)
-                <div class="absolute top-7 right-5 h-44 w-auto  overflow-hidden">
-                    <img src="{{ asset('images/' . $project->picture) }}" alt="{{ $project->projectname }}" class="h-full w-full rounded-2xl">
+                <div class="absolute top-7 right-5 h-44 w-auto overflow-hidden">
+                    <img src="{{ asset('images/' . $project->picture) }}" alt="{{ $project->projectname }}" class="h-full max-w-72 rounded-2xl">
                 </div>
                 @endif
             </div>
