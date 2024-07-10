@@ -1,56 +1,67 @@
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot name="header" class="bg-gray-400">
         <h2 class="font-semibold text-2xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
 
-    <div class="pb-12 pt-5">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="p-4 sm:p-8 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 shadow sm:rounded-lg">
+    <!-- Page Content -->
+    <main class="bg-gray-100 dark:bg-gray-800 min-h-screen h-full flex">
+        <!-- Left Sidebar -->
+        <div class="w-1/4 border-r border-gray-300 dark:border-gray-600 p-5">
+            <h2 class="my-2 text-2xl font-semibold">Afspraken voor vandaag:</h2>
+            <ul class="divide-y divide-gray-200 dark:divide-gray-600 text-lg font-semibold">
+                @forelse ($appointments as $appointment)
+                    <li class="py-2">
+                        <a href="{{ route('agenda.index', $appointment->id) }}" class="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600">
+                            {{ $appointment->title }}
+                        </a>
+                        <div class="text-gray-700 dark:text-gray-300">
+                            {{ \Carbon\Carbon::parse($appointment->start)->format('H:i') }} - {{ \Carbon\Carbon::parse($appointment->end)->format('H:i') }}
+                        </div>
+                    </li>
+                @empty
+                    <li class="py-2 font-normal text-base">Geen afspraken voor vandaag.</li>
+                @endforelse
+            </ul>
+        </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- First column for the calendar -->
-                    <div class="border h-fit border-gray-300 dark:border-gray-600 rounded-lg p-5 shadow-md">
-                        <div class="min-h-screen w-full" id="calendarDash"></div>
+        <!-- Middle Section -->
+        <div class="flex-1 p-5">
+            <h2 class="my-2 text-2xl font-semibold">Mijn Projecten:</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                @foreach ($userProjects as $project)
+                    <div class="border border-gray-300 dark:border-gray-600 rounded-lg p-5 shadow-md bg-white">
+                        <a href="{{ route('projects.show', $project->id) }}" class="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600 block mt-2">
+                            <h2 class="my-2 text-xl font-semibold">{{ $project->projectname }}</h2>
+                            <img src="{{ asset('images/' . $project->picture) }}" alt="{{ $project->projectname }}" class="h-full w-full rounded-2xl">
+                        </a>
                     </div>
-
-                    <!-- Second column for "Mijn Projecten" -->
-                    <div class="border h-fit border-gray-300 dark:border-gray-600 rounded-lg p-5 shadow-md">
-                        <h2 class="my-2 text-2xl font-semibold">Mijn Projecten:</h2>
-                        <ul class="divide-y divide-gray-200 dark:divide-gray-600 text-lg font-semibold">
-                            @forelse ($userProjects as $project)
-                                <li class="py-2">
-                                    <a href="{{ route('projects.show', $project->id) }}" class="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600">
-                                        {{ $project->projectname }}
-                                    </a>
-                                </li>
-                            @empty
-                                <li class="py-2 font-normal text-base">Je hebt geen lopende projecten.</li>
-                            @endforelse
-                        </ul>
-                    </div>
-
-                    <!-- Third column for "Wie is er vandaag aanwezig?" -->
-                    <div class="border h-fit border-gray-300 dark:border-gray-600 rounded-lg p-5 shadow-md">
-                        <h2 class="my-2 text-2xl font-semibold">Wie is er vandaag aanwezig?</h2>
-                        <ul class="divide-y divide-gray-200 dark:divide-gray-600 text-lg font-semibold">
-                            @forelse ($users as $user)
-                                <li class="py-2 flex">
-                                    <div>
-                                        <a href="{{ route('team.show', $user->id) }}" class="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600">
-                                            {{ $user->name }}
-                                        </a>
-                                        @include('components.status-indicator-extra')
-                                    </div>
-                                </li>
-                            @empty
-                                <li class="py-2 font-normal text-base">Niemand :(</li>
-                            @endforelse
-                        </ul>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
-    </div>
+
+        <!-- Right Sidebar -->
+        <div class="w-1/4 border-l border-gray-300 dark:border-gray-600 p-5">
+            <h2 class="my-2 text-2xl font-semibold">Wie is er vandaag aanwezig?</h2>
+            <div class="grid grid-cols-2 gap-4">
+                @forelse ($users as $user)
+                    <div class="flex flex-col items-center">
+                        @if ($user->profile_picture)
+                            <img src="{{ asset('images/' . $user->profile_picture) }}" alt="{{ $user->name }}" class="rounded-full h-16 w-16 object-cover">
+                        @else
+                            <div class="bg-gray-300 rounded-full h-16 w-16 flex items-center justify-center">
+                                <span class="text-gray-500 text-xs">Geen foto</span>
+                            </div>
+                        @endif
+                        <a href="{{ route('team.show', $user->id) }}" class="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600 mt-2 text-center">
+                            {{ $user->name }}
+                        </a>
+                    </div>
+                @empty
+                    <div class="py-2 font-normal text-base">Niemand :(</div>
+                @endforelse
+            </div>
+        </div>
+    </main>
 </x-app-layout>

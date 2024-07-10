@@ -35,10 +35,13 @@ Route::middleware('auth', DeactivatedCheck::class)->group(function () {
 
     Route::post('/degrees', [DegreeController::class, 'store'])->name('degree.store');
     Route::delete('/degrees/{degree}', [DegreeController::class, 'destroy'])->name('degree.destroy');
-
+    Route::get('/agenda', function () {
+        return view('agenda');
+    })->name('agenda.index');
     Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda.index');
     Route::post('/events', [AgendaController::class, 'store'])->name('event.store');
     Route::patch('/events', [AgendaController::class, 'patch'])->name('event.patch');
+    Route::get('/agenda/{id}', [AgendaController::class, 'show'])->name('agenda.show');
     Route::get('/events', [AgendaController::class, 'getEvents'])->name('events');
     Route::delete('/events/{id}', [AgendaController::class, 'destroy'])->name('event.destroy');
 
