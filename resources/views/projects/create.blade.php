@@ -7,13 +7,23 @@
 
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div class="bg-white dark:bg-gray-700 shadow sm:rounded-lg p-6">
-            <form method="POST" action="{{ route('projects.store') }}">
+            <form method="POST" action="{{ route('projects.store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <!-- Project Name -->
                 <div class="mb-4">
                     <label for="projectname" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Project Naam</label>
                     <x-text-input type="text" id="projectname" name="projectname" class="mt-1 block w-80 sm:text-sm" required/>
+                </div>
+
+                <div>
+                    <x-input-label for="picture" :value="__('Foto')" />
+                    <input type="file" name="picture" id="picture" class="mt-1 block w-full" accept="image/*">
+                    <x-input-error class="mt-2" :messages="$errors->get('picture')" />
+                </div>
+
+                <div id="picturePreview" class="my-2 w-fit">
+                        <img id="previewImage" src="#" alt="Preview" class="w-auto h-60 hidden">
                 </div>
 
                 <!-- Phase -->
@@ -125,16 +135,10 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const searchInputUsers = document.getElementById('userSearch');
-        const searchInputPL = document.getElementById('userSearchPL');
-        const searchInputPO = document.getElementById('userSearchPO');
 
         const userList = document.getElementById('userList');
-        const userListPL = document.getElementById('userListPL');
-        const userListPO = document.getElementById('userListPO');
 
         const users = Array.from(userList.getElementsByTagName('li'));
-        const usersPL = Array.from(userListPL.getElementsByTagName('li'));
-        const usersPO = Array.from(userListPO.getElementsByTagName('li'));
 
         searchInputUsers.addEventListener('input', function(event) {
             const searchTerm = event.target.value.toLowerCase();
@@ -145,22 +149,27 @@
             });
         });
 
-        searchInputPL.addEventListener('input', function(event) {
-            const searchTerm = event.target.value.toLowerCase();
-            const filteredUsersPL = usersPL.filter(user => user.textContent.toLowerCase().includes(searchTerm));
-            userListPL.innerHTML = '';
-            filteredUsersPL.forEach(user => {
-                userListPL.appendChild(user);
-            });
-        });
-
-        searchInputPO.addEventListener('input', function(event) {
-            const searchTerm = event.target.value.toLowerCase();
-            const filteredUsersPO = usersPO.filter(user => user.textContent.toLowerCase().includes(searchTerm));
-            userListPO.innerHTML = '';
-            filteredUsersPO.forEach(user => {
-                userListPO.appendChild(user);
-            });
+        const pictureInput = document.getElementById('picture');
+        const previewImage = document.getElementById('previewImage');
+        
+        // Event listener for profile picture change
+        pictureInput.addEventListener('change', function (event) {
+            const input = event.target;
+            const file = input.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function () {
+                previewImage.src = reader.result;
+                previewImage.classList.remove('hidden');
+            };
+            
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                // If no file selected, hide the preview
+                previewImage.src = '#';
+                previewImage.classList.add('hidden');
+            }
         });
     });
 </script>

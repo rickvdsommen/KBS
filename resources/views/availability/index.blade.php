@@ -66,7 +66,7 @@
                                         @else
                                             <form action="{{ route('availability.link') }}" method="POST" style="display:inline;">
                                                 @csrf
-                                                <input type="hidden" name="id" value="{{ $availability->id }}">
+                                                <input type="hidden" name="availability_id" value="{{ $availability->id }}">
                                                 <select name="user_id" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required>
                                                     <option value="">Selecteer gebruiker</option>
                                                     @foreach($users as $user)

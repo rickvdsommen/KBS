@@ -46,11 +46,11 @@ class AvailabilityController extends Controller
     public function link(Request $request)
     {
         $request->validate([
-            'id' => 'required|exists:availabilities,id',
+            'availability_id' => 'required|exists:availabilities,id',
             'user_id' => 'required|exists:users,id',
         ]);
 
-        $availability = Availability::findOrFail($request->input('id'));
+        $availability = Availability::findOrFail($request->input('availability_id'));
         $availability->user_id = $request->input('user_id');
         $availability->save();
 
@@ -62,11 +62,12 @@ class AvailabilityController extends Controller
      */
     public function unlink(Request $request)
     {
+        // dd($request);
         $request->validate([
-            'id' => 'required|exists:availabilities,id',
+            'availability_id' => 'required|exists:availabilities,id',
         ]);
-
-        $availability = Availability::findOrFail($request->input('id'));
+        
+        $availability = Availability::findOrFail($request->input('availability_id'));
         $availability->user_id = null;
         $availability->save();
 
@@ -89,12 +90,23 @@ class AvailabilityController extends Controller
 
     public function updateAvailability(Request $request)
     {
+        $request->validate([
+            'availability' => 'required|in:aanwezig,bezet,afwezig',
+        ]);
+
         $user = Auth::user();
 
-        $user->availability->updated_at = now();
-        $user->availability->status = $request->availability;
+        if (!$user->availability) {
+            $user->availability()->create([
+                'status' => $request->availability,
+                'updated_at' => now(),
+            ]);
+        } else {
+            $user->availability->updated_at = now();
+            $user->availability->status = $request->availability;
+            $user->availability->save();
+        }
         
-        $user->availability->save();
         return redirect()->back()->with('success', 'Availability updated successfully.');
     }
 }
