@@ -16,6 +16,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\DeactivatedCheck;
 use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\PoiController;
 
 // Routes for getting a view from a page
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
@@ -50,12 +51,14 @@ Route::middleware('auth', DeactivatedCheck::class)->group(function () {
 
     Route::resource('/projects', ProjectController::class);
 
-    Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard.index');
 
     Route::post('/availabilityToggle/update', [AvailabilityController::class, 'updateAvailability'])->name('availabilityToggle.update');
     
     Route::get('/availability', [AvailabilityController::class, 'index'])->name('availability.index');
     Route::patch('/availability/{availability}', [AvailabilityController::class, 'update'])->name('availability.update');
+
+    Route::get('/poi', [PoiController::class, 'index'])->name('poi.index');
 });
 
 // Only accessible with admin role

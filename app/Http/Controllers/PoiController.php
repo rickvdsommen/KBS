@@ -11,7 +11,7 @@ use App\Models\Availability;
 use App\Models\Appointment;
 use Illuminate\Support\Carbon;
 
-class DashboardController extends Controller
+class PoiController extends Controller
 {
     public function index()
     {
@@ -31,7 +31,7 @@ class DashboardController extends Controller
             $appointments = Appointment::whereDate('start', Carbon::today())
                 ->get();
     
-            return view('dashboard.index', compact('userProjects', 'users', 'appointments'));
+            return view('poi.index', compact('userProjects', 'users', 'appointments'));
         } catch (\Exception $e) {
             // Log the error or handle it appropriately
             return back()->withError('Failed to load dashboard data.');
