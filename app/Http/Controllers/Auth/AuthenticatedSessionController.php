@@ -34,7 +34,7 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('login')->with('error', 'Dit account is gedeactiveerd.');
         }
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect()->intended(route('dashboard.index', absolute: false));
     }
 
     /**
