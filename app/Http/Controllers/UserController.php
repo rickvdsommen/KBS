@@ -74,7 +74,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $users = User::all();
-        $user->load('device.location');
+        $user->load('availability.location');
         return view('users.show', compact('users'));
     }
 
@@ -106,9 +106,9 @@ class UserController extends Controller
 
         if ($request->has('deactivated')) {
             $user->deactivated = $request->input('deactivated') === 'on';
-            if ($user->device) {
-                $user->device->status = 'deactivated';
-                $user->device->save();
+            if ($user->availability) {
+                $user->availability->status = 'deactivated';
+                $user->availability->save();
             }
         } else {
             $user->deactivated = false; // or null, depending on your application logic

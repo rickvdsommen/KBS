@@ -7,7 +7,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\Device;
+use App\Models\Availability;
 use App\Models\Appointment;
 use Illuminate\Support\Carbon;
 
@@ -17,8 +17,8 @@ class DashboardController extends Controller
     {
         try {
             // Fetch users with today's status updates
-            $users = User::with('device')
-                ->whereHas('device', function($query) {
+            $users = User::with('availability')
+                ->whereHas('availability', function($query) {
                     $query->whereDate('updated_at', Carbon::today())
                         ->whereIn('status', ['aanwezig', 'bezet']);
                 })

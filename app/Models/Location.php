@@ -12,8 +12,9 @@ class Location extends Model
     protected $fillable = ['name'];
 
     protected $table = 'locations';
-    public function devices()
+
+    public function availability()
     {
-        return $this->hasMany(Device::class);
+        return $this->hasMany(Availability::class);
     }
 }

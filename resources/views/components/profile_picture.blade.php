@@ -3,9 +3,9 @@
     $ringColor = 'ring-gray-500'; // Default ring color
     if ($user->deactivated) {
         $ringColor = 'ring-gray-500';
-    } elseif ($user->device && $user->device->status == 'aanwezig' && $user->device->updated_at->isToday()) {
+    } elseif ($user->availability && $user->availability->status == 'aanwezig' && $user->availability->updated_at->isToday()) {
         $ringColor = 'ring-green-500';
-    } elseif ($user->device && $user->device->status == 'bezet' && $user->device->updated_at->isToday()) {
+    } elseif ($user->availability && $user->availability->status == 'bezet' && $user->availability->updated_at->isToday()) {
         $ringColor = 'ring-red-500';
     }
 @endphp

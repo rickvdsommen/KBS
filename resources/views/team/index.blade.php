@@ -14,7 +14,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
             @foreach ($users as $user)
-                <a href="{{ route('team.show', $user) }}" class="transform transition-transform hover:scale-105 flex">
+                <a href="{{ route('team.show', $user) }}" class="transform transition-transform @lg:hover:scale-105 flex">
                     <div class="flex-1 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-lg hover:shadow-xl cursor-pointer flex flex-col items-center">
                         {{-- @if ($user->profile_picture)
                             <img src="{{ asset('images/' . $user->profile_picture) }}" alt="PF" class="w-full h-48 object-contain">

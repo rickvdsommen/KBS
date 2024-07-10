@@ -17,8 +17,8 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Update devices table to use location_id
-        Schema::table('devices', function (Blueprint $table) {
+        // Update availabilities table to use location_id
+        Schema::table('availabilities', function (Blueprint $table) {
             $table->unsignedBigInteger('location_id')->nullable()->after('user_id');
 
             // Define foreign key
@@ -31,7 +31,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('devices', function (Blueprint $table) {
+        Schema::table('availabilities', function (Blueprint $table) {
             $table->dropForeign(['location_id']);
             $table->dropColumn('location_id');
         });

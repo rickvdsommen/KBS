@@ -78,7 +78,7 @@ class ProjectController extends Controller
             'startingDate' => 'required|date',
             'projectLeader' => 'required',
             'productOwner' => 'required',
-            'progress' => 'integer|min:1|max:100',
+            'progress' => 'integer|min:0|max:100',
             'tags' => 'array',
             'profile_picture' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'categories' => 'array',
@@ -104,7 +104,7 @@ class ProjectController extends Controller
 
         $project->save();
 
-        return redirect()->route('projects.index')->with('success', 'Project created successfully.');
+        return view('projects.show', compact('project'))->with('success', 'Project created successfully.');
     }
 
     public function show(Project $project)
@@ -146,7 +146,7 @@ class ProjectController extends Controller
     }
 
     public function update(Request $request, Project $project)
-{
+    {
     $request->validate([
         'projectname' => 'required|unique:projects,projectname,' . $project->id,
         'phaseName' => 'required',
@@ -189,7 +189,8 @@ class ProjectController extends Controller
         $project->users()->sync($request->selectedUsers);
     }
 
-    return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
+
+    return view('projects.show', compact('project'))->with('success', 'roject updated successfully.');
 }
 
 
