@@ -1,4 +1,4 @@
-<div class="sm:border-r border-gray-300 dark:border-gray-600 sm:py-5 px-4 sm:h-full">
+<div class="sm:border-r border-gray-300 dark:border-gray-600 sm:py-5 pt-4 px-4 sm:h-full">
     <h2 class="my-2 text-2xl font-semibold">Afspraken voor vandaag:</h2>
     <ul class="divide-y divide-gray-200 dark:divide-gray-600">
         @forelse ($appointments as $appointment)
