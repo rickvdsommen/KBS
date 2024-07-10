@@ -21,14 +21,14 @@
                         </div>
                     </li>
                 @empty
-                    <li class="py-2 font-normal text-base">Geen afspraken voor vandaag.</li>
+                    <li class="py-2 font-normal text-base">Er zijn geen afspraken voor vandaag.</li>
                 @endforelse
             </ul>
         </div>
 
         <!-- Middle Section -->
         <div class="flex-1 p-5">
-            <h2 class="my-2 text-2xl font-semibold">Mijn Projecten:</h2>
+            <h2 class="my-2 text-2xl font-semibold">Huidige Projecten:</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach ($userProjects as $project)
                     <div class="border border-gray-300 dark:border-gray-600 rounded-lg p-5 shadow-md bg-white">
@@ -47,15 +47,8 @@
             <div class="grid grid-cols-2 gap-4">
                 @forelse ($users as $user)
                     <div class="flex flex-col items-center">
-                        @if ($user->profile_picture)
-                            <img src="{{ asset('images/' . $user->profile_picture) }}" alt="{{ $user->name }}" class="rounded-full h-16 w-16 object-cover">
-                        @else
-                            <div class="bg-gray-300 rounded-full h-16 w-16 flex items-center justify-center">
-                                <span class="text-gray-500 text-xs">Geen foto</span>
-                            </div>
-                        @endif
                         <a href="{{ route('team.show', $user->id) }}" class="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600 mt-2 text-center">
-                            {{ $user->name }}
+                            @include('components.profile_picture')<br/>{{ $user->name }}
                         </a>
                     </div>
                 @empty
