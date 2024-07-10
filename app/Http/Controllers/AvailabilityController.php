@@ -21,11 +21,15 @@ class AvailabilityController extends Controller
         // Apply filters based on search parameters
         if ($request->filled('search')) {
             $search = $request->input('search');
-            $availabilityQuery->whereHas('user', function ($query) use ($search) {
-                $query->where('name', 'like', "%$search%")
-                      ->orWhere('device_id', 'like', "%$search%");
-            })->orWhereHas('location', function ($query) use ($search) {
-                $query->where('name', 'like', "%$search%");
+            $availabilityQuery->where(function($query) use ($search) {
+                $query->where('id', 'like', "%$search%")
+                    ->orWhereHas('user', function ($query) use ($search) {
+                        $query->where('name', 'like', "%$search%")
+                              ->orWhere('id', 'like', "%$search%");
+                    })
+                    ->orWhereHas('location', function ($query) use ($search) {
+                        $query->where('name', 'like', "%$search%");
+                    });
             });
         }
 
@@ -33,8 +37,6 @@ class AvailabilityController extends Controller
         $availabilities = $availabilityQuery->with('user', 'location')->paginate(10);
         $users = User::all();
         $locations = Location::all();
-
-
 
         return view('availability.index', compact('availabilities', 'users', 'locations'));
     }
