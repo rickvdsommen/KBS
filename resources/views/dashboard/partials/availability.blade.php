@@ -3,9 +3,9 @@
     <div class="grid grid-cols-2 gap-4 mt-4">
         @forelse ($users as $user)
             <div class="flex flex-col items-center border border-gray-300 dark:border-gray-600 rounded-lg py-3 shadow-lg hover:shadow-xl">
-                <a href="{{ route('team.show', $user->id) }}" class="block text-center">
-                    <div class="mb-2 flex justify-center items-center">
-                        @include('components.profile_picture')
+                <a href="{{ route('team.show', $user->id) }}" class="block text-center w-full">
+                    <div class="mb-2 flex justify-center items-center w-full">
+                        @include('components.profile_picture_middle', ['user' => $user])
                     </div>
                     <span class="text-lg font-semibold text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600 block text-center">{{ $user->name }}</span>
                 </a>
