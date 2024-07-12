@@ -8,7 +8,7 @@
                     @if ($project->picture)
                         <div class=" flex items-center justify-center">
                             <img src="{{ asset('images/' . $project->picture) }}" alt="{{ $project->projectname }}"
-                                class="w-auto h-auto max-h-32 max-w-full">
+                                class="w-full h-32 max-h-32 max-w-full">
                         </div>
                     @else
                         <div class="bg-gray-300 h-32 w-full flex items-center justify-center">

@@ -17,19 +17,20 @@ const DATEFORMAT = 'YYYY-MM-DD HH:mm:ss'
 
 document.addEventListener('DOMContentLoaded', function () {
     const calendarEl = document.getElementById('calendar');
-    const calendarElDash = document.getElementById('calendarDash');
     if (calendarEl !== null) {
         const calendar = new Calendar(calendarEl, {
             plugins: [timeGridPlugin, interactionPlugin],
             initialView: 'timeGridWeek',
             locale: nlLocale,
-            editable: true,
-            selectable: true,
+            editable: window.isAdmin,
+            selectable: window.isAdmin,
             hiddenDays: [0, 6],
             slotMinTime: '07:00:00', // Start time at 9 AM
             slotMaxTime: '21:00:00', // End time at 5 PM
 
             select: function (arg) {
+                if (!window.isAdmin) return;
+
                 var title = prompt('Afspraak naam:');
                 var description = prompt('Beschrijving:');
                 if (!description) {
@@ -57,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             },
             eventChange: function (arg) {
+                if (!window.isAdmin) return;
                 $.ajax({
                     url: window.APP_URL + "/events",
                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -76,21 +78,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
             },
-            eventDidMount: function (info) {
-                let content;
-                if (info.event.extendedProps.description) {
-                    content = `Beschrijving: ${info.event.extendedProps.description}`;
-                } else {
-                    content = `Geen beschrijving`;
-                }
-
-                tippy(info.el, {
-                    content: content,
-                    placement: 'top',
-                    theme: 'light',
-                });
-            },
             eventClick: function (info) {
+                if (!window.isAdmin) return;
                 if (confirm("Are you sure you want to delete this event?")) {
                 $.ajax({
                     url: window.APP_URL + `/events/${info.event.id}`,
@@ -104,25 +93,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });}
             },
-            eventSources: '/events', // Endpoint to fetch existing events
-            headerToolbar: {
-                left: 'prev,today,next',
-                center: 'title',
-                right: 'timeGridWeek,timeGridDay' // user can switch between the two
-
-            },
-        });
-        calendar.render();
-    };
-    if (calendarElDash !== null) {
-        const calendarDash = new Calendar(calendarElDash, {
-            plugins: [timeGridPlugin],
-            initialView: 'timeGridDay',
-            locale: nlLocale,
-            slotMinTime: '07:00:00', // Start time at 9 AM
-            slotMaxTime: '21:00:00', // End time at 5 PM
-
-
             eventDidMount: function (info) {
                 let content;
                 if (info.event.extendedProps.description) {
@@ -139,13 +109,13 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             eventSources: '/events', // Endpoint to fetch existing events
             headerToolbar: {
-                left: '',
+                left: 'prev,today,next',
                 center: 'title',
-                right: '',
+                right: 'timeGridWeek,timeGridDay' // user can switch between the two
+
             },
         });
-
-        calendarDash.render();
+        calendar.render();
     };
 });
 window.addEventListener('resize', function () {

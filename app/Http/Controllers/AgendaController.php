@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Appointment;
+use Illuminate\Support\Facades\Auth;
 use Throwable;
 
 class AgendaController extends Controller
 {
     public function index()
     {
-        return view('agenda');
+        $isAdmin = Auth::user()->hasRole('admin');
+        return view('agenda', compact('isAdmin'));
     }
 
     public function getEvents(Request $request)
