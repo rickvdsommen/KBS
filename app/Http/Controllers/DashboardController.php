@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Availability;
 use App\Models\Appointment;
+use App\Models\Project;
 use Illuminate\Support\Carbon;
 
 class DashboardController extends Controller
@@ -25,7 +26,7 @@ class DashboardController extends Controller
                 ->get();
     
             // Get the logged-in user's projects
-            $userProjects = Auth::user()->projects;
+            $userProjects = Project::where('status', 'Lopend')->get();
     
             // Fetch today's agenda
             $appointments = Appointment::whereDate('start', Carbon::today())
