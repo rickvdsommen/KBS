@@ -35,8 +35,8 @@ class TeamController extends Controller
         // Sorting the users with availability status 'bezet' or 'aanwezig' on top
         $query->leftJoin('availabilities', 'users.id', '=', 'availabilities.user_id')
               ->orderByRaw("CASE 
-                  WHEN availabilities.status = 'bezet' THEN 1 
-                  WHEN availabilities.status = 'aanwezig' THEN 2 
+                  WHEN availabilities.status = 'aanwezig' THEN 1 
+                  WHEN availabilities.status = 'bezet' THEN 2 
                   ELSE 3 
               END")
               ->select('users.*');
