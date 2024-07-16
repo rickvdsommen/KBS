@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Availability;
 use App\Models\Appointment;
+use App\Models\Project;
 use Illuminate\Support\Carbon;
 
 class PoiController extends Controller
@@ -24,14 +25,14 @@ class PoiController extends Controller
                 })
                 ->get();
     
-            // Get the logged-in user's projects
-            $userProjects = Auth::user()->projects;
+            // Get the ongoing projects
+            $projects = Project::where('status', 'Lopend')->get();
     
             // Fetch today's agenda
             $appointments = Appointment::whereDate('start', Carbon::today())
                 ->get();
     
-            return view('poi.index', compact('userProjects', 'users', 'appointments'));
+            return view('poi.index', compact('projects', 'users', 'appointments'));
         } catch (\Exception $e) {
             // Log the error or handle it appropriately
             return back()->withError('Failed to load dashboard data.');

@@ -25,14 +25,14 @@ class DashboardController extends Controller
                 })
                 ->get();
     
-            // Get the logged-in user's projects
-            $userProjects = Project::where('status', 'Lopend')->get();
+            // Get the ongoing projects
+            $projects = Project::where('status', 'Lopend')->get();
     
             // Fetch today's agenda
             $appointments = Appointment::whereDate('start', Carbon::today())
                 ->get();
     
-            return view('dashboard.index', compact('userProjects', 'users', 'appointments'));
+            return view('dashboard.index', compact('projects', 'users', 'appointments'));
         } catch (\Exception $e) {
             // Log the error or handle it appropriately
             return back()->withError('Failed to load dashboard data.');

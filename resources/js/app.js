@@ -116,11 +116,12 @@ document.addEventListener('DOMContentLoaded', function () {
             },
         });
         calendar.render();
+
+        window.addEventListener('resize', function () {
+            calendar.updateSize();
+            calendarDash.updateSize();
+        });
     };
-});
-window.addEventListener('resize', function () {
-    calendar.updateSize();
-    calendarDash.updateSize();
 });
 
 window.Alpine = Alpine;
