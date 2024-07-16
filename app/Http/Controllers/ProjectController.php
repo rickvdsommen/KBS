@@ -10,18 +10,6 @@ use App\Models\User;
 
 class ProjectController extends Controller
 {
-    public function projects()
-    {
-        $all = Project::with('tags')->get();
-        dd($all);
-    }
-
-    public function categories()
-    {
-        $all = Project::with('categories')->get();
-        dd($all);
-    }
-
     public function index(Request $request)
     {
         $query = Project::with(['tags', 'categories', 'productOwnerRelation', 'projectLeaderRelation']);
@@ -115,6 +103,14 @@ class ProjectController extends Controller
 
     public function edit(Project $project, Request $request)
     {
+        $currentUser = auth()->user();
+        $projectLeaderId = (int) $project->projectLeader;
+        $productOwnerId = (int) $project->productOwner;
+
+        if ($currentUser->id !== $projectLeaderId && $currentUser->id !== $productOwnerId && !$currentUser->hasRole('admin')) {
+            return redirect()->route('projects.show', $project)->with('error', 'You do not have permission to edit this project.');
+        }
+
         $tags = Tag::all();
         $categories = Category::all();
         $users = User::all();

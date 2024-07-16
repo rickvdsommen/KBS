@@ -126,12 +126,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex justify-end">
-                                <a href="{{ route('projects.edit', $project->id) }}"
-                                    class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300">
-                                    <x-primary-button>Wijzigen</x-primary-button>
-                                </a>
-                            </div>
+                            @if(auth()->user()->id === (int) $project->projectLeader || auth()->user()->id === (int) $project->productOwner || auth()->user()->hasRole('admin'))
+                                <div class="flex justify-end">
+                                    <a href="{{ route('projects.edit', $project->id) }}"
+                                        class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300">
+                                        <x-primary-button>Wijzigen</x-primary-button>
+                                    </a>
+                                </div>
+                            @endif
+                            
                         </div>
                     </a>
                 </div>

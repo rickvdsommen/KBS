@@ -50,19 +50,20 @@
                     <div class="mt-6">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-200">Vooruitgang:</h3>
                         <div class="flex items-center mt-2">
-                            <div class="w-9/12 bg-gray-200 dark:bg-gray-600 rounded-lg overflow-hidden">
+                            <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-lg overflow-hidden">
                                 <div class="bg-indigo-500 dark:bg-indigo-600 text-xs leading-none py-1 text-center text-white" style="width: {{ $project->progress }}%;">
                                     {{ $project->progress }}%
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="flex justify-end mt-4">
-                        <a href="{{ route('projects.edit', $project->id) }}" class="text-indigo-600 hover:text-indigo-900">
-                            <x-primary-button>Wijzigen</x-primary-button>
-                        </a>
-                    </div>
+                    @if(auth()->user()->id === (int) $project->projectLeader || auth()->user()->id === (int) $project->productOwner || auth()->user()->hasRole('admin'))
+                        <div class="flex justify-end mt-4">
+                            <a href="{{ route('projects.edit', $project->id) }}" class="text-indigo-600 hover:text-indigo-900">
+                                <x-primary-button>Wijzigen</x-primary-button>
+                            </a>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
