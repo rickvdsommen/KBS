@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Redirect;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -40,32 +41,49 @@ class UserController extends Controller
     }
 
     public function store(Request $request)
-    {
-        // Validate the request data
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email',
-            'function' => 'required|string|max:255',
-            'password' => 'required|string|min:8',
-        ]);
-    
-        try {
-            // Create a new user
-            User::create([
-                'name' => $validatedData['name'],
-                'email' => $validatedData['email'],
-                'function' => $validatedData['function'],
-                'password' => bcrypt($validatedData['password']),
-            ]);
-    
-            // Redirect back with a success message
-            return redirect()->back()->with('status', 'added');
-        } catch (\Exception $e) {
-            // Handle any errors, for example:
-            // Log::error($e->getMessage());
-            return redirect()->back()->with('status', 'error')->withErrors(['error' => 'Er is een fout opgetreden bij het toevoegen van de gebruiker. Probeer het opnieuw.']);
+{
+
+    // Validate the request data
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users,email',
+        'function' => 'required|string|max:255',
+        'password' => 'required|string|min:8',
+        'start_month' => 'nullable|integer',
+        'start_year' => 'nullable|integer',
+        'end_month' => 'nullable|integer',
+        'end_year' => 'nullable|integer',
+    ]);
+
+    try {
+        // Create a new user
+        $user = new User();
+        $user->name = $validatedData['name'];
+        $user->email = $validatedData['email'];
+        $user->function = $validatedData['function'];
+        $user->password = bcrypt($validatedData['password']);
+        if($validatedData['start_year']!==null && $validatedData['start_month']!==null){
+            $startDate = Carbon::create($validatedData['start_year'], $validatedData['start_month'], 1);
+            $user->start_date = $startDate;
+        } else {
+            $user->start_date = null;
         }
+        if($validatedData['end_year']!==null && $validatedData['end_month']!==null){
+            $endDate = Carbon::create($validatedData['end_year'], $validatedData['end_month'], 1);
+            $user->end_date = $endDate;
+        } else {
+            $user->end_date = null;
+        }
+        $user->save();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('status', 'added');
+    } catch (\Exception $e) {
+        // Handle any errors, for example:
+        // Log::error($e->getMessage());
+        return redirect()->back()->with('status', 'error')->withErrors(['error' => 'Er is een fout opgetreden bij het toevoegen van de gebruiker. Probeer het opnieuw.']);
     }
+}
     
 
     /**
@@ -92,11 +110,31 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'function' => 'required|string|max:255',
             'deactivated' => 'nullable|string|in:on',
+            'start_month' => 'nullable|integer',
+            'start_year' => 'nullable|integer',
+            'end_month' => 'nullable|integer',
+            'end_year' => 'nullable|integer',
         ]);
+
+        
+        
+        if($validatedData['start_year']!==null && $validatedData['start_month']!==null){
+            $startDate = Carbon::create($validatedData['start_year'], $validatedData['start_month'], 1);
+            $user->start_date = $startDate;
+        } else {
+            $user->start_date = null;
+        }
+        if($validatedData['end_year']!==null && $validatedData['end_month']!==null){
+            $endDate = Carbon::create($validatedData['end_year'], $validatedData['end_month'], 1);
+            $user->end_date = $endDate;
+        } else {
+            $user->end_date = null;
+        }
+        
 
         if($request->admin === "on"){
             $user->assignRole('admin');
@@ -114,7 +152,7 @@ class UserController extends Controller
             $user->deactivated = false; // or null, depending on your application logic
         }
 
-        $user->update($request->except('deactivated'));
+        $user->update($request->except('deactivated', 'start_month', 'start_year', 'end_month', 'end_year'));
         
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }

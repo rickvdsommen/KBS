@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('bio')->nullable();
             $table->string('profile_picture')->nullable();
             $table->boolean('deactivated')->default(false);
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

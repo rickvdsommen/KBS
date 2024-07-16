@@ -18,6 +18,16 @@
                         <p class="text-lg text-gray-700 dark:text-gray-300 mb-4"><strong>Telefoonnummer: </strong><a href="tel:{{ $user->phone }}" class="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600">{{ $user->phone }}</a></p>
                         <p class="text-lg text-gray-700 dark:text-gray-300 mb-4"><strong>Geboortedatum:</strong> {{ \Carbon\Carbon::parse($user->birthday)->locale('nl')->translatedFormat('d F Y') }}</p>
                         <p class="text-lg text-gray-700 dark:text-gray-300 mb-4"><strong>Functie:</strong> {{ $user->function }}</p>
+                        <p class="text-lg text-gray-700 dark:text-gray-300 mb-4"><strong>Periode werkzaam:</strong> @if ($user->start_date && $user->end_date)
+                            {{ \Carbon\Carbon::parse($user->start_date)->locale('nl')->translatedFormat('F Y') }}
+                            tot
+                            {{ \Carbon\Carbon::parse($user->end_date)->locale('nl')->translatedFormat('F Y') }}
+                        @elseif ($user->start_date)
+                            {{ \Carbon\Carbon::parse($user->start_date)->locale('nl')->translatedFormat('F Y') }}
+                            tot heden
+                        @else
+                            Onbekend
+                        @endif</p>
                         <p class="text-lg text-gray-700 dark:text-gray-300 mb-4"><strong>Mijn werkplek:</strong>
                         @if($user->availability && $user->availability->location)
                             {{ $user->availability->location->name }}

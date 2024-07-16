@@ -20,7 +20,7 @@ class ProjectFactory extends Factory
             'projectname' => $this->faker->unique()->sentence(2),
             'phaseName' => $this->faker->word,
             'description' => $this->faker->paragraph,
-            'status' => $this->faker->randomElement(['Planning', 'In Progress', 'Completed']),
+            'status' => $this->faker->randomElement(['Ingepland', 'Lopend']),
             'startingDate' => $this->faker->date,
             'projectLeader' => '1',
             'productOwner' => '2',

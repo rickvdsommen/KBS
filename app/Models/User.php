@@ -28,6 +28,8 @@ class User extends Authenticatable
         'location',
         'profile_picture',
         'deactivated',
+        'start_date',
+        'end_date',
     ];
 
     /**

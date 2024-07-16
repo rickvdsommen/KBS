@@ -113,7 +113,7 @@
                                         class="h-auto w-full object-cover rounded-lg sm:w-2/5 ">
                                 @endif
                             </div>
-                            <div class="mb-4">
+                            <div>
                                 <p class="text-gray-700 dark:text-gray-300">
                                     <span class="font-semibold">Vooruitgang:</span>
                                 </p>
