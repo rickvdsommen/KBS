@@ -38,14 +38,26 @@
                     <a href="{{ route('projects.show', $project->id) }}">
                         <div
                             class="h-full flex flex-col justify-between p-6 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-700 hover:shadow-xl cursor-pointer">
-                            <div class="flex flex-col sm:flex-row items-center sm:items-start mb-4">
+                            <div class="flex flex-col sm:flex-row items-center sm:items-start">
 
                                 <!-- Project each row -->
                                 <div>
                                     <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-200 mb-2 sm:mb-4">
                                         {{ $project->projectname }}
                                     </h3>
-
+                                    <div class="mb-2">
+                                        <p class="text-gray-700 dark:text-gray-300">
+                                            @php
+                                                // Truncate description to max 200 characters
+                                                $description = $project->description;
+                                                $truncated_description =
+                                                    strlen($description) > 200
+                                                        ? substr($description, 0, 200) . '...'
+                                                        : $description;
+                                            @endphp
+                                            {{ $truncated_description }}
+                                        </p>
+                                    </div>
                                     <div class="">
                                         <p class="text-gray-700 dark:text-gray-300">
                                             <span class="font-semibold">Fase:</span> {{ $project->phaseName }}
@@ -58,7 +70,7 @@
                                             {{ \Carbon\Carbon::parse($project->startingDate)->locale('nl')->translatedFormat('d F Y') }}
                                         </p>
                                     </div>
-                                    <div class="mb-2 sm:mb-4">
+                                    <div class="mb-2">
                                         <p class="text-gray-700 dark:text-gray-300">
                                             <span class="font-semibold">Project Leader:</span>
                                             {{ $project->projectLeaderRelation->name }}
@@ -68,22 +80,8 @@
                                             {{ $project->productOwnerRelation->name }}
                                         </p>
                                     </div>
-                                    <div class="mb-2 sm:mb-4">
-                                        <p class="text-gray-700 dark:text-gray-300">
-                                            <span class="font-semibold">Omschrijving:</span>
-                                            @php
-                                                // Truncate description to max 200 characters
-                                                $description = $project->description;
-                                                $truncated_description =
-                                                    strlen($description) > 200
-                                                        ? substr($description, 0, 200) . '...'
-                                                        : $description;
-                                            @endphp
-                                            {{ $truncated_description }}
-                                        </p>
-                                    </div>
                                     @if ($project->categories->isNotEmpty() || $project->tags->isNotEmpty())
-                                        <div class="mb-2 sm:mb-4">
+                                        <div class="mb-2">
                                             @if ($project->categories->isNotEmpty())
                                                 <p class="text-gray-700 dark:text-gray-300">
                                                     <span class="font-semibold">Categorieën:</span>
