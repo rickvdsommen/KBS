@@ -23,7 +23,7 @@
 
 <body class="bg-gray-100">
     <div class="min-h-screen flex items-center justify-center">
-        <div class="max-w-7xl w-full bg-white dark:bg-gray-700 shadow sm:rounded-lg">
+        <div class="max-w-screen-2xl max-h-screen-2xl w-full bg-white dark:bg-gray-700 shadow sm:rounded-lg">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <!-- Left Sidebar (agenda) -->
                 <div class="col-span-1 sm:col-span-1 lg:col-span-1">
