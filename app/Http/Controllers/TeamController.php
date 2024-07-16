@@ -32,14 +32,16 @@ class TeamController extends Controller
         }
 
 
-        // Sorting the users with availability status 'bezet' or 'aanwezig' on top
+        // Sorting the users with availability status 'aanwezig' or 'bezet' on top if updated_at is from today
         $query->leftJoin('availabilities', 'users.id', '=', 'availabilities.user_id')
-              ->orderByRaw("CASE 
-                  WHEN availabilities.status = 'aanwezig' THEN 1 
-                  WHEN availabilities.status = 'bezet' THEN 2 
-                  ELSE 3 
-              END")
-              ->select('users.*');
+        ->orderByRaw("CASE 
+            WHEN availabilities.updated_at >= CURDATE() 
+            AND availabilities.status = 'aanwezig' THEN 1
+            WHEN availabilities.updated_at >= CURDATE() 
+            AND availabilities.status = 'bezet' THEN 2
+            ELSE 3 
+        END")
+        ->select('users.*');
 
         $users = $query->paginate(9); 
         
