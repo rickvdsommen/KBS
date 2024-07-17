@@ -18,6 +18,9 @@ class UserController extends Controller
     {
         $query = User::query();
 
+        // Exclude the current logged-in user
+        $query->where('id', '!=', auth()->id());
+
         // Search functionality
         if ($request->filled('search')) {
             $search = $request->input('search');
