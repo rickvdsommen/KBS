@@ -38,7 +38,10 @@ class ProjectController extends Controller
                 $q->where('tag', 'like', "%$searchTerm%");
             });
         }
-    
+
+        $statusOrder = ['Lopend', 'Ingepland', 'Gepauzeerd', 'Afgerond', 'Gestopt'];
+        $query->orderByRaw("FIELD(status, '" . implode("','", $statusOrder) . "')");
+        
         $projects = $query->paginate(4);
     
         return view('projects.index', compact('projects'));
