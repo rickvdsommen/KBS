@@ -134,7 +134,7 @@
                 @method('DELETE')
                 <x-secondary-button class="text-red-600 dark:text-red-600 mt-2"
                     onclick="return confirm('Weet je zeker dat je deze gebruiker wilt verwijderen?')"
-                    type="submit">Verwijderen</x-primary-button>
+                    type="submit">Verwijderen</x-secondary-button>
             </form>
             <form method="POST" action="{{ route('users.reset_password', $user->id) }}">
                 @csrf
