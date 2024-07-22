@@ -18,7 +18,7 @@
 
                     <div class="p-4">
                         <h2
-                            class="mb-2 text-lg font-semibold text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600 text-center">
+                            class="text-xl font-semibold text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600 text-center">
                             {{ $project->projectname }}</h2>
                     </div>
                 </a>
