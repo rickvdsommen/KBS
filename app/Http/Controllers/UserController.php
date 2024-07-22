@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -105,7 +107,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $admin = $user->hasRole('admin');
-        return view('users.edit', compact('user', 'admin'), );
+        return view('users.edit', compact('user', 'admin'));
     }
 
     /**
@@ -167,5 +169,19 @@ class UserController extends Controller
     {
         $user->delete();
         return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+    }
+
+    public function resetPassword(User $user)
+    {   
+        // Generate a new random password
+        $newPassword = Str::random(12);
+
+        // Update the user's password
+        $user->password = Hash::make($newPassword);
+        $user->save();
+
+        $admin = $user->hasRole('admin');
+        return redirect()->route('users.edit', compact('user', 'admin'))->with('success', 'Wachtwoord succesvol gereset: ' . $newPassword);
+
     }
 }

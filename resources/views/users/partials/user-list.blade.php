@@ -68,13 +68,6 @@ $dutchMonths = [
                             <form action="{{ route('users.edit', $user->id) }}" method="GET">
                                 <x-primary-button type="submit">Wijzigen</x-primary-button>
                             </form>
-                            <form action="{{ route('users.destroy', $user->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <x-secondary-button class="text-red-600 dark:text-red-600"
-                                    onclick="return confirm('Weet je zeker dat je deze gebruiker wilt verwijderen?')"
-                                    type="submit">Verwijderen</x-primary-button>
-                            </form>
                         </td>
                     </tr>
                 @empty

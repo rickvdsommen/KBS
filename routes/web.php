@@ -76,6 +76,7 @@ Route::middleware(['role_or_permission:admin', 'auth', DeactivatedCheck::class])
     Route::post('/availability/link', [AvailabilityController::class, 'link'])->name('availability.link');
     Route::post('/availability/unlink', [AvailabilityController::class, 'unlink'])->name('availability.unlink');
     
+    Route::post('/users/{user}/reset-password', [UserController::class, 'resetPassword'])->name('users.reset_password');
 });
 
 require __DIR__.'/auth.php';
