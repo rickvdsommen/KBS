@@ -20,7 +20,7 @@
                         <p class="text-lg text-gray-700 dark:text-gray-300 mb-4"><strong>Functie:</strong> {{ $user->function }}</p>
                         <p class="text-lg text-gray-700 dark:text-gray-300 mb-4"><strong>Periode werkzaam:</strong> @if ($user->start_date && $user->end_date)
                             {{ \Carbon\Carbon::parse($user->start_date)->locale('nl')->translatedFormat('F Y') }}
-                            tot
+                            t/m
                             {{ \Carbon\Carbon::parse($user->end_date)->locale('nl')->translatedFormat('F Y') }}
                         @elseif ($user->start_date)
                             {{ \Carbon\Carbon::parse($user->start_date)->locale('nl')->translatedFormat('F Y') }}
