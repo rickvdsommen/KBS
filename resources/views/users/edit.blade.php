@@ -118,7 +118,7 @@
                         class="block text-sm font-medium text-gray-700 dark:text-gray-200">Admin</label>
                     <input type="checkbox" name="admin"
                         class="mt-1 block rounded-md border-gray-300 dark:border-gray-700 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        @if ($user->admin) checked @endif>
+                        @if ($admin) checked @endif>
                 </div>
                 <div class="my-3">
                     <label for="deactivated"
