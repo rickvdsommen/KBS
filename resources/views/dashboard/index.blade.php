@@ -1,9 +1,4 @@
 <x-app-layout>
-    <x-slot name="header" class="bg-gray-400">
-        <h2 class="font-semibold text-2xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
 
     <!-- Page Content -->
     <div class="mt-6 max-w-7xl mx-auto bg-white dark:bg-gray-700 shadow sm:rounded-lg">
