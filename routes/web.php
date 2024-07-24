@@ -17,10 +17,17 @@ use App\Http\Middleware\DeactivatedCheck;
 use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PoiController;
+use App\Livewire\Poi;
+use App\Livewire\Test;
 
 // Routes for getting a view from a page
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
     ->name('login');
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/poi', Poi::class);
+});
 
 // Routes for CRUD items
 Route::middleware('auth', DeactivatedCheck::class)->group(function () {
@@ -57,8 +64,6 @@ Route::middleware('auth', DeactivatedCheck::class)->group(function () {
     
     Route::get('/availability', [AvailabilityController::class, 'index'])->name('availability.index');
     Route::patch('/availability/{availability}', [AvailabilityController::class, 'update'])->name('availability.update');
-
-    Route::get('/poi', [PoiController::class, 'index'])->name('poi.index');
 });
 
 // Only accessible with admin role
