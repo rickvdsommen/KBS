@@ -18,6 +18,7 @@
             window.APP_URL = "{{ env('APP_URL') }}";
         </script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @livewireStyles
     </head>
     <body class="font-sans antialiased" x-data="{ darkMode: false }"
     {{-- x-init="
@@ -44,5 +45,6 @@
                 {{ $slot }}
             </main>
         </div>
+        @livewireScripts
     </body>
 </html>

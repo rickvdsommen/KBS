@@ -1,6 +1,6 @@
 <div class="sm:border-r border-gray-300 dark:border-gray-600 sm:py-5 pt-4 px-4 sm:h-full">
     <h2 class="my-2 text-2xl font-semibold">Afspraken voor vandaag:</h2>
-    <ul class="divide-y divide-gray-200 dark:divide-gray-600">
+    <ul class="divide-y divide-gray-200 dark:divide-gray-600" wire:poll.5s="refreshItems">
         @forelse ($appointments as $appointment)
             <li class="py-3">
                 <a href="{{ route('agenda.index', $appointment->id) }}" class="block text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600 font-semibold">

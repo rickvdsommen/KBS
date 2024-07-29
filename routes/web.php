@@ -17,8 +17,6 @@ use App\Http\Middleware\DeactivatedCheck;
 use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PoiController;
-use App\Livewire\Poi;
-use App\Livewire\Test;
 
 // Routes for getting a view from a page
 Route::get('/', [AuthenticatedSessionController::class, 'create'])
@@ -26,7 +24,7 @@ Route::get('/', [AuthenticatedSessionController::class, 'create'])
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/poi', Poi::class);
+    Route::get('/poi', [PoiController::class, 'index'])->name('poi.index');
 });
 
 // Routes for CRUD items

@@ -1,6 +1,6 @@
 <div class="border-l border-gray-300 dark:border-gray-600 py-5 px-4 sm:h-full">
     <h2 class="my-2 text-2xl font-semibold text-center">Wie is er vandaag aanwezig?</h2>
-    <div class="grid grid-cols-2 gap-4 mt-4">
+    <div class="grid grid-cols-2 gap-4 mt-4" wire:poll.5s="refreshItems">
         @forelse ($users as $user)
             <div class="flex flex-col items-center border border-gray-300 dark:border-gray-600 rounded-lg py-3 shadow-lg hover:shadow-xl">
                 <a href="{{ route('team.show', $user->id) }}" class="block text-center w-full">

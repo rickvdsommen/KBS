@@ -5,17 +5,17 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <!-- Left Sidebar (agenda) -->
             <div class="col-span-1 sm:col-span-1 lg:col-span-1">
-                @include('dashboard.partials.agenda')
+                @livewire('agenda')
             </div>
 
             <!-- Middle Section (projects) - Larger -->
             <div class="col-span-2 sm:col-span-2 lg:col-span-2">
-                @include('dashboard.partials.projects')
+                @livewire('projects')
             </div>
 
             <!-- Right Sidebar (availability) -->
             <div class="col-span-1 sm:col-span-1 lg:col-span-1">
-                @include('dashboard.partials.availability')
+                @livewire('availability')
             </div>
         </div>
     </div>
