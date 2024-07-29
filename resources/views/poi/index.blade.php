@@ -42,6 +42,14 @@
             </div>
         </div>
     </div>
+    
+    <!-- JavaScript to refresh the page every 10 seconds -->
+    <script>
+        // This function will refresh the page every 10 seconds (10000 milliseconds)
+        setInterval(function() {
+            location.reload();
+        }, 10000); // 10000 milliseconds = 10 seconds
+    </script>
 </body>
 
 </html>
