@@ -39,10 +39,11 @@ class RegistrationTest extends TestCase
             'password_confirmation' => 'password',
             'birthday' => '2024-05-01',
             'function' => 'test gebruiker',
+            'deactivated' => 0,
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
+        $response->assertRedirect(route('dashboard.index', absolute: false));
     }
 
     public function test_new_users_can_not_register_with_tampered_email_in_form(): void
@@ -56,6 +57,7 @@ class RegistrationTest extends TestCase
             'email' => $temperedEmail,
             'password' => 'password',
             'password_confirmation' => 'password',
+            'deactivated' => 0;
         ]);
         
         $this->assertNotEquals(
