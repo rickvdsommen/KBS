@@ -57,7 +57,7 @@ class RegistrationTest extends TestCase
             'email' => $temperedEmail,
             'password' => 'password',
             'password_confirmation' => 'password',
-            'deactivated' => 0;
+            'deactivated' => 0,
         ]);
         
         $this->assertNotEquals(
